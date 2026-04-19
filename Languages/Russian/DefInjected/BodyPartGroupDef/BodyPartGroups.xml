@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: bile gland -->
+  <NAT_BileGland.label>желчная железа</NAT_BileGland.label>
+  
+  <!-- EN: tail -->
+  <NAT_TailAttackTool.label>хвост</NAT_TailAttackTool.label>
+  
+</LanguageData>

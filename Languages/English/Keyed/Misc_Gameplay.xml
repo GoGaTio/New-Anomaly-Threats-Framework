@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- Obelisk -->
+  <NAT_InducerTriggered_Label>Obelisk pulse</NAT_InducerTriggered_Label>
+  <NAT_InducerTriggeredPlayer_Desc>Obelisk pulse affects all humans in the region, twisting their minds.</NAT_InducerTriggeredPlayer_Desc>
+  <NAT_InducerTriggered_Desc>While interacting with the obelisk, {PAWN_nameDef} felt psy-weaves induces from it. This waves can twist minds of humans in the region.</NAT_InducerTriggered_Desc>
+	
+  <NAT_InducerObeliskLetterLabel>Obelisk activation</NAT_InducerObeliskLetterLabel>
+	<NAT_InducerObeliskLetter>The obelisk is activating! It swells with grisly energy as the air crackles around it. It is about to self-destruct in a great explosion, but before it does, it will create pulses, inducing pain and turning everything around into it clotted variants.</NAT_InducerObeliskLetter>
+  
+  <NAT_InducerEffect_Animals>Obelisk subdued animals</NAT_InducerEffect_Animals>
+  <NAT_InducerEffectDesc_Animals>Obelisk psy-pulse made local animals mad. These animals will hunt your colonists even behind closed doors.</NAT_InducerEffectDesc_Animals>
+
+  <NAT_InducerEffect_Subdue>Obelisk subdued {PAWN_nameDef}</NAT_InducerEffect_Subdue>
+  <NAT_InducerEffectDesc_Subdue>Obelisk psy-pulse subdued {PAWN_nameDef} mind. This state will run out in a few hours.</NAT_InducerEffectDesc_Subdue>
+
+  <NAT_InducerEffect_Shock>Obelisk shocked {PAWN_nameDef}</NAT_InducerEffect_Shock>
+  <NAT_InducerEffectDesc_Shock>Obelisk psy-pulse supressed {PAWN_nameDef}'s mind.</NAT_InducerEffectDesc_Shock>
+
+  <NAT_InducerEffect_Suppression>Obelisk supressed {PAWN_nameDef}</NAT_InducerEffect_Suppression>
+  <NAT_InducerEffectDesc_Suppression>Obelisk psy-pulse indeced anger and anxiety on {PAWN_nameDef}.</NAT_InducerEffectDesc_Suppression>
+
+  <NAT_ObeliskCausedBreak>This happened because of crannied obelisk psy-pulse.</NAT_ObeliskCausedBreak>
+  
+  <NAT_AttackToOpen>Attack to open</NAT_AttackToOpen>
+	<!--Collector-->
+	<NAT_LetterPawnStealed>{PAWN_nameDef} was stealed by collector. Now {PAWN_pronoun} is in his lair somewhere nearby.\n\nFind and kill collector to save {PAWN_objective}.</NAT_LetterPawnStealed>
+	<NAT_LetterLabelCollectorRevealed>Collector revealed</NAT_LetterLabelCollectorRevealed>
+	<NAT_LetterCollectorRevealed>Invisible creature appeared nearby!</NAT_LetterCollectorRevealed>
+	<NAT_MessageCollectorRevealed>Collector revealed</NAT_MessageCollectorRevealed>
+	<NAT_CubeStealed>Cube disappeared</NAT_CubeStealed>
+	<NAT_LetterGoldenCubeStealed>You've found out that golden cube, beautiful Cube, was stealed.\n\nMaybe cube was stealed by collector, creature that steals everything valuable.</NAT_LetterGoldenCubeStealed>
+
+  <NAT_CollectorLairFound>Collector lair found</NAT_CollectorLairFound>
+  <NAT_CollectorLairFound_Desc>You designated the location of collector lair. It seems to be in {0}.</NAT_CollectorLairFound_Desc>
+
+  <!--Settings-->
+  <NAT_Setting_AllowRaid>Allow void awakening extensions</NAT_Setting_AllowRaid>
+  <NAT_Setting_AllowRaid_Desc>Allow extra features in void awakening game ending.</NAT_Setting_AllowRaid_Desc>
+
+</LanguageData>

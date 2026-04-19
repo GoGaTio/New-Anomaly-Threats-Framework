@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: serpent -->
+  <NAT_Serpent.label>змей</NAT_Serpent.label>
+  <!-- EN: left lung -->
+  <NAT_Serpent.corePart.parts.left_lung.customLabel>левое лёгкое</NAT_Serpent.corePart.parts.left_lung.customLabel>
+  <!-- EN: right lung -->
+  <NAT_Serpent.corePart.parts.right_lung.customLabel>правое лёгкое</NAT_Serpent.corePart.parts.right_lung.customLabel>
+  <!-- EN: left kidney -->
+  <NAT_Serpent.corePart.parts.left_kidney.customLabel>левая почка</NAT_Serpent.corePart.parts.left_kidney.customLabel>
+  <!-- EN: right kidney -->
+  <NAT_Serpent.corePart.parts.right_kidney.customLabel>правая почка</NAT_Serpent.corePart.parts.right_kidney.customLabel>
+  <!-- EN: left eye -->
+  <NAT_Serpent.corePart.parts.SnakeHead.parts.left_eye.customLabel>левый глаз</NAT_Serpent.corePart.parts.SnakeHead.parts.left_eye.customLabel>
+  <!-- EN: right eye -->
+  <NAT_Serpent.corePart.parts.SnakeHead.parts.right_eye.customLabel>правый глаз</NAT_Serpent.corePart.parts.SnakeHead.parts.right_eye.customLabel>
+  
+</LanguageData>

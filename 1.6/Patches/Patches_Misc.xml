@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName = "Nociosphere"]/killedLeavings</xpath>
+    <value>
+      <NAT_PainClot>60</NAT_PainClot>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/MutantDef[defName = "Ghoul"]/drugWhitelist</xpath>
+    <value>
+      <li>NAT_PainQuenchSerum</li>
+    </value>
+  </Operation>
+
+</Patch>

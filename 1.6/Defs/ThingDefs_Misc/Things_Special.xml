@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="SignalActionBase">
+    <defName>NAT_SignalAction_Sightstealers</defName>
+    <thingClass>NAT.SignalAction_Sightstealers</thingClass>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+
+</Defs>

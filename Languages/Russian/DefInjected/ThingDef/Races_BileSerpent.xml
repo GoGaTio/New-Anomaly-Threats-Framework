@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: bile serpent -->
+  <NAT_BileSerpent.label>желчный змей</NAT_BileSerpent.label>
+  <!-- EN: A huge predatory snake, that can spit bile at their enemies. Bile they produce is sticky and thick enough to slow even large animals like elephants, but doesn't affect other entities. -->
+  <NAT_BileSerpent.description>Большая хищная змея, плюющяяся липкой желчью во врагов. Желчь прилепает к органическим тканям, затрудняя передвижение и манипуляцию, но никак не влияет на других тварей.</NAT_BileSerpent.description>
+  <!-- EN: fangs -->
+  <NAT_BileSerpent.tools.fangs.label>клыки</NAT_BileSerpent.tools.fangs.label>
+  <!-- EN: head -->
+  <NAT_BileSerpent.tools.head.label>голова</NAT_BileSerpent.tools.head.label>
+  <!-- EN: tail -->
+  <NAT_BileSerpent.tools.tail.label>хвост</NAT_BileSerpent.tools.tail.label>
+  
+</LanguageData>

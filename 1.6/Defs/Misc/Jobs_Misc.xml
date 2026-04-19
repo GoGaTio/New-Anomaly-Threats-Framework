@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <JobDef>
+    <defName>NAT_BringAdditionalOfferings</defName>
+    <driverClass>NAT.JobDriver_BringAdditionalOfferings</driverClass>
+    <reportString>carrying TargetA</reportString>
+  </JobDef>
+
+</Defs>

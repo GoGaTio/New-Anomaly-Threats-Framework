@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- Obelisk -->
+  <NAT_InducerTriggered_Label>Импульс обелиска</NAT_InducerTriggered_Label>
+  <NAT_InducerTriggeredPlayer_Desc>Импульс обелиска накрыл регион, изменяя сознание людей.</NAT_InducerTriggeredPlayer_Desc>
+  <NAT_InducerTriggered_Desc>Во время взаимодействия с обелиском {PAWN_nameDef} чувствует энергию исходящую от обелиска, которая всё усиливается и вдруг заполняет {PAWN_possessive} сознание!</NAT_InducerTriggered_Desc>
+	
+  <NAT_InducerObeliskLetterLabel>Активация обелиска</NAT_InducerObeliskLetterLabel>
+	<NAT_InducerObeliskLetter>Обелиск активируется! Он наливается мрачной энергией, и воздух вокруг него потрескивает от напряжения. Он вот-вот взорвётся, но до этого успеет исказить разумы всех, кого сможет.</NAT_InducerObeliskLetter>
+  
+  <NAT_InducerEffect_Animals>Обелиск подчинил животных</NAT_InducerEffect_Animals>
+  <NAT_InducerEffectDesc_Animals>Обелиск подчинил местных животных и направил их на вас! Эти животные не успокоятся, пока не будут мертвы или не убьют вас.</NAT_InducerEffectDesc_Animals>
+
+  <NAT_InducerEffect_Subdue>{PAWN_nameDef} {PAWN_gender ? подчинён : подчинена} обелиском</NAT_InducerEffect_Subdue>
+  <NAT_InducerEffectDesc_Subdue>{PAWN_nameDef} {PAWN_gender ? подвергся : подверглась} влиянию импульса обелиска, который подчинил {PAWN_possessive} разум.</NAT_InducerEffectDesc_Subdue>
+
+  <NAT_InducerEffect_Shock>{PAWN_nameDef} {PAWN_gender ? шокирован : шокирована} обелиском</NAT_InducerEffect_Shock>
+  <NAT_InducerEffectDesc_Shock>{PAWN_nameDef} {PAWN_gender ? подвергся : подверглась} влиянию импульса обелиска, который подавил {PAWN_possessive} сознание.</NAT_InducerEffectDesc_Shock>
+
+  <NAT_InducerEffect_Suppression>{PAWN_nameDef} {PAWN_gender ? подавлен : подавлена} обелиском</NAT_InducerEffect_Suppression>
+  <NAT_InducerEffectDesc_Suppression>{PAWN_nameDef} {PAWN_gender ? подвергся : подверглась} влиянию импульса обелиска, который ввёл в {PAWN_possessive} сознание боль, тревогу и ярость.</NAT_InducerEffectDesc_Suppression>
+
+  <NAT_ObeliskCausedBreak>Это случилось из-за импульса потрескавшегося обелиска.</NAT_ObeliskCausedBreak>
+  
+  <NAT_AttackToOpen>Атакуйте чтобы открыть</NAT_AttackToOpen>
+	<!--Collector-->
+	<NAT_LetterPawnStealed>{PAWN_nameDef} {PAWN_gender ? украден : украдена} коллекционером. Теперь {PAWN_pronoun} находится в его логове где-то неподалёку.\n\nНайдите и убейте коллекционера чтобы получить информацию о {PAWN_possessive} местонахождении.</NAT_LetterPawnStealed>
+	<NAT_LetterLabelCollectorRevealed>Коллекционер раскрыт</NAT_LetterLabelCollectorRevealed>
+	<NAT_LetterCollectorRevealed>Невидимое существо проявилось поблизости!</NAT_LetterCollectorRevealed>
+	<NAT_MessageCollectorRevealed>Коллекционер раскрыт</NAT_MessageCollectorRevealed>
+	<NAT_CubeStealed>Куб исчез</NAT_CubeStealed>
+	<NAT_LetterGoldenCubeStealed>Золотой куб украден коллекционером. Теперь он находится в его логове где-то неподалёку.\n\nНайдите и убейте коллекционера чтобы получить информацию о местонахождении куба.</NAT_LetterGoldenCubeStealed>
+
+  <NAT_CollectorLairFound>Логово коллекционера обнаружено</NAT_CollectorLairFound>
+  <NAT_CollectorLairFound_Desc>Записи коллекционера указывают на {0}. Скорее всего там находится его логово со всем украденным.</NAT_CollectorLairFound_Desc>
+  
+  <!--Settings-->
+  <NAT_Setting_AllowRaid>Разрешить дополнение концовки монолита</NAT_Setting_AllowRaid>
+  <NAT_Setting_AllowRaid_Desc>Разрешить дополнения и изменения в концовке пробуждения монолита.</NAT_Setting_AllowRaid_Desc>
+
+</LanguageData>
