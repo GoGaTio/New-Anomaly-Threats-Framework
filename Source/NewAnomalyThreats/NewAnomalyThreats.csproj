@@ -79,6 +79,7 @@
     <Compile Include="Incidents\IncidentWorker_SerpentAssault.cs" />
     <Compile Include="Jobs\JobDrivers_Misc.cs" />
     <Compile Include="Jobs\JobGivers.cs" />
+    <Compile Include="Jobs\Lords.cs" />
     <Compile Include="MapGen\GenStep_UndergroundLayout.cs" />
     <Compile Include="GameComponent.cs" />
     <Compile Include="Misc.cs" />
@@ -86,7 +87,8 @@
     <Compile Include="NAT_PainPulses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
-    <Compile Include="ThingComps\CompBoss.cs" />
+    <Compile Include="ThingComps\CompBossCaller.cs" />
+    <Compile Include="ThingComps\CompBossStages.cs" />
     <Compile Include="ThingComps\CompDamageAdaptable.cs" />
     <Compile Include="ThingComps\CompUniqueName.cs" />
     <Compile Include="ThingComps\CompPreventFrendlyFire.cs" />

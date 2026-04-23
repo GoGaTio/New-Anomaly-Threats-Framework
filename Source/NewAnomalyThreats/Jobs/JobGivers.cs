@@ -238,7 +238,6 @@ namespace NAT
 			}
 			if (ritualDef.EnoughOfferings(thingList))
 			{
-				
 				return null;
 			}
 			List<ThingDefCountClass> list = ritualDef.OfferingsLeft(thingList);
