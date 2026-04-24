@@ -28,6 +28,11 @@ namespace NAT
 		{
 
 		}
+
+		public virtual void TickRare()
+		{
+
+		}
 	}
 
 	public class DataStorer : IExposable
@@ -88,7 +93,7 @@ namespace NAT
 			parms.dontSpawn = true;
 			ResurrectionUtility.TryResurrect(pawn, parms);
 			pawn.RemoveHediffs((x) => x is Hediff_Injury || x.Part == null || !x.Part.def.tags.Any((y) => y == BodyPartTagDefOf.ConsciousnessSource));
-			GenSpawn.Spawn(pawn, PositionHeld, MapHeld);
+			/*GenSpawn.Spawn(pawn, PositionHeld, MapHeld);
 			try
 			{
 				if (rust.Faction != null && !rust.Faction.IsPlayer)
@@ -120,7 +125,7 @@ namespace NAT
 			catch (Exception ex)
 			{
 				Log.Error("New Anomaly Threats - Error in RustedCore.Resurrect(Lord maker part): " + ex);
-			}
+			}*/
 		}
 	}
 
@@ -154,7 +159,7 @@ namespace NAT
 
 		public override void GameComponentTick()
 		{
-			foreach(BossTracker item1 in bossTrackers.ToList())
+			foreach(EntityTracker item1 in entityTrackers.ToList())
 			{
 				item1.Tick();
 			}
@@ -162,7 +167,11 @@ namespace NAT
 			{
 				foreach (EntityTracker item2 in entityTrackers.ToList())
 				{
-					item2.Tick();
+					item2.TickRare();
+				}
+				foreach (BossTracker item3 in bossTrackers.ToList())
+				{
+					item3.Tick();
 				}
 			}
 		}

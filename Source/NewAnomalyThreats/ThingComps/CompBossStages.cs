@@ -83,7 +83,6 @@ namespace NAT
 
 		public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
 		{
-			preDeathLord.
 			base.Notify_Killed(prevMap, dinfo);
 		}
 

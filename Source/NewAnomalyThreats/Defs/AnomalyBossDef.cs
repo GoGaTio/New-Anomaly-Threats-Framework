@@ -41,7 +41,5 @@ namespace NAT
 		}
 
 		public List<BossGroup> groups = new List<BossGroup>();
-
-		public void 
 	}
 }
