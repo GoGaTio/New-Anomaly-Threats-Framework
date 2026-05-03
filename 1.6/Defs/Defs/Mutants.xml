@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <MutantDef ParentName="BaseMutantEntity">
+    <defName>NAT_Cadaver</defName>
+    <label>cadaver</label>
+    <description>A person who has been turned into a ghoul.\n\nAbout ghouls: Ghouls are engineered murder machines, twisted by dark psychic influences.\n\nGhouls are very dangerous in melee combat. However, the process of their creation leaves them incapable of higher levels of thought, preventing them from holding weapons or tools. They cannot work and outside combat they wander in a half-conscious stupor.\n\nMany people find the constant twitching of ghouls disturbing. More disturbing is their dependence on raw meat. If they go hungry they will turn hostile, even attacking their creators to sate their hunger.</description>
+    <hediff>NAT_Cadaver</hediff>
+    <thinkTree>NAT_Cadaver</thinkTree>
+    <thinkTreeConstant>NAT_CadaverConstant</thinkTreeConstant>
+    <showJobReport>true</showJobReport>
+    <disableApparel>false</disableApparel>
+    <canGainXP>false</canGainXP>
+    <consideredSubhuman>true</consideredSubhuman>
+    <workDisables Inherit="False">
+      <li>Social</li>
+      <li>Animals</li>
+      <li>Artistic</li>
+      <li>PlantWork</li>
+      <li>Constructing</li>
+      <li>Intellectual</li>
+      <li>Caring</li>
+    </workDisables>
+    <whitelistedFloatMenuProviders>
+      <li>FloatMenuOptionProvider_DraftedAttack</li>
+      <li>FloatMenuOptionProvider_DraftedMove</li>
+      <li>FloatMenuOptionProvider_Ingest</li>
+      <li>FloatMenuOptionProvider_GhoulRest</li>
+      <li>FloatMenuOptionProvider_EnterMapPortal</li>
+      <li>FloatMenuOptionProvider_Arrest</li>
+      <li>FloatMenuOptionProvider_CaptureEntity</li>
+      <li>FloatMenuOptionProvider_CapturePawn</li>
+      <li>FloatMenuOptionProvider_CarryingPawn</li>
+      <li>FloatMenuOptionProvider_CarryPawn</li>
+      <li>FloatMenuOptionProvider_CarryMechToCharger</li>
+      <li>FloatMenuOptionProvider_OpenThing</li>
+      <li>FloatMenuOptionProvider_ExtinguishFires</li>
+      <li>FloatMenuOptionProvider_Wear</li>
+      <li>FloatMenuOptionProvider_Equip</li>
+      <li>FloatMenuOptionProvider_PickUpItem</li>
+      <li>FloatMenuOptionProvider_Reload</li>
+      <li>FloatMenuOptionProvider_DropEquipment</li>
+    </whitelistedFloatMenuProviders>
+    <relativeTurnedThought>BecameGhoul</relativeTurnedThought>
+    <allowedDevelopmentalStages>Adult</allowedDevelopmentalStages>
+    <needWhitelist>
+      <li>Food</li>
+    </needWhitelist>
+    <overrideFoodType>true</overrideFoodType>
+    <foodType>CarnivoreAnimalStrict</foodType>
+    <allowEatingCorpses>true</allowEatingCorpses>
+    <deathOnDownedChance>0.25</deathOnDownedChance>
+    <removePermanentInjuries>true</removePermanentInjuries>
+    <canUseDrugs>true</canUseDrugs>
+    <drugWhitelist>
+      <li>VoidsightSerum</li>
+      <li>MetalbloodSerum</li>
+      <li>JuggernautSerum</li>
+      <li>MindNumbSerum</li>
+      <li>GhoulResurrectionSerum</li>
+    </drugWhitelist>
+    <anomalyKnowledgeOffset>0.5</anomalyKnowledgeOffset>
+    <knowledgeCategory>Basic</knowledgeCategory>
+    <codexEntry>Ghoul</codexEntry>
+    <disablesGenes>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Furskin</li>
+    </disablesGenes>
+    <abilityWhitelist Inherit="True"/>
+    <deathLetter>One of your ghouls has died.</deathLetter>
+    <deathLetterExtra>Unlike regular colonists, ghouls do not need to be buried and their death will not upset others. You may choose to bury them should you wish.</deathLetterExtra>
+    <!-- Sounds -->
+    <soundAttackChance>0.25</soundAttackChance>
+    <soundCall>Pawn_Ghoul_Call</soundCall>
+    <soundAttack>Pawn_Ghoul_Attack</soundAttack>
+    <soundWounded>Pawn_Ghoul_Pain</soundWounded>
+    <soundDeath>Pawn_Ghoul_Killed</soundDeath>
+    <!-- Rendering -->
+    <skinColorOverride>(0.58, 0.62, 0.55)</skinColorOverride>
+    <hairColorOverride>(0.65, 0.65, 0.65)</hairColorOverride>
+    <bodyTypeGraphicPaths>
+      <Male>Things/Pawn/Ghoul/Bodies/Ghoulskin_Male</Male>
+      <Female>Things/Pawn/Ghoul/Bodies/Ghoulskin_Female</Female>
+      <Hulk>Things/Pawn/Ghoul/Bodies/Ghoulskin_Hulk</Hulk>
+      <Fat>Things/Pawn/Ghoul/Bodies/Ghoulskin_Fat</Fat>
+      <Thin>Things/Pawn/Ghoul/Bodies/Ghoulskin_Thin</Thin>
+    </bodyTypeGraphicPaths>
+    <forcedHeadTypes>
+      <li>Ghoul_Normal</li>
+      <li>Ghoul_Heavy</li>
+      <li>Ghoul_Narrow</li>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Ghoul_Wide</li>
+    </forcedHeadTypes>
+    <hairTagFilter>
+      <whitelist>true</whitelist>
+      <tags>
+        <li>Bald</li>
+      </tags>
+    </hairTagFilter>
+    <beardTagFilter>
+      <whitelist>true</whitelist>
+      <tags>
+        <li>NoBeard</li>
+      </tags>
+    </beardTagFilter>
+
+    <tools>
+      <li>
+        <label>teeth</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+        <chanceFactor>0.5</chanceFactor>
+        <soundMeleeHit>Pawn_Melee_HumanBite_Hit</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_HumanBite_Miss</soundMeleeMiss>
+      </li>
+      <li>
+        <label>left claw</label>
+        <labelNoLocation>claw</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>7.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <soundMeleeHit>Pawn_Ghoul_Scratch</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      </li>
+      <li>
+        <label>right claw</label>
+        <labelNoLocation>claw</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>7.0</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+        <soundMeleeHit>Pawn_Ghoul_Scratch</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      </li>
+    </tools>
+  </MutantDef>
+
+</Defs>

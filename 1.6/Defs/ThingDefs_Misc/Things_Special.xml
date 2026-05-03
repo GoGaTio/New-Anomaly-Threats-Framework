@@ -7,4 +7,17 @@
     <tickerType>Normal</tickerType>
   </ThingDef>
 
+  <ThingDef ParentName="EtherealThingBase">
+    <defName>VoidStructureIncoming</defName>
+    <selectable>false</selectable>
+    <tickerType>Normal</tickerType>
+    <thingClass>ThingWithComps</thingClass>
+    <drawOffscreen>true</drawOffscreen>
+    <comps>
+      <li Class="CompProperties_DestroyAfterEffect">
+        <effecterDef>VoidStructureIncoming</effecterDef>
+      </li>
+    </comps>
+  </ThingDef>
+
 </Defs>

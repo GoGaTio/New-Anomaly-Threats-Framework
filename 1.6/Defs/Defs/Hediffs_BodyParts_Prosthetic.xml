@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Prosthetic leg -->
+
+  <HediffDef ParentName="AddedBodyPartBase">
+    <defName>NAT_CadaverSpringLeg</defName>
+    <label>spring leg</label>
+    <labelNoun>a prosthetic leg</labelNoun>
+    <description>An installed prosthetic leg. While it lacks a neural interface, its complex arrangement of internal joints allows it to mimic natural movement quite convincingly. Still, it is inferior to a real leg.</description>
+    <descriptionHyperlinks><ThingDef>NAT_CadaverSpringLeg</ThingDef></descriptionHyperlinks>
+    <spawnThingOnRemoved>SimpleProstheticLeg</spawnThingOnRemoved>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>0.95</partEfficiency>
+    </addedPartProps>
+    <comps>
+        <li Class="HediffCompProperties_GiveAbility">
+          <abilityDefs>
+            <li>NAT_SpringLegJump</li>
+          </abilityDefs>
+        </li>
+      </comps>
+<stages>
+      <li>
+        <statOffsets>
+<IncomingDamageFactor>0.05</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <ThingDef ParentName="BodyPartBase">
+    <defName>NAT_CadaverSpringLeg</defName>
+    <label>spring leg</label>
+    <description>A leg prosthesis. While it lacks a neural interface, its complex arrangement of internal joints allows it to mimic natural movement quite convincingly. Still, it is inferior to a real leg.</description>
+    <descriptionHyperlinks><RecipeDef>NAT_InstallCadaverSpringLeg</RecipeDef></descriptionHyperlinks>
+    <costList>
+      <Steel>40</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+<techLevel>Industrial</techLevel>
+    <thingCategories>
+      <li>BodyPartsProsthetic</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Things/Item/Health/HealthItem</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.80</drawSize>
+      <color>(154,124,104)</color>
+    </graphicData>
+    <statBases>
+      <WorkToMake>15000</WorkToMake>
+    </statBases>
+    <recipeMaker>
+      <displayPriority>600</displayPriority>
+    </recipeMaker>
+    <statBases>
+      <Mass>8</Mass>
+    </statBases>
+    <techHediffsTags>
+      <li>NAT_Cadaver</li>
+    </techHediffsTags>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallBodyPartArtificialBase">
+    <defName>NAT_InstallCadaverSpringLeg</defName>
+    <label>install prosthetic leg</label>
+    <description>Install a prosthetic leg.</description>
+    <descriptionHyperlinks>
+      <ThingDef>NAT_CadaverSpringLeg</ThingDef>
+      <HediffDef>NAT_CadaverSpringLeg</HediffDef>
+    </descriptionHyperlinks>
+    <jobString>Installing prosthetic leg.</jobString>
+<anesthetize>false</anesthetize>
+<surgeryOutcomeEffect IsNull="True" />
+<mutantPrerequisite>
+      <li>NAT_Cadaver</li>
+    </mutantPrerequisite>
+    <ingredients Inherit="false">
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NAT_CadaverSpringLeg</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NAT_CadaverSpringLeg</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Leg</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>NAT_CadaverSpringLeg</addsHediff>
+  </RecipeDef>
+
+</Defs>

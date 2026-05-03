@@ -10,7 +10,7 @@ using Verse.AI.Group;
 
 namespace NAT
 {
-	public class LordJob_BossRaid : LordJob
+	/*public class LordJob_BossRaid : LordJob
 	{
 		public override bool GuiltyOnDowned => true;
 
@@ -62,5 +62,5 @@ namespace NAT
 			Scribe_Values.Look(ref breachers, "breaching", defaultValue: false);
 			Scribe_Values.Look(ref canPickUpOpportunisticWeapons, "canPickUpOpportunisticWeapons", defaultValue: false);
 		}
-	}
+	}*/
 }

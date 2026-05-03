@@ -192,13 +192,11 @@ namespace NAT
 			}
 			if (!(lord.CurLordToil is LordToil_PsychicRitual lordToil_PsychicRitual))
 			{
-				
 				return null;
 			}
 			PsychicRitualDef_AdditionalOfferings ritualDef;
 			if ((ritualDef = lordToil_PsychicRitual.RitualData.psychicRitual.def as PsychicRitualDef_AdditionalOfferings) == null)
 			{
-				
 				return null;
 			}
 			PsychicRitual psychicRitual = lordToil_PsychicRitual.RitualData.psychicRitual;

@@ -47,7 +47,15 @@ namespace NAT
 
 		public IntVec3 preDeathPos;
 
+		public Map preDeathMap;
+
 		public CompProperties_BossStages.BossStage CurrentBossStage => Props.stages[currentBossStage];
+
+		public override void PostPostMake()
+		{
+			base.PostPostMake();
+			NewAnomalyThreatsUtility.Comp.AddEntityTracker(new AnomalyBossTracker() { boss = Boss });
+		}
 
 		public RoofCollapseResponse Notify_OnBeforeRoofCollapse()
 		{
@@ -73,7 +81,7 @@ namespace NAT
 
 		public override float GetStatFactor(StatDef stat)
 		{
-			return CurrentBossStage.statFactors.GetStatOffsetFromList(stat); ;
+			return CurrentBossStage.statFactors.GetStatFactorFromList(stat);
 		}
 
 		public override float GetStatOffset(StatDef stat)
@@ -83,6 +91,9 @@ namespace NAT
 
 		public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
 		{
+			preDeathLord = Boss.GetLord();
+			preDeathPos = parent.PositionHeld;
+			preDeathMap = prevMap;
 			base.Notify_Killed(prevMap, dinfo);
 		}
 

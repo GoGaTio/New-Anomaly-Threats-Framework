@@ -14,6 +14,8 @@ namespace NAT
 	{
 		public int loadID;
 
+		public GameComponent_NewAnomalyThreats parent;
+
 		public virtual void ExposeData()
 		{
 			Scribe_Values.Look(ref loadID, "loadID", 0);
@@ -35,52 +37,28 @@ namespace NAT
 		}
 	}
 
-	public class DataStorer : IExposable
+	public class AnomalyBossTracker : EntityTracker
 	{
-		public virtual void ExposeData()
-		{
-		}
-	}
-
-	public class BossTracker : IExposable, ILoadReferenceable
-	{
-		public int loadID;
-
 		public Pawn boss;
-
-		public AnomalyBossDef bossKind;
 
 		public CompBossStages CompBoss => boss.GetComp<CompBossStages>();
 
-		public virtual void ExposeData()
+		public override void ExposeData()
 		{
-			Scribe_Values.Look(ref loadID, "loadID", 0);
+			base.ExposeData();
 			Scribe_References.Look(ref boss, "boss", saveDestroyedThings: true);
-			Scribe_Defs.Look(ref bossKind, "bossKind");
 		}
 
-		public virtual string GetUniqueLoadID()
+		public override void Tick()
 		{
-			return $"NAT_AnomalyBossTracker_{loadID}";
-		}
-
-		public virtual void Tick()
-		{
-			if (boss != null && boss.Dead)
+			base.Tick();
+			if(boss != null && boss.Dead)
 			{
-				CompBossStages comp = CompBoss;
-				if (comp != null && comp.CanAdvanceStage)
-				{
-
-				}
-				else
-				{
-
-				}
+				TryResurrect(boss);
 			}
 		}
 
-		public void Resurrect(Pawn pawn)
+		public void TryResurrect(Pawn pawn)
 		{
 			if (pawn.Discarded)
 			{
@@ -88,13 +66,24 @@ namespace NAT
 				pawn.ForceSetStateToUnspawned();
 				pawn.DecrementMapIndex();
 			}
+			CompBossStages comp = CompBoss;
+			if(comp == null || !comp.CanAdvanceStage)
+			{
+				parent.entityTrackers.Remove(this);
+				return;
+			}
 			ResurrectionParams parms = new ResurrectionParams();
 			parms.restoreMissingParts = true;
 			parms.dontSpawn = true;
 			ResurrectionUtility.TryResurrect(pawn, parms);
 			pawn.RemoveHediffs((x) => x is Hediff_Injury || x.Part == null || !x.Part.def.tags.Any((y) => y == BodyPartTagDefOf.ConsciousnessSource));
-			/*GenSpawn.Spawn(pawn, PositionHeld, MapHeld);
-			try
+			GenSpawn.Spawn(pawn, comp.preDeathPos, comp.preDeathMap);
+			if(comp.preDeathLord != null)
+			{
+				comp.preDeathLord.AddPawn(pawn);
+			}
+			comp.TryGoNextStage();
+			/*try
 			{
 				if (rust.Faction != null && !rust.Faction.IsPlayer)
 				{
@@ -126,63 +115,6 @@ namespace NAT
 			{
 				Log.Error("New Anomaly Threats - Error in RustedCore.Resurrect(Lord maker part): " + ex);
 			}*/
-		}
-	}
-
-	public class GameComponent_NewAnomalyThreats : GameComponent
-	{
-		public List<EntityTracker> entityTrackers = new List<EntityTracker>();
-
-		public List<DataStorer> dataStorage = new List<DataStorer>();
-
-		public List<BossTracker> bossTrackers = new List<BossTracker>();
-
-		public int nextId;
-
-		public GameComponent_NewAnomalyThreats(Game game)
-		{
-		}
-
-		public void AddEntityTracker(EntityTracker entityTracker)
-		{
-			entityTracker.loadID = nextId;
-			nextId++;
-			entityTrackers.Add(entityTracker);
-		}
-
-		public void AddBossTracker(BossTracker bossTracker)
-		{
-			bossTracker.loadID = nextId;
-			nextId++;
-			bossTrackers.Add(bossTracker);
-		}
-
-		public override void GameComponentTick()
-		{
-			foreach(EntityTracker item1 in entityTrackers.ToList())
-			{
-				item1.Tick();
-			}
-			if(Find.TickManager.TicksGame % 2500 == 0)
-			{
-				foreach (EntityTracker item2 in entityTrackers.ToList())
-				{
-					item2.TickRare();
-				}
-				foreach (BossTracker item3 in bossTrackers.ToList())
-				{
-					item3.Tick();
-				}
-			}
-		}
-
-		public override void ExposeData()
-		{
-			base.ExposeData();
-			Scribe_Collections.Look(ref entityTrackers, "entityTrackers", LookMode.Deep);
-			Scribe_Collections.Look(ref dataStorage, "dataStorage", LookMode.Deep);
-			Scribe_Collections.Look(ref bossTrackers, "bossTrackers", LookMode.Deep);
-			Scribe_Values.Look(ref nextId, "nextId");
 		}
 	}
 }

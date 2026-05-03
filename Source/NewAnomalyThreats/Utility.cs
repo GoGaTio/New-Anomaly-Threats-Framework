@@ -10,6 +10,10 @@ namespace NAT
 {
 	public static class NewAnomalyThreatsUtility
 	{
+		public static GameComponent_NewAnomalyThreats Comp => gameComp ?? Current.Game.GetComponent<GameComponent_NewAnomalyThreats>();
+
+		public static GameComponent_NewAnomalyThreats gameComp;
+
 		public static NewAnomalyThreatsSettings Settings
 		{
 			get
@@ -23,6 +27,14 @@ namespace NAT
 		}
 
 		private static NewAnomalyThreatsSettings settings;
+
+		public static void Log(string message)
+		{
+			if (Prefs.DevMode)
+			{
+				Verse.Log.Message(message);
+			}
+		}
 
 		public static void SetFactionNoError(this Pawn pawn, Faction faction)
 		{

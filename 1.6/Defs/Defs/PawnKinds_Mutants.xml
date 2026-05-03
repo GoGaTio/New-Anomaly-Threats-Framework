@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnKindDef ParentName="MutantBase" Name="NAT_CadaverBase">
+<defName>NAT_Cadaver</defName>
+    <label>cadaver</label>
+    <mutant>NAT_Cadaver</mutant>
+    <generateInitialNonFamilyRelations>false</generateInitialNonFamilyRelations>
+<combatPower>90</combatPower>
+    <gearHealthRange>0.4~0.8</gearHealthRange>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="NAT_CadaverBase">
+    <defName>NAT_CadaverSwarmer</defName>
+    <label>cadaver swarmer</label>
+    <combatPower>40</combatPower>
+    <gearHealthRange>0.2~0.4</gearHealthRange>
+    <itemQuality>Poor</itemQuality>
+    <apparelMoney>0~100</apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>Neolithic</li>
+    </apparelTags>
+<weaponMoney>150~500</weaponMoney>
+    <weaponTags>
+      <li>ShortShots</li>
+      <li>MedievalMeleeBasic</li>
+    </weaponTags>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="NAT_CadaverBase">
+    <defName>NAT_CadaverSoldier</defName>
+    <label>cadaver soldier</label>
+    <combatPower>45</combatPower>
+    <gearHealthRange>0.2~0.4</gearHealthRange>
+    <itemQuality>Poor</itemQuality>
+    <apparelMoney>200~3000</apparelMoney>
+    <apparelTags>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <techHediffsMoney>1000~2000</techHediffsMoney>
+    <techHediffsTags>
+      <li>Simple</li>
+      <li>Advanced</li>
+      <li>AdvancedWeapon</li>
+    </techHediffsTags>
+<weaponMoney>300~900</weaponMoney>
+    <weaponTags>
+      <li>ShortShots</li>
+      <li>MedievalMeleeBasic</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

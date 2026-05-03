@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <HediffDef>
+    <defName>NAT_Cadaver</defName>
+    <label>cadaver</label>
+    <description>This person has been implanted with an archotech shard, twisting them into a jittering murder machine. Its body is an amalgam of flesh and metal, while its mind cycles between half-conscious stupor and murderous intent.\n\nThey cannot work; they only fight. Ghouls must eat raw meat. If they go hungry, they can turn hostile.\n\nMany find ghouls' constant twitching to be disturbing, even when they aren't killing someone.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <everCurableByItem>false</everCurableByItem>
+    <keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
+    <stages>
+      <li>
+        <painFactor>0</painFactor>
+        <statFactors>
+          <MaxNutrition>2</MaxNutrition>
+          <PsychicSensitivity>0</PsychicSensitivity>
+        </statFactors>
+        <statOffsets>
+          <ComfyTemperatureMin>-40</ComfyTemperatureMin>
+          <ComfyTemperatureMax>40</ComfyTemperatureMax>
+          <MinimumContainmentStrength>30</MinimumContainmentStrength>
+<IncomingDamageFactor>0.2</IncomingDamageFactor>
+        </statOffsets>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <postFactor>0</postFactor>
+          </li>
+        </capMods>
+<regeneration>50</regeneration>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_AttachPoints" />
+    </comps>
+  </HediffDef>
+  
+</Defs>
