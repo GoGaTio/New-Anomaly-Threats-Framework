@@ -48,7 +48,6 @@ namespace NAT
 		[MayRequire("GoGaTio.NewAnomalyThreats.SeaMonsters")]
 		public static HediffDef NAT_BilePowerSerum;
 
-		[MayRequire("GoGaTio.NewAnomalyThreats.SeaMonsters")]
 		public static HediffDef NAT_SlowedByBile;
 
 		public static HediffDef NAT_EmotionSuppression;
@@ -69,5 +68,6 @@ namespace NAT
 
 		public static GenStepDef NAT_UndergroundLayout;
 
+		public static HediffDef NAT_Nail;
 	}
 }

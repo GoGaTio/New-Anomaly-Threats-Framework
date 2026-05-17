@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  
+  <HediffDef>
+    <defName>NAT_Nail</defName>
+    <label>nail</label>
+    <hediffClass>NAT.Hediff_NoMerge</hediffClass>
+    <description>A sharp nail-like bioferrite spike. While generally not fatal, these are incredibly painful. It must be surgically removed.</description>
+    <tendable>false</tendable> <!-- Must be removed via surgery -->
+    <displayWound>true</displayWound>
+    <stages>
+      <li>
+        <painOffset>0.05</painOffset>
+      </li>
+    </stages>
+    <comps />
+  </HediffDef>
+  
+</Defs>

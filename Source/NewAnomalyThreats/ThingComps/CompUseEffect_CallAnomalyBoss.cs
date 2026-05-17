@@ -9,125 +9,140 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NAT
 {
-	public class CompProperties_CallAnomalyBoss : CompProperties_UseEffect
+	public class CompProperties_CallAnomalyBoss : CompProperties_Interactable
 	{
 		public AnomalyBossDef bossDef;
 
 		public EffecterDef effecterDef;
 
-		public EffecterDef prepareEffecterDef;
+		public EffecterDef destroyEffecterDef;
 
-		[NoTranslate]
-		public string spawnLetterTextKey;
+		public GraphicData floatingGraphic;
 
-		[NoTranslate]
-		public string spawnLetterLabelKey;
-
-		[NoTranslate]
-		public string unlockedLetterTextKey;
-
-		[NoTranslate]
-		public string unlockedLetterLabelKey;
-
-		public int delayTicks = -1;
+		public int destroyDelayTicks = -1;
 
 		public CompProperties_CallAnomalyBoss()
 		{
-			compClass = typeof(CompUseEffect_CallAnomalyBoss);
-		}
-
-		public override void Notify_PostUnlockedByResearch(ThingDef parent)
-		{
-			if (Find.TickManager.TicksGame > 0 && !unlockedLetterLabelKey.NullOrEmpty() && !unlockedLetterTextKey.NullOrEmpty())
-			{
-				SendBossgroupDetailsLetter(unlockedLetterLabelKey, unlockedLetterTextKey, parent);
-			}
-		}
-
-		public void SendBossgroupDetailsLetter(string labelKey, string textKey, ThingDef parent)
-		{
-			List<ThingDef> list = new List<ThingDef> { parent };
-			//list.AddRange(bossgroupDef.boss.kindDef.race.killedLeavingsPlayerHostile.Select((ThingDefCountClass t) => t.thingDef));
-			//Find.LetterStack.ReceiveLetter(FormatLetterLabel(labelKey), FormatLetterText(textKey, parent), LetterDefOf.NeutralEvent, null, null, null, list);
-		}
-
-		public string FormatLetterText(string text, ThingDef parent)
-		{
-			return text.Translate(NamedArgumentUtility.Named(parent, "PARENT"), NamedArgumentUtility.Named(bossDef.bossKind, "LEADER"));
+			compClass = typeof(CompCallAnomalyBoss);
+			activateTexPath = "UI/Commands/NAT_CallAnomalyBoss";
 		}
 	}
-	public class CompUseEffect_CallAnomalyBoss : CompUseEffect
+	public class CompCallAnomalyBoss : CompInteractable
 	{
-		private Effecter prepareEffecter;
+		public new CompProperties_CallAnomalyBoss Props => (CompProperties_CallAnomalyBoss)props;
 
-		public CompProperties_CallAnomalyBoss Props => (CompProperties_CallAnomalyBoss)props;
+		public int ticksTillDestroy = -1;
 
-		public bool ShouldSendSpawnLetter
+		public override void OrderForceTarget(LocalTargetInfo target)
 		{
-			get
+			OrderActivation(target.Pawn);
+		}
+
+		protected override void OnInteracted(Pawn caster)
+		{
+			if(Props.effecterDef != null)
 			{
-				if (Props.spawnLetterLabelKey.NullOrEmpty() || Props.spawnLetterTextKey.NullOrEmpty())
+				Vector3 offset = Vector3.zero;
+				float num = 0.5f * (1f + Mathf.Sin(Mathf.PI * 2f * (float)GenTicks.TicksGame / 300f)) * 0.35f;
+				offset.z += num;
+				Props.effecterDef.Spawn(parent, parent.Map, offset);
+			}
+			ticksTillDestroy = Props.destroyDelayTicks;
+			NewAnomalyThreatsUtility.Comp.bossManager.CallBoss(Props.bossDef, caster.MapHeld);
+		}
+
+		public override string CompInspectStringExtra()
+		{
+			return null;
+		}
+
+		public override void CompTick()
+		{
+			base.CompTick();
+			if(ticksTillDestroy > 0)
+			{
+				ticksTillDestroy--;
+				if(ticksTillDestroy <= 0)
 				{
-					return false;
+					Props.destroyEffecterDef?.Spawn(parent.Position, parent.Map);
+					parent.Kill();
 				}
-				if (!MechanitorUtility.AnyMechanitorInPlayerFaction())
-				{
-					return false;
-				}
-				if (Find.BossgroupManager.lastBossgroupCalled > 0)
-				{
-					return false;
-				}
-				return true;
 			}
 		}
 
-		public override void DoEffect(Pawn usedBy)
+		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
 		{
-			base.DoEffect(usedBy);
-			if (Props.effecterDef != null)
+			AcceptanceReport acceptanceReport = CanInteract(selPawn);
+			FloatMenuOption floatMenuOption = new FloatMenuOption(Props.jobString.CapitalizeFirst(), delegate
 			{
-				Effecter obj = new Effecter(Props.effecterDef);
-				obj.Trigger(new TargetInfo(parent.Position, parent.Map), TargetInfo.Invalid);
-				obj.Cleanup();
+				OrderActivation(selPawn);
+			});
+			if (!acceptanceReport.Accepted)
+			{
+				floatMenuOption.Disabled = true;
+				floatMenuOption.Label = floatMenuOption.Label + " (" + acceptanceReport.Reason + ")";
 			}
-			prepareEffecter?.Cleanup();
-			prepareEffecter = null;
-			CallBoss();
-		}
-
-		private void CallBoss()
-		{
-			NewAnomalyThreatsUtility.Comp.bossManager.CallBoss(Props.bossDef, parent.MapHeld);
-		}
-
-		public override TaggedString ConfirmMessage(Pawn p)
-		{
-			return NewAnomalyThreatsUtility.Comp.bossManager.BossWaveComposition(Props.bossDef, p.Map);
-		}
-
-		public override void PrepareTick()
-		{
-			if (Props.prepareEffecterDef != null && prepareEffecter == null)
+			else
 			{
-				prepareEffecter = Props.prepareEffecterDef.Spawn(parent.Position, parent.MapHeld);
+				AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.CanCallBoss(Props.bossDef, parent.Map);
+				if (!report.Accepted)
+				{
+					floatMenuOption.Disabled = true;
+					floatMenuOption.Label = floatMenuOption.Label + " (" + report.Reason + ")";
+				}
 			}
-			prepareEffecter?.EffectTick(parent, TargetInfo.Invalid);
+			yield return floatMenuOption;
 		}
 
-		public override AcceptanceReport CanBeUsedBy(Pawn p)
+		public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-			return NewAnomalyThreatsUtility.Comp.bossManager.CanCallBoss(Props.bossDef, parent.Map);
-		}
-
-		public override void PostSpawnSetup(bool respawningAfterLoad)
-		{
-			if (!respawningAfterLoad && ShouldSendSpawnLetter)
+			AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.CanCallBoss(Props.bossDef, parent.Map);
+			foreach (Gizmo item in base.CompGetGizmosExtra())
 			{
-				Props.SendBossgroupDetailsLetter(Props.spawnLetterLabelKey, Props.spawnLetterTextKey, parent.def);
+				if (!report.Accepted)
+				{
+					item.Disable(report.Reason);
+				}
+				yield return item;
+			}
+		}
+
+		public override void DrawAt(Vector3 drawLoc, bool flip = false)
+		{
+			if (Props.floatingGraphic != null && ticksTillDestroy < 0)
+			{
+				float num = 0.5f * (1f + Mathf.Sin(Mathf.PI * 2f * (float)GenTicks.TicksGame / 300f)) * 0.35f;
+				drawLoc.z += num;
+				drawLoc += Altitudes.AltIncVect;
+				Props.floatingGraphic.Graphic.Draw(drawLoc, parent.Rotation, parent);
+			}
+		}
+
+		private void OrderActivation(Pawn pawn)
+		{
+			Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(NewAnomalyThreatsUtility.Comp.bossManager.BossWaveComposition(Props.bossDef, pawn.Map), delegate
+			{
+				Job job = JobMaker.MakeJob(JobDefOf.InteractThing, parent);
+				job.count = 1;
+				job.playerForced = true;
+				pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+			}));
+		}
+
+		public override void PostExposeData()
+		{
+			base.PostExposeData();
+			if (string.IsNullOrEmpty(ExposeKey))
+			{
+				Scribe_Values.Look(ref ticksTillDestroy, "ticksTillDestroy", -1);
+			}
+			else
+			{
+				Scribe_Values.Look(ref ticksTillDestroy, ExposeKey + "_ticksTillDestroy", -1);
 			}
 		}
 	}

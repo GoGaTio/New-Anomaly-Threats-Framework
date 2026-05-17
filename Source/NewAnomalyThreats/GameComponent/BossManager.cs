@@ -30,6 +30,8 @@ namespace NAT
 
 			public float lastPoints = -1;
 
+			public int hoursTillArrival;
+
 			public int lastSummonedTick = -999999;
 
 			public bool incoming = false;
@@ -66,6 +68,13 @@ namespace NAT
 			public IEnumerable<PawnKindDef> GeneratePawns(float points)
 			{
 				var group = def.GetBossGroup(timesSummoned, points);
+				foreach(PawnKindDefCount item in group.fixedEscorts)
+				{
+					for(int i = 0; i < item.count; i++)
+					{
+						yield return item.kindDef;
+					}
+				}
 				float num = points;
 				while(num > 0)
 				{
@@ -79,8 +88,12 @@ namespace NAT
 			{
 				if (incoming)
 				{
-					def.ArriveOnMap(this);
-					incoming = false;
+					hoursTillArrival--;
+					if(hoursTillArrival < 0)
+					{
+						def.ArriveOnMap(this);
+						incoming = false;
+					}
 				}
 			}
 
@@ -190,9 +203,10 @@ namespace NAT
 		public void CallBoss(AnomalyBossDef def, Map map)
 		{
 			AnomalyBoss boss = bosses.FirstOrDefault(x => x.def == def);
-			boss.lastSummonedTick = Find.TickManager.TicksGame;
 			boss.incoming = true;
 			boss.mapIndex = (sbyte)map.Index;
+			boss.hoursTillArrival = boss.def.arrivalTimeHoursRange.RandomInRange;
+			boss.lastSummonedTick = Find.TickManager.TicksGame + (boss.hoursTillArrival * 2500);
 		}
 	}
 }

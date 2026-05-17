@@ -27,6 +27,14 @@ namespace NAT
 
 		public List<BossStage> stages = new List<BossStage>();
 
+		public List<ThingDefCountRangeClass> finalLeavings = new List<ThingDefCountRangeClass>();
+
+		[MustTranslate]
+		public string finishedLetterLabel;
+
+		[MustTranslate]
+		public string finishedLetterText;
+
 		public CompProperties_BossStages()
 		{
 			compClass = typeof(CompBossStages);
@@ -95,6 +103,21 @@ namespace NAT
 			preDeathPos = parent.PositionHeld;
 			preDeathMap = prevMap;
 			base.Notify_Killed(prevMap, dinfo);
+			if (!CanAdvanceStage)
+			{
+				List<Thing>	list = new List<Thing>();
+				for (int i = 0; i < Props.finalLeavings.Count; i++)
+				{
+					ThingDefCountRangeClass item = Props.finalLeavings[i];
+					Thing thing = ThingMaker.MakeThing(item.thingDef);
+					thing.stackCount = item.countRange.RandomInRange;
+					if(GenPlace.TryPlaceThing(thing, preDeathPos, preDeathMap, ThingPlaceMode.Near))
+					{
+						list.Add(thing);
+					}
+				}
+				Find.LetterStack.ReceiveLetter(Props.finishedLetterLabel, Props.finishedLetterText, LetterDefOf.PositiveEvent, list);
+			}
 		}
 
 		public override void PostExposeData()

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+<DamageDef>
+    <defName>NAT_Nail</defName>
+    <label>nail stab</label>
+    <workerClass>NAT.DamageWorker_Nail</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been nailed to death.</deathMessage>
+    <hediff>Stab</hediff>
+    <hediffSolid>Crack</hediffSolid>
+    <impactSoundType>Slice</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <stabChanceOfForcedInternal>0.3</stabChanceOfForcedInternal>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+  </DamageDef>
+  
+</Defs>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>NAT_Bullet_Nail</defName>
+    <label>nail</label>
+    <graphicData>
+      <texPath>Things/Projectile/NAT_Nail</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>NAT_Nail</damageDef>
+      <damageAmountBase>5</damageAmountBase>
+      <stoppingPower>0</stoppingPower>
+      <beamStartOffset>0.5</beamStartOffset>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <speed>100</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>

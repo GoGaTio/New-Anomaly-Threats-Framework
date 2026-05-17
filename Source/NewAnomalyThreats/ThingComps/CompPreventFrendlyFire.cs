@@ -69,7 +69,7 @@ namespace NAT
 
 		public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
 		{
-			if(dinfo.Def.harmsHealth && dinfo.IntendedTarget != parent && parent.Faction == dinfo.Instigator?.Faction)
+			if(dinfo.Def.harmsHealth && dinfo.IntendedTarget != parent && parent != dinfo.Instigator && parent.Faction == dinfo.Instigator?.Faction)
 			{
 				absorbed = true;
 				return;

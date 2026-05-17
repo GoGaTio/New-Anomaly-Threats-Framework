@@ -11,10 +11,14 @@ using Verse.AI;
 
 namespace NAT
 {
-	public interface IAffectedByDisruptor
+	public interface IAlwaysTargetable
 	{
-		void Affect();
 	}
+
+	public class CanHaveFactionExtension : DefModExtension
+	{
+	}
+
 	public class IncidentExtension : DefModExtension
 	{
 		public ThingDef thingDef;

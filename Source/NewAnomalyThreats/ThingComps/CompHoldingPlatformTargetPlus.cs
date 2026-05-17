@@ -51,44 +51,28 @@ using Verse.Noise;
 using Verse.Profile;
 using Verse.Sound;
 using Verse.Steam;
+using HarmonyLib;
 
 namespace NAT
 {
-	public class FilthBile : Filth
+	public abstract class CompHoldingPlatformTargetPlus : CompHoldingPlatformTarget
 	{
-		public int activeTicks = 180;
 
-        protected override void TickInterval(int delta)
-        {
-            base.TickInterval(delta);
-            if (activeTicks == 0 || !Spawned)
-            {
-				return;
-            }
-			foreach (Thing item in Map.thingGrid.ThingsAt(Position))
-			{
-				if (item is Pawn p && (p.RaceProps.Humanlike || p.IsAnimal))
-				{
-                    if (TryAttachBile(p))
-                    {
-						break;
-					}
-				}
-			}
-			activeTicks--;
-		}
+		public abstract bool CanCapture { get; }
 
-		private bool TryAttachBile(Pawn pawn)
+		public virtual void CapturePawn(ThingOwner newOwner)
 		{
-			Hediff h = pawn.health.GetOrAddHediff(NATDefOf.NAT_SlowedByBile);
-			if(h.Severity >= 1.5f)
-            {
-				return false;
-            }
-			h.Severity += 0.49f;
-			DamageInfo dinfo = new DamageInfo(DamageDefOf.Deterioration, 150f);
-			this.TakeDamage(dinfo);
-			return true;
+			targetHolder = null;
+			if(newOwner != null)
+			{
+				Pawn pawn = GetHeldPawn(newOwner);
+				newOwner.TryAddOrTransfer(pawn);
+				pawn.TryGetComp<CompHoldingPlatformTarget>()?.Notify_HeldOnPlatform(newOwner);
+				Find.HiddenItemsManager.SetDiscovered(pawn.def);
+				parent.Destroy();
+			}
 		}
+
+		public abstract Pawn GetHeldPawn(ThingOwner newOwner);
 	}
 }

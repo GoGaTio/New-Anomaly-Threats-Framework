@@ -27,6 +27,8 @@ namespace NAT
 
 			public List<PawnGenOption> escorts = new List<PawnGenOption>();
 
+			public List<PawnKindDefCount> fixedEscorts = new List<PawnKindDefCount>();
+
 			public bool CanUseNow(int index)
 			{
 				if(index < minIndex)
@@ -41,6 +43,12 @@ namespace NAT
 			}
 		}
 
+		[MustTranslate]
+		public string arrivedLetterLabel;
+
+		[MustTranslate]
+		public string arrivedLetterText;
+
 		public List<BossGroup> groups = new List<BossGroup>();
 
 		public PawnKindDef bossKind;
@@ -50,6 +58,8 @@ namespace NAT
 		public float maxPoints = float.MaxValue;
 
 		public int ticksCooldown = 180000;
+
+		public IntRange arrivalTimeHoursRange = new IntRange(2, 10);
 
 		public virtual float ProcessPoints(float points, Map map)
 		{
@@ -67,15 +77,23 @@ namespace NAT
 			return list;
 		}
 
-		public virtual void ArriveOnMap(AnomalyBossManager.AnomalyBoss boss)
+		public void ArriveOnMap(AnomalyBossManager.AnomalyBoss boss)
 		{
 			List<Pawn> list = GeneratePawns(boss).ToList();
-			IncidentParms parms = new IncidentParms() { target = boss.Map };
-			if (!PawnsArrivalModeDefOf.EdgeWalkIn.Worker.TryResolveRaidSpawnCenter(parms))
-			{
-				return;
-			}
-			PawnsArrivalModeDefOf.EdgeWalkIn.Worker.Arrive(list, parms);
+			ArriveInt(list, boss);
+			GenerateLord(list, boss);
+			Find.LetterStack.ReceiveLetter(arrivedLetterLabel.Formatted(bossKind.LabelCap), arrivedLetterText, LetterDefOf.ThreatBig, list);
+			boss.escorts = null;
+		}
+
+		public virtual void ArriveInt(List<Pawn> list, AnomalyBossManager.AnomalyBoss boss)
+		{
+			
+		}
+
+		public virtual void GenerateLord(List<Pawn> list, AnomalyBossManager.AnomalyBoss boss)
+		{
+
 		}
 
 		public virtual IEnumerable<Pawn> GeneratePawns(AnomalyBossManager.AnomalyBoss boss)

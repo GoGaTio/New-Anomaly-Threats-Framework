@@ -71,6 +71,34 @@ namespace NAT
 		}
 	}*/
 
+	[HarmonyPatch(typeof(CompHoldingPlatformTarget), nameof(CompHoldingPlatformTarget.CanBeCaptured), MethodType.Getter)]
+	public class Patch_CompHoldingPlatformTarget_CanBeCaptured
+	{
+		[HarmonyPostfix]
+		public static void Postfix(ref bool __result, CompHoldingPlatformTarget __instance)
+		{
+			if(__instance is CompHoldingPlatformTargetPlus comp)
+			{
+				__result = comp.CanCapture;
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(CompHoldingPlatformTarget), nameof(CompHoldingPlatformTarget.Notify_HeldOnPlatform))]
+	public class Patch_CompHoldingPlatformTarget_Notify_HeldOnPlatform
+	{
+		[HarmonyPostfix]
+		public static bool Prefix(ThingOwner newOwner, CompHoldingPlatformTarget __instance)
+		{
+			if (__instance is CompHoldingPlatformTargetPlus comp)
+			{
+				comp.CapturePawn(newOwner);
+				return false;
+			}
+			return true;
+		}
+	}
+
 	[HarmonyPatch(typeof(CompDisruptorFlare), nameof(CompDisruptorFlare.PostSpawnSetup))]
 	public class Patch_CompDisruptorFlare
 	{
@@ -95,6 +123,39 @@ namespace NAT
 						list.Add(t);
 					}
 				}
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(TargetingParameters))]
+	[HarmonyPatch(nameof(TargetingParameters.CanTarget))]
+	public class Patch_Targeting
+	{
+		[HarmonyPrefix]
+		public static bool Prefix(TargetInfo targ, ITargetingSource source, ref bool __result, TargetingParameters __instance)
+		{
+			if (targ.Thing is IAlwaysTargetable && __instance.canTargetEntities == true && __instance.canTargetBuildings == true)
+			{
+				__result = __instance.validator == null ? true : __instance.validator(targ);
+				return false;
+			}
+			return true;
+		}
+	}
+
+	[HarmonyPatch(typeof(ThingDef), nameof(ThingDef.CanHaveFaction), MethodType.Getter)]
+	public class Patch_CanHaveFaction
+	{
+		[HarmonyPostfix]
+		public static void Postfix(ref bool __result, ThingDef __instance)
+		{
+			if (__result)
+			{
+				return;
+			}
+			if (__instance.HasModExtension<CanHaveFactionExtension>())
+			{
+				__result = true;
 			}
 		}
 	}
@@ -136,7 +197,7 @@ namespace NAT
 		}
 	}
 
-	[HarmonyPatch(typeof(Verb), nameof(Verb.ApparelPreventsShooting))]
+	/*[HarmonyPatch(typeof(Verb), nameof(Verb.ApparelPreventsShooting))]
 	public class Patch_ApparelPreventsShooting
 	{
 		[HarmonyPostfix]
@@ -148,7 +209,7 @@ namespace NAT
 				__result = true;
 			}
 		}
-	}
+	}*/
 
 	[HarmonyPatch(typeof(QuestPart_EntityArrival), "Notify_QuestSignalReceived")]
 	public class Patch_EntityArrivalOverride

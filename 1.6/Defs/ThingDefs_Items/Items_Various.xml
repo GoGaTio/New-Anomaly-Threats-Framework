@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  
-  <ThingDef>
-    <defName>NAT_PainClot</defName>
-    <label>pain clot</label>
-    <description>A piece of clotted pain.</description>
+
+  <ThingDef Name="NAT_AnomalousResourceBase" Abstract="True">
     <thingClass>ThingWithComps</thingClass>
     <tradeability>None</tradeability>
     <category>Item</category>
-    <genericMarketSellable>false</genericMarketSellable>
-    <drawerType>MapMeshOnly</drawerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
     <altitudeLayer>Item</altitudeLayer>
@@ -20,17 +16,15 @@
     <useHitPoints>false</useHitPoints>
     <healthAffectsPrice>false</healthAffectsPrice>
     <graphicData>
-      <texPath>Things/Item/NAT_PainClot</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
-      <drawSize>(1, 1)</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Standard_Pickup</soundInteract>
     <soundDrop>Standard_Drop</soundDrop>
-    <stackLimit>75</stackLimit>
+    <stackLimit>1</stackLimit>
     <intricate>true</intricate>
     <statBases>
-      <Mass>0.05</Mass>
-      <Beauty>-10</Beauty>
+      <Mass>1</Mass>
+      <Beauty>-4</Beauty>
       <Flammability>0</Flammability>
     </statBases>
     <thingCategories>
@@ -40,6 +34,27 @@
     <comps>
       <li Class="CompProperties_Forbiddable" />
     </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="NAT_AnomalousResourceBase">
+    <defName>NAT_PainClot</defName>
+    <label>pain clot</label>
+    <description>A piece of clotted pain.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <tradeability>None</tradeability>
+    <genericMarketSellable>false</genericMarketSellable>
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Item/NAT_PainClot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <stackLimit>75</stackLimit>
+    <statBases>
+      <Mass>0.05</Mass>
+      <Beauty>-10</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
   </ThingDef>
 
   <ThingDef ParentName="ChunkBase">
