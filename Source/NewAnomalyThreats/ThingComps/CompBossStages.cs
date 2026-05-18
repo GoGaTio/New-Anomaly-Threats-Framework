@@ -81,6 +81,10 @@ namespace NAT
 					{
 						Boss.abilities = new Pawn_AbilityTracker(Boss);
 					}
+					foreach(AbilityDef def in CurrentBossStage.abilities)
+					{
+						Boss.abilities.GainAbility(def);
+					}
 				}
 				return true;
 			}

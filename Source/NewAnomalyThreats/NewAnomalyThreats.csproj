@@ -78,6 +78,7 @@
     <Compile Include="Harmony\ResearchPatches.cs" />
     <Compile Include="Hediffs\Hediff_NoMerge.cs" />
     <Compile Include="Hediffs\Hediff_InducedPain.cs" />
+    <Compile Include="Hediffs\HediffComp_GiveAbilityCharges.cs" />
     <Compile Include="Hediffs\Hediff_PainQuench.cs" />
     <Compile Include="Hediffs\Hediff_Subdued.cs" />
     <Compile Include="Incidents\ArrivalMethods.cs" />
@@ -101,7 +102,6 @@
     <Compile Include="ThingComps\CompUniqueName.cs" />
     <Compile Include="ThingComps\CompPreventFrendlyFire.cs" />
     <Compile Include="ThingComps\CompCrate.cs" />
-    <Compile Include="ThingComps\CompHateShield.cs" />
     <Compile Include="ThingComps\CompPainFigure.cs" />
     <Compile Include="ThingComps\CompTargetEffect_InducePain.cs" />
     <Compile Include="ThingComps\CompUndergroundEntrance.cs" />
@@ -111,9 +111,10 @@
     <Compile Include="Things\FilthBile.cs" />
     <Compile Include="Things\SignalAction_Sightstealers.cs" />
     <Compile Include="Things\UndergroundEntrance.cs" />
-    <Compile Include="UI\Gizmo.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
