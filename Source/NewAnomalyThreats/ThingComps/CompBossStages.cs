@@ -91,6 +91,17 @@ namespace NAT
 			return false;
 		}
 
+		public override void CompTick()
+		{
+			base.CompTick();
+			if (parent.Spawned)
+			{
+				preDeathLord = Boss.GetLord();
+				preDeathPos = parent.Position;
+				preDeathMap = parent.Map;
+			}
+		}
+
 		public override float GetStatFactor(StatDef stat)
 		{
 			return CurrentBossStage.statFactors.GetStatFactorFromList(stat);
@@ -103,9 +114,11 @@ namespace NAT
 
 		public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
 		{
-			preDeathLord = Boss.GetLord();
-			preDeathPos = parent.PositionHeld;
-			preDeathMap = prevMap;
+			if(preDeathMap == null)
+			{
+				preDeathPos = parent.PositionHeld;
+				preDeathMap = prevMap;
+			}
 			base.Notify_Killed(prevMap, dinfo);
 			if (!CanAdvanceStage)
 			{
