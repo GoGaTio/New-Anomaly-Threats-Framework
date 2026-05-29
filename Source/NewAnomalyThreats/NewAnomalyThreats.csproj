@@ -87,6 +87,7 @@
     <Compile Include="Jobs\JobDrivers_Misc.cs" />
     <Compile Include="Jobs\JobGivers.cs" />
     <Compile Include="Jobs\Lords.cs" />
+    <Compile Include="MapGen\DungeonUtility.cs" />
     <Compile Include="MapGen\GenStep_UndergroundLayout.cs" />
     <Compile Include="GameComponent\GameComponent.cs" />
     <Compile Include="Misc.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="PsychicRituals.cs" />
     <Compile Include="ThingComps\CompConstantFleckEmitter.cs" />
     <Compile Include="ThingComps\CompHoldingPlatformTargetPlus.cs" />
+    <Compile Include="ThingComps\CompTurret.cs" />
     <Compile Include="ThingComps\CompUseEffect_CallAnomalyBoss.cs" />
     <Compile Include="ThingComps\CompBossStages.cs" />
     <Compile Include="ThingComps\CompDamageAdaptable.cs" />

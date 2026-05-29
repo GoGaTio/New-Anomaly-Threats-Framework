@@ -8,10 +8,108 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using Verse.Noise;
 using Verse.Sound;
+using static HarmonyLib.Code;
 
 namespace NAT
 {
+	public class BossStageAction
+	{
+		public BossStageAction() { }
+
+		public bool endAction = true;
+
+		public bool startAction = true;
+
+		public virtual void Start(CompBossStages comp)
+		{
+			if (startAction)
+			{
+				DoAction(comp);
+			}
+		}
+
+		public virtual void End(CompBossStages comp)
+		{
+			if (endAction)
+			{
+				DoAction(comp);
+			}
+		}
+		public virtual void DoAction(CompBossStages comp)
+		{
+
+		}
+	}
+
+	public class BossStageAction_Explosion : BossStageAction
+	{
+		public float explosiveRadius = 1.9f;
+
+		public DamageDef explosiveDamageType;
+
+		public int damageAmountBase = -1;
+
+		public float armorPenetrationBase = -1f;
+
+		public ThingDef postExplosionSpawnThingDef;
+
+		public float postExplosionSpawnChance;
+
+		public int postExplosionSpawnThingCount = 1;
+
+		public bool applyDamageToExplosionCellsNeighbors;
+
+		public ThingDef preExplosionSpawnThingDef;
+
+		public float preExplosionSpawnChance;
+
+		public int preExplosionSpawnThingCount = 1;
+
+		public float chanceToStartFire;
+
+		public bool damageFalloff;
+
+		public bool explodeOnKilled;
+
+		public bool explodeOnDestroyed;
+
+		public GasType? postExplosionGasType;
+
+		public float? postExplosionGasRadiusOverride;
+
+		public int postExplosionGasAmount = 255;
+
+		public bool doVisualEffects = true;
+
+		public bool doSoundEffects = true;
+
+		public float propagationSpeed = 1f;
+
+		public ThingDef postExplosionSpawnSingleThingDef;
+
+		public ThingDef preExplosionSpawnSingleThingDef;
+
+		public float explosiveExpandPerStackcount;
+
+		public float explosiveExpandPerFuel;
+
+		public EffecterDef explosionEffect;
+
+		public SoundDef explosionSound;
+
+		public override void DoAction(CompBossStages comp)
+		{
+			if (explosionEffect != null)
+			{
+				Effecter effecter = explosionEffect.Spawn();
+				effecter.Trigger(new TargetInfo(comp.preDeathPos, comp.preDeathMap), new TargetInfo(comp.preDeathPos, comp.preDeathMap));
+				effecter.Cleanup();
+			}
+			GenExplosion.DoExplosion(comp.preDeathPos, comp.preDeathMap, explosiveRadius, explosiveDamageType, comp.parent, damageAmountBase, armorPenetrationBase, explosionSound, null, null, null, postExplosionSpawnThingDef, postExplosionSpawnChance, postExplosionSpawnThingCount, postExplosionGasType, postExplosionGasRadiusOverride, postExplosionGasAmount, applyDamageToExplosionCellsNeighbors, preExplosionSpawnThingDef, preExplosionSpawnChance, preExplosionSpawnThingCount, chanceToStartFire, damageFalloff, null, null, null, doVisualEffects, propagationSpeed, 0f, doSoundEffects, null, 1f, null, null, postExplosionSpawnSingleThingDef, preExplosionSpawnSingleThingDef);
+		}
+	}
 	public class CompProperties_BossStages : CompProperties
 	{
 		public class BossStage
@@ -23,6 +121,8 @@ namespace NAT
 			public List<StatModifier> statFactors = new List<StatModifier>();
 
 			public List<AbilityDef> abilities = new List<AbilityDef>();
+
+			public List<BossStageAction> actions = new List<BossStageAction>();
 		}
 
 		public List<BossStage> stages = new List<BossStage>();
@@ -34,6 +134,8 @@ namespace NAT
 
 		[MustTranslate]
 		public string finishedLetterText;
+
+		public AnomalyBossDef def;
 
 		public CompProperties_BossStages()
 		{
@@ -118,6 +220,10 @@ namespace NAT
 			{
 				preDeathPos = parent.PositionHeld;
 				preDeathMap = prevMap;
+			}
+			foreach(BossStageAction action in CurrentBossStage.actions)
+			{
+				action.End(this);
 			}
 			base.Notify_Killed(prevMap, dinfo);
 			if (!CanAdvanceStage)

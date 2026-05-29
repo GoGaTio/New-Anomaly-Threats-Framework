@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Ancient Armored Turret -->
+
+  <ThingDef Name="NAT_AncientTurretBase" ParentName="BuildingBase" Abstract="True">
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <tradeability>None</tradeability>
+    <uiIconPath>Things/Building/Ancient/ArmoredTurret/AncientArmoredTurret_MenuIcon</uiIconPath>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+    <graphicData>
+      <texPath>Things/Building/NAT_AncientDefenceTurret_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.27,0.25,0.27)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>25</Mass>
+      <Beauty>-20</Beauty>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+      <li Class="CompProperties_Hackable">
+        <defence>50</defence>
+        <onlyRemotelyHackable>true</onlyRemotelyHackable>
+        <hackedInspectString>Disabled</hackedInspectString>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <building>
+      <combatPower>45</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretBurstCooldownTime>5.8</turretBurstCooldownTime>
+      <claimable>false</claimable>
+      <repairable>false</repairable>
+      <deconstructible>false</deconstructible>
+    </building>
+  </ThingDef>
+
+<ThingDef ParentName="NAT_AncientTurretBase">
+    <defName>NAT_Turret_AncientNailTurret</defName>
+    <label>ancient nailgun turret</label>
+    <description>An armored security turret containing a long-lasting battery.</description>
+    <building>
+      <combatPower>80</combatPower>
+      <turretGunDef>NAT_Gun_AncientNailTurret</turretGunDef>
+      <turretBurstCooldownTime>3.5</turretBurstCooldownTime>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>NAT_Gun_AncientNailTurret</defName>
+    <label>ancient nailgun</label>
+    <description>A simple automatic gun made to be mounted on a turret.</description>
+    <graphicData>
+      <texPath>Things/Building/Ancient/ArmoredTurret/AncientArmoredTurret_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>NAT_Bullet_Nail</defaultProjectile>
+        <range>24.9</range>
+        <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+        <burstShotCount>10</burstShotCount>
+        <soundCast>Interact_AssaultRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AncientTurretBase">
+    <defName>NAT_Turret_AncientIncineratorTurret</defName>
+    <label>ancient incinerator turret</label>
+    <description>An armored security turret containing a long-lasting battery.</description>
+    <building>
+      <combatPower>115</combatPower>
+      <turretGunDef>NAT_Gun_AncientIncineratorTurret</turretGunDef>
+      <turretBurstCooldownTime>6.4</turretBurstCooldownTime>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>NAT_Gun_AncientIncineratorTurret</defName>
+    <label>ancient incinerator</label>
+    <description>A simple automatic gun made to be mounted on a turret.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_AncientDefenceTurret_Incinerator</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <RangedWeapon_Cooldown>6.4</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_ArcSprayIncinerator</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <range>14.9</range>
+        <minRange>1.5</minRange>
+        <beamFullWidthRange>11</beamFullWidthRange>
+        <burstShotCount>14</burstShotCount>
+        <showBurstShotStats>false</showBurstShotStats>
+        <requireLineOfSight>true</requireLineOfSight>
+        <beamWidth>6</beamWidth>
+        <ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+        <beamDamageDef>Flame</beamDamageDef>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <soundCastBeam>Flamethrower_Firing</soundCastBeam>
+        <beamGroundFleckDef>Fleck_IncineratorBeamBurn</beamGroundFleckDef>
+        <beamFleckChancePerTick>0.32</beamFleckChancePerTick>
+        <beamMaxDeviation>0.5</beamMaxDeviation>
+        <beamCurvature>0</beamCurvature>
+        <beamEndEffecterDef>IncineratorBeam_End</beamEndEffecterDef>
+        <beamChanceToStartFire>0.85</beamChanceToStartFire>
+        <beamFireSizeRange>0.55~0.85</beamFireSizeRange>
+        <beamStartOffset>0</beamStartOffset>
+        <beamHitsNeighborCells>true</beamHitsNeighborCells>
+        <beamCantHitWithinMinRange>true</beamCantHitWithinMinRange>
+        <beamHitsNeighborCellsRequiresLOS>true</beamHitsNeighborCellsRequiresLOS>
+        <beamSetsGroundOnFire>true</beamSetsGroundOnFire>
+        <beamLineFleckDef>Fleck_IncineratorBeamSmoke</beamLineFleckDef>
+        <highlightColor>(180, 60, 10)</highlightColor>
+        <secondaryHighlightColor>(220, 210, 20)</secondaryHighlightColor>
+        <beamLineFleckChanceCurve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(0.65, 0.02)</li>
+            <li>(1, .5)</li>
+          </points>
+        </beamLineFleckChanceCurve>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+        <flammabilityAttachFireChanceCurve>
+          <points>
+            <li>(0.6, 0)</li>
+            <li>(0.7, 0.2)</li>
+            <li>(1.2, 0.8)</li>
+          </points>
+        </flammabilityAttachFireChanceCurve>
+        <rangedFireRulepack>Combat_RangedFlamethrower</rangedFireRulepack>
+      </li>
+    </verbs>
+  </ThingDef>
+  
+</Defs>

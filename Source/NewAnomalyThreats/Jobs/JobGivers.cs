@@ -64,7 +64,7 @@ namespace NAT
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			if (pawn.Drafted)
+			if (pawn.DeadOrDowned || pawn.Drafted || pawn.CurJob?.ability != null)
 			{
 				return null;
 			}

@@ -80,18 +80,19 @@ namespace NAT
 		public void ArriveOnMap(AnomalyBossManager.AnomalyBoss boss)
 		{
 			List<Pawn> list = GeneratePawns(boss).ToList();
-			ArriveInt(list, boss);
-			GenerateLord(list, boss);
+			Map map = boss.Map;
+			ArriveInt(list, map);
+			GenerateLord(list, map);
 			Find.LetterStack.ReceiveLetter(arrivedLetterLabel.Formatted(bossKind.LabelCap), arrivedLetterText, LetterDefOf.ThreatBig, list);
 			boss.escorts = null;
 		}
 
-		public virtual void ArriveInt(List<Pawn> list, AnomalyBossManager.AnomalyBoss boss)
+		public virtual void ArriveInt(List<Pawn> list, Map map)
 		{
 			
 		}
 
-		public virtual void GenerateLord(List<Pawn> list, AnomalyBossManager.AnomalyBoss boss)
+		public virtual void GenerateLord(List<Pawn> list, Map map)
 		{
 
 		}

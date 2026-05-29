@@ -16,6 +16,8 @@ namespace NAT
 
 		public GameComponent_NewAnomalyThreats parent;
 
+		public virtual bool ShouldRemove => false;
+
 		public virtual void ExposeData()
 		{
 			Scribe_Values.Look(ref loadID, "loadID", 0);
@@ -43,6 +45,8 @@ namespace NAT
 
 		public CompBossStages CompBoss => boss.GetComp<CompBossStages>();
 
+		public override bool ShouldRemove => boss == null;
+
 		public override void ExposeData()
 		{
 			base.ExposeData();
@@ -54,11 +58,24 @@ namespace NAT
 			base.Tick();
 			if(boss != null && boss.Dead)
 			{
-				TryResurrect(boss);
+				if (TryResurrect(boss))
+				{
+					if (boss.TryGetComp<CompBossStages>(out var comp))
+					{
+						foreach (BossStageAction action in comp.CurrentBossStage.actions)
+						{
+							action.Start(comp);
+						}
+					}
+				}
+				else
+				{
+					parent.entityTrackers.Remove(this);
+				}
 			}
 		}
 
-		public void TryResurrect(Pawn pawn)
+		public bool TryResurrect(Pawn pawn)
 		{
 			if (pawn.Discarded)
 			{
@@ -69,18 +86,24 @@ namespace NAT
 			CompBossStages comp = CompBoss;
 			if(comp == null || !comp.CanAdvanceStage)
 			{
-				parent.entityTrackers.Remove(this);
-				return;
+				return false;
 			}
 			ResurrectionParams parms = new ResurrectionParams();
 			parms.restoreMissingParts = true;
 			parms.dontSpawn = true;
-			ResurrectionUtility.TryResurrect(pawn, parms);
+			if(!ResurrectionUtility.TryResurrect(pawn, parms))
+			{
+				return false;
+			}
 			pawn.RemoveHediffs((x) => x is Hediff_Injury || x.Part == null || !x.Part.def.tags.Any((y) => y == BodyPartTagDefOf.ConsciousnessSource));
 			GenSpawn.Spawn(pawn, comp.preDeathPos, comp.preDeathMap);
 			if(comp.preDeathLord != null)
 			{
 				comp.preDeathLord.AddPawn(pawn);
+			}
+			else
+			{
+				comp.Props.def.GenerateLord(new List<Pawn>() { boss }, boss.Map);
 			}
 			comp.TryGoNextStage();
 			/*try
@@ -115,6 +138,7 @@ namespace NAT
 			{
 				Log.Error("New Anomaly Threats - Error in RustedCore.Resurrect(Lord maker part): " + ex);
 			}*/
+			return true;
 		}
 	}
 }

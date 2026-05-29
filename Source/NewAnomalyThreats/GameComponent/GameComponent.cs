@@ -96,6 +96,16 @@ namespace NAT
 		public override void ExposeData()
 		{
 			base.ExposeData();
+			if(Scribe.mode == LoadSaveMode.Saving)
+			{
+				foreach (EntityTracker item in entityTrackers.ToList())
+				{
+					if (item.ShouldRemove)
+					{
+						entityTrackers.Remove(item);
+					}
+				}
+			}
 			Scribe_Deep.Look(ref bossManager, "bossManager");
 			Scribe_Collections.Look(ref entityTrackers, "entityTrackers", LookMode.Deep);
 			Scribe_Collections.Look(ref dataStorage, "dataStorage", LookMode.Deep);
