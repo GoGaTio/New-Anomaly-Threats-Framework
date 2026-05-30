@@ -96,6 +96,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
     <Compile Include="ThingComps\CompConstantFleckEmitter.cs" />
+    <Compile Include="ThingComps\CompMovableEntity.cs" />
     <Compile Include="ThingComps\CompHoldingPlatformTargetPlus.cs" />
     <Compile Include="ThingComps\CompTurret.cs" />
     <Compile Include="ThingComps\CompUseEffect_CallAnomalyBoss.cs" />

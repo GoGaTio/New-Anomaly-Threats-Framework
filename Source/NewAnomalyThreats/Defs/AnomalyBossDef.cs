@@ -108,5 +108,11 @@ namespace NAT
 				yield return PawnGenerator.GeneratePawn(item, Faction.OfEntities);
 			}
 		}
+
+		public override void PostLoad()
+		{
+			base.PostLoad();
+			bossKind.race.GetCompProperties<CompProperties_BossStages>().def = this;
+		}
 	}
 }

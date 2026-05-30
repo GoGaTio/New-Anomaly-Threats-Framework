@@ -103,7 +103,7 @@ namespace NAT
 			}
 			else
 			{
-				comp.Props.def.GenerateLord(new List<Pawn>() { boss }, boss.Map);
+				comp.Props.def?.GenerateLord(new List<Pawn>() { boss }, comp.preDeathMap);
 			}
 			comp.TryGoNextStage();
 			/*try
