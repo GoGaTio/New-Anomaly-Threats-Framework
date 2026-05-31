@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities.cs" />
+    <Compile Include="ActivityWorkers.cs" />
     <Compile Include="Damages.cs" />
     <Compile Include="DefOf.cs" />
     <Compile Include="Defs\DefGeneratorDef.cs" />
@@ -96,10 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
     <Compile Include="ThingComps\CompConstantFleckEmitter.cs" />
-    <Compile Include="ThingComps\CompMovableEntity.cs" />
+    <Compile Include="Things\MovableEntity.cs" />
     <Compile Include="ThingComps\CompHoldingPlatformTargetPlus.cs" />
     <Compile Include="ThingComps\CompTurret.cs" />
-    <Compile Include="ThingComps\CompUseEffect_CallAnomalyBoss.cs" />
+    <Compile Include="ThingComps\CompCallAnomalyBoss.cs" />
     <Compile Include="ThingComps\CompBossStages.cs" />
     <Compile Include="ThingComps\CompDamageAdaptable.cs" />
     <Compile Include="ThingComps\CompUniqueName.cs" />

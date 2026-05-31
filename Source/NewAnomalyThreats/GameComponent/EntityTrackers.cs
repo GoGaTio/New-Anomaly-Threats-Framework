@@ -96,15 +96,21 @@ namespace NAT
 				return false;
 			}
 			pawn.RemoveHediffs((x) => x is Hediff_Injury || x.Part == null || !x.Part.def.tags.Any((y) => y == BodyPartTagDefOf.ConsciousnessSource));
-			GenSpawn.Spawn(pawn, comp.preDeathPos, comp.preDeathMap);
+			if(comp.preDeathLord != null && comp.preDeathLord.ownedPawns.NullOrEmpty() && comp.preDeathLord.ownedBuildings.NullOrEmpty())
+			{
+				comp.preDeathLord = null;
+			}
 			if(comp.preDeathLord != null)
 			{
 				comp.preDeathLord.AddPawn(pawn);
 			}
 			else
 			{
+				Log.Message("TryingReplaceLord");
 				comp.Props.def?.GenerateLord(new List<Pawn>() { boss }, comp.preDeathMap);
 			}
+			GenSpawn.Spawn(pawn, comp.preDeathPos, comp.preDeathMap);
+			comp.preDeathLord = boss.GetLord();
 			comp.TryGoNextStage();
 			/*try
 			{

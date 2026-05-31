@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -110,6 +111,46 @@ namespace NAT
 			GenExplosion.DoExplosion(comp.preDeathPos, comp.preDeathMap, explosiveRadius, explosiveDamageType, comp.parent, damageAmountBase, armorPenetrationBase, explosionSound, null, null, null, postExplosionSpawnThingDef, postExplosionSpawnChance, postExplosionSpawnThingCount, postExplosionGasType, postExplosionGasRadiusOverride, postExplosionGasAmount, applyDamageToExplosionCellsNeighbors, preExplosionSpawnThingDef, preExplosionSpawnChance, preExplosionSpawnThingCount, chanceToStartFire, damageFalloff, null, null, null, doVisualEffects, propagationSpeed, 0f, doSoundEffects, null, 1f, null, null, postExplosionSpawnSingleThingDef, preExplosionSpawnSingleThingDef);
 		}
 	}
+
+	public class BossStageAction_SpawnPawns : BossStageAction
+	{
+		public List<PawnGenOption> options = new List<PawnGenOption>();
+
+		public FloatRange pointsRange = new FloatRange(1000,1000);
+
+		public EffecterDef spawnEffecter;
+
+		public override void DoAction(CompBossStages comp)
+		{
+			if(spawnEffecter == null)
+			{
+				spawnEffecter = EffecterDefOf.Skip_ExitNoDelay;
+			}
+			Lord lord = comp.preDeathLord;
+			Log.Message(lord == null ? "lord is null" : $"lord is {lord.DebugString()}");
+			Map map = comp.preDeathMap;
+			IntVec3 cell = comp.preDeathPos;
+			IEnumerable<PawnKindDef> pawns = NewAnomalyThreatsUtility.GeneratePawnsFromOptions(options, pointsRange.RandomInRange);
+			float radius = GenRadial.RadiusOfNumCells(pawns.Count() * 5);
+			radius *= radius;
+			int radiusInt = (int)radius;
+			foreach (PawnKindDef item in pawns)
+			{
+				if (CellFinder.TryFindRandomCellNear(cell, map, radiusInt, (c) => c.Standable(map) && c.AnyAdjacentCellsWalkable(map), out var result, maxTries: radiusInt))
+				{
+					Pawn pawn = PawnGenerator.GeneratePawn(item, Faction.OfEntities);
+					GenSpawn.Spawn(pawn, result, map, WipeMode.VanishOrMoveAside);
+					spawnEffecter.Spawn(result, map).Cleanup();
+					lord.AddPawn(pawn);
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
+
 	public class CompProperties_BossStages : CompProperties
 	{
 		public class BossStage

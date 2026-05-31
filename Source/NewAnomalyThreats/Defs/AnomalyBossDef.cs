@@ -109,9 +109,9 @@ namespace NAT
 			}
 		}
 
-		public override void PostLoad()
+		public override void ResolveReferences()
 		{
-			base.PostLoad();
+			base.ResolveReferences();
 			bossKind.race.GetCompProperties<CompProperties_BossStages>().def = this;
 		}
 	}

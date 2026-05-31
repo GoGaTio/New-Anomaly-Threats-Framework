@@ -7,4 +7,16 @@
     <reportString>sealing TargetA.</reportString>
   </JobDef>
 
+  <JobDef>
+    <defName>NAT_MoveEntity</defName>
+    <driverClass>NAT.JobDriver_MoveEntity</driverClass>
+    <reportString>moving TargetA.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>NAT_BringAdditionalOfferings</defName>
+    <driverClass>NAT.JobDriver_BringAdditionalOfferings</driverClass>
+    <reportString>carrying TargetA</reportString>
+  </JobDef>
+
 </Defs>

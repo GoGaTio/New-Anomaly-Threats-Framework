@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
   <ThingDef ParentName="SignalActionBase">
@@ -7,17 +7,24 @@
     <tickerType>Normal</tickerType>
   </ThingDef>
 
-  <ThingDef ParentName="EtherealThingBase">
-    <defName>VoidStructureIncoming</defName>
-    <selectable>false</selectable>
+  <ThingDef Name="NAT_MovableEntityBase" Abstract="True">
+    <thingClass>NAT.MovableEntity</thingClass>
+    <selectable>true</selectable>
+    <category>None</category>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <drawerType>RealtimeOnly</drawerType>
     <tickerType>Normal</tickerType>
-    <thingClass>ThingWithComps</thingClass>
-    <drawOffscreen>true</drawOffscreen>
-    <comps>
-      <li Class="CompProperties_DestroyAfterEffect">
-        <effecterDef>VoidStructureIncoming</effecterDef>
-      </li>
-    </comps>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <isAutoAttackableMapObject>true</isAutoAttackableMapObject>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+    </statBases>
+    <modExtensions>
+      <li Class="NAT.CanHaveFactionExtension"/>
+    </modExtensions>
   </ThingDef>
-
+  
 </Defs>

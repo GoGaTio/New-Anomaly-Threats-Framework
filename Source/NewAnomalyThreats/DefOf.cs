@@ -69,5 +69,7 @@ namespace NAT
 		public static GenStepDef NAT_UndergroundLayout;
 
 		public static HediffDef NAT_Nail;
+
+		public static JobDef NAT_MoveEntity;
 	}
 }

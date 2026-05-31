@@ -159,7 +159,7 @@ namespace NAT
 					{
 						return false;
 					}
-					if (pawn.Faction == Faction.OfPlayerSilentFail && !fireAtWill)
+					if (!fireAtWill && pawn.Faction == Faction.OfPlayerSilentFail)
 					{
 						return false;
 					}

@@ -75,12 +75,9 @@ namespace NAT
 						yield return item.kindDef;
 					}
 				}
-				float num = points;
-				while(num > 0)
+				foreach(PawnKindDef item in NewAnomalyThreatsUtility.GeneratePawnsFromOptions(group.escorts, points))
 				{
-					PawnKindDef kind = group.escorts.RandomElementByWeight(x => x.selectionWeight).kind;
-					num -= kind.combatPower;
-					yield return kind;
+					yield return item;
 				}
 			}
 

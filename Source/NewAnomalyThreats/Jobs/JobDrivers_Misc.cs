@@ -55,6 +55,56 @@ using static HarmonyLib.Code;
 
 namespace NAT
 {
+	public class JobDriver_MoveEntity : JobDriver
+	{
+		protected MovableEntity Entity => job.GetTarget(TargetIndex.A).Thing as MovableEntity;
+
+		protected IntVec3 TargetCell => job.GetTarget(TargetIndex.B).Cell;
+
+		public override bool TryMakePreToilReservations(bool errorOnFailed)
+		{
+			if(pawn.Reserve(job.GetTarget(TargetIndex.A), job, 1, -1, null, errorOnFailed))
+			{
+				return pawn.Reserve(job.GetTarget(TargetIndex.B), job, 1, -1, null, errorOnFailed);
+			}
+			return false;
+		}
+
+		protected override IEnumerable<Toil> MakeNewToils()
+		{
+			this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+			yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
+			Toil toil = Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.OnCell);
+			toil.initAction = (Action)Delegate.Combine(toil.initAction, (Action)delegate
+			{
+				Entity.StartMoving(toil.actor);
+			});
+			toil.tickAction = (Action)Delegate.Combine(toil.tickAction, (Action)delegate
+			{
+				if(Entity.nextCell != toil.actor.pather.nextCell)
+				{
+					Entity.Position = toil.actor.Position;
+					Entity.nextCell = toil.actor.pather.nextCell;
+				}
+				Entity.movePercent = toil.actor.pather.MovePercentage;
+				if(Entity.nextCell == TargetCell && Entity.movePercent >= 0.5f)
+				{
+					toil.actor.pather.StopDead();
+					ReadyForNextToil();
+				}
+			});
+			toil.AddFinishAction(delegate
+			{
+				if(Entity.movePercent >= 0.5f)
+				{
+					Entity.Position = Entity.nextCell;
+				}
+				Entity.StopMoving();
+			});
+			yield return toil;
+		}
+	}
+
 	public class JobDriver_Seal : JobDriver
 	{
 		protected UndergroundEntrance Entrance => job.GetTarget(TargetIndex.A).Thing as UndergroundEntrance;
