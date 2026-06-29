@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -14,6 +15,21 @@ using Verse.Noise;
 namespace NAT
 {
 	public class AnomalyBossDef : Def
+	{
+		public Type bossClass = typeof(AnomalyBoss);
+
+		[MustTranslate]
+		public string arrivedLetterLabel;
+
+		[MustTranslate]
+		public string arrivedLetterText;
+
+		public int ticksCooldown = 180000;
+
+		public IntRange arrivalTimeHoursRange = new IntRange(2, 10);
+	}
+
+	public class AnomalyBossDef_PawnGroup : AnomalyBossDef
 	{
 		public class BossGroup
 		{
@@ -29,85 +45,55 @@ namespace NAT
 
 			public List<PawnKindDefCount> fixedEscorts = new List<PawnKindDefCount>();
 
-			public bool CanUseNow(int index)
+			public virtual bool CanUseNow(int index)
 			{
-				if(index < minIndex)
+				if (index < minIndex)
 				{
 					return false;
 				}
-				if(index > maxIndex)
+				if (index > maxIndex)
 				{
 					return false;
 				}
 				return true;
 			}
+
+			public virtual IEnumerable<PawnKindDef> Generate(float points)
+			{
+				foreach (PawnKindDefCount item in fixedEscorts)
+				{
+					for (int i = 0; i < item.count; i++)
+					{
+						yield return item.kindDef;
+					}
+				}
+				foreach (PawnKindDef item in NewAnomalyThreatsUtility.GeneratePawnsFromOptions(escorts, points))
+				{
+					yield return item;
+				}
+			}
 		}
 
-		[MustTranslate]
-		public string arrivedLetterLabel;
+		public PawnsArrivalModeDef arrivalMode;
 
 		[MustTranslate]
-		public string arrivedLetterText;
+		public string escortsLabel = null;
 
 		public List<BossGroup> groups = new List<BossGroup>();
-
-		public PawnKindDef bossKind;
 
 		public float minPoints = 1000f;
 
 		public float maxPoints = float.MaxValue;
 
-		public int ticksCooldown = 180000;
-
-		public IntRange arrivalTimeHoursRange = new IntRange(2, 10);
-
-		public virtual float ProcessPoints(float points, Map map)
-		{
-			return Mathf.Clamp(points, minPoints, maxPoints);
-		}
-
 		public virtual BossGroup GetBossGroup(int timesCalled, float points)
 		{
 			return groups.Where(x => x.CanUseNow(timesCalled)).RandomElement();
 		}
+	}
 
-		public virtual List<PawnKindDef> GetBosses(int timesCalled, float points)
-		{
-			List<PawnKindDef> list = new List<PawnKindDef>() { bossKind };
-			return list;
-		}
-
-		public void ArriveOnMap(AnomalyBossManager.AnomalyBoss boss)
-		{
-			List<Pawn> list = GeneratePawns(boss).ToList();
-			Map map = boss.Map;
-			ArriveInt(list, map);
-			GenerateLord(list, map);
-			Find.LetterStack.ReceiveLetter(arrivedLetterLabel.Formatted(bossKind.LabelCap), arrivedLetterText, LetterDefOf.ThreatBig, list);
-			boss.escorts = null;
-		}
-
-		public virtual void ArriveInt(List<Pawn> list, Map map)
-		{
-			
-		}
-
-		public virtual void GenerateLord(List<Pawn> list, Map map)
-		{
-
-		}
-
-		public virtual IEnumerable<Pawn> GeneratePawns(AnomalyBossManager.AnomalyBoss boss)
-		{
-			if (boss.escorts.NullOrEmpty())
-			{
-				boss.GetEscorts(boss.Map);
-			}
-			foreach(PawnKindDef item in boss.escorts)
-			{
-				yield return PawnGenerator.GeneratePawn(item, Faction.OfEntities);
-			}
-		}
+	public class AnomalyBossDef_Pawn : AnomalyBossDef_PawnGroup
+	{
+		public PawnKindDef bossKind;
 
 		public override void ResolveReferences()
 		{

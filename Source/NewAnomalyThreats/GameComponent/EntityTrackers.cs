@@ -107,7 +107,10 @@ namespace NAT
 			else
 			{
 				Log.Message("TryingReplaceLord");
-				comp.Props.def?.GenerateLord(new List<Pawn>() { boss }, comp.preDeathMap);
+				if (comp.Props.def != null && NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(comp.Props.def) is AnomalyBoss_PawnGroup pawnGroup)
+				{
+					pawnGroup.GenerateLord(new List<Pawn>() { boss }, comp.preDeathMap);
+				}
 			}
 			GenSpawn.Spawn(pawn, comp.preDeathPos, comp.preDeathMap);
 			comp.preDeathLord = boss.GetLord();

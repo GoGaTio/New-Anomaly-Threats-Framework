@@ -64,11 +64,13 @@
   <ItemGroup>
     <Compile Include="Abilities.cs" />
     <Compile Include="ActivityWorkers.cs" />
+    <Compile Include="Cult\Ability.cs" />
     <Compile Include="Damages.cs" />
     <Compile Include="DefOf.cs" />
     <Compile Include="Defs\DefGeneratorDef.cs" />
     <Compile Include="Defs\AnomalyBossDef.cs" />
     <Compile Include="Defs\EndGameRaidDef.cs" />
+    <Compile Include="GameComponent\AnomalyBoss.cs" />
     <Compile Include="GameComponent\DataStorers.cs" />
     <Compile Include="GameComponent\EntityTrackers.cs" />
     <Compile Include="GameComponent\BossManager.cs" />
@@ -96,7 +98,9 @@
     <Compile Include="NAT_PainPulses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
+    <Compile Include="ThingComps\CompKnowledgeOnDeath.cs" />
     <Compile Include="ThingComps\CompConstantFleckEmitter.cs" />
+    <Compile Include="ThingComps\CompArmor.cs" />
     <Compile Include="Things\MovableEntity.cs" />
     <Compile Include="ThingComps\CompHoldingPlatformTargetPlus.cs" />
     <Compile Include="ThingComps\CompTurret.cs" />

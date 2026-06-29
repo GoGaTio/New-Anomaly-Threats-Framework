@@ -1,13 +1,14 @@
 ﻿using LudeonTK;
 using RimWorld;
+using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Verse;
 using UnityEngine;
+using Verse;
 
 namespace NAT
 {
@@ -31,13 +32,14 @@ namespace NAT
 
 		private static NewAnomalyThreatsSettings settings;
 
-		public static void Log(string message)
+		/*public static void Log(string message)
 		{
 			if (Prefs.DevMode)
 			{
 				Verse.Log.Message(message);
+				
 			}
-		}
+		}*/
 
 		public static bool AnyAdjacentCellsWalkable(this IntVec3 cell, Map map)
 		{
@@ -106,6 +108,12 @@ namespace NAT
 					pawn.health.RemoveHediff(hediff);
 				}
 			}
+		}
+
+		[DebugOutput("NAT", true)]
+		public static void NewAnomalyThreatsComponent()
+		{
+			Log.Message(Scribe.saver.DebugOutputFor(Current.Game.GetComponent<GameComponent_NewAnomalyThreats>()));
 		}
 	}
 }

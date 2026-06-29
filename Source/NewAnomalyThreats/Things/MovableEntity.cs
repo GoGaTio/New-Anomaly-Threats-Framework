@@ -192,7 +192,7 @@ namespace NAT
 			}
 			if (ValidateCarrier(selPawn))
 			{
-				yield return new FloatMenuOption("NAT_MoveEntity".Translate(), delegate
+				yield return new FloatMenuOption("NAT_MoveEntity".Translate(this), delegate
 				{
 					TargetRepositionCell(selPawn);
 				});
@@ -213,7 +213,7 @@ namespace NAT
 			{
 				yield return new Command_Action
 				{
-					defaultLabel = "NAT_MoveEntity".Translate() + "...",
+					defaultLabel = "NAT_MoveEntity".Translate(this) + "...",
 					defaultDesc = "NAT_MoveEntityDesc".Translate(this).Resolve(),
 					icon = MoveIcon.Texture,
 					action = delegate
@@ -228,7 +228,7 @@ namespace NAT
 				yield return new Command_Action
 				{
 					defaultLabel = "NAT_CancelMoveEntity".Translate(),
-					defaultDesc = "NAT_CancelMoveEntityDesc".Translate(this).Resolve(),
+					defaultDesc = "NAT_CancelMoveEntityDesc".Translate().Resolve(),
 					icon = CancelTex,
 					action = delegate
 					{
@@ -311,7 +311,7 @@ namespace NAT
 				}
 			}, ValidateTarget, null, null, BaseContent.ClearTex, playSoundOnAction: true, delegate (LocalTargetInfo t)
 			{
-				Widgets.MouseAttachedLabel("NAT_ChooseWhoShouldMove".Translate());
+				Widgets.MouseAttachedLabel("NAT_ChooseWhoShouldMove".Translate(this));
 			});
 			bool ValidateTarget(LocalTargetInfo t)
 			{
@@ -347,7 +347,7 @@ namespace NAT
 				}
 			}, ValidateTarget, null, null, BaseContent.ClearTex, playSoundOnAction: true, delegate (LocalTargetInfo t)
 			{
-				Widgets.MouseAttachedLabel("NAT_ChooseWhereToMove".Translate());
+				Widgets.MouseAttachedLabel("NAT_ChooseWhereToMove".Translate(this));
 			}, OnUpdateAction);
 			bool ValidateTarget(LocalTargetInfo t)
 			{

@@ -145,9 +145,13 @@ namespace NAT
 		{
 			get
 			{
+				if (!parent.Spawned)
+				{
+					return false;
+				}
 				if (parent is Pawn pawn)
 				{
-					if (!pawn.Spawned || pawn.Downed || pawn.Dead || !pawn.Awake())
+					if (pawn.Downed || pawn.Dead || !pawn.Awake())
 					{
 						return false;
 					}
@@ -159,10 +163,14 @@ namespace NAT
 					{
 						return false;
 					}
-					if (!fireAtWill && pawn.Faction == Faction.OfPlayerSilentFail)
-					{
-						return false;
-					}
+				}
+				else
+				{
+					
+				}
+				if (!fireAtWill && parent.Faction == Faction.OfPlayerSilentFail)
+				{
+					return false;
 				}
 				CompCanBeDormant compCanBeDormant = parent.TryGetComp<CompCanBeDormant>();
 				if (compCanBeDormant != null && !compCanBeDormant.Awake)

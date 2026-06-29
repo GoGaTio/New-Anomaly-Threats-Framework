@@ -35,7 +35,7 @@
       <li Class="CompProperties_Forbiddable" />
     </comps>
   </ThingDef>
-  
+
   <ThingDef ParentName="NAT_AnomalousResourceBase">
     <defName>NAT_PainClot</defName>
     <label>pain clot</label>
@@ -55,6 +55,41 @@
       <Beauty>-10</Beauty>
       <Flammability>0</Flammability>
     </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AnomalousResourceBase" Name="ADREMC">
+    <defName>ADREMC_A</defName>
+    <label>pain clot</label>
+    <description>A piece of clotted pain.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <tradeability>None</tradeability>
+    <genericMarketSellable>false</genericMarketSellable>
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <texPath>ADREMC_</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <stackLimit>75</stackLimit>
+    <statBases>
+      <Mass>0.05</Mass>
+      <Beauty>-10</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="ADREMC">
+    <defName>ADREMC_B</defName>
+    <graphicData>
+      <drawSize>(2, 2)</drawSize>
+    </graphicData>
+  </ThingDef>
+  
+  <ThingDef ParentName="ADREMC">
+    <defName>ADREMC_C</defName>
+    <graphicData>
+      <drawSize>(3, 3)</drawSize>
+    </graphicData>
   </ThingDef>
 
   <ThingDef ParentName="ChunkBase">

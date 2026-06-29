@@ -52,7 +52,7 @@ namespace NAT
 				Props.effecterDef.Spawn(parent, parent.Map, offset);
 			}
 			ticksTillDestroy = Props.destroyDelayTicks;
-			NewAnomalyThreatsUtility.Comp.bossManager.CallBoss(Props.bossDef, caster.MapHeld);
+			NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).Call(caster, parent.PositionHeld, parent.MapHeld);
 		}
 
 		public override string CompInspectStringExtra()
@@ -88,7 +88,7 @@ namespace NAT
 			}
 			else
 			{
-				AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.CanCallBoss(Props.bossDef, parent.Map);
+				AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).CanCall(parent.PositionHeld, parent.MapHeld);
 				if (!report.Accepted)
 				{
 					floatMenuOption.Disabled = true;
@@ -100,7 +100,7 @@ namespace NAT
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-			AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.CanCallBoss(Props.bossDef, parent.Map);
+			AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).CanCall(parent.PositionHeld, parent.MapHeld);
 			foreach (Gizmo item in base.CompGetGizmosExtra())
 			{
 				if (!report.Accepted)
@@ -124,7 +124,7 @@ namespace NAT
 
 		private void OrderActivation(Pawn pawn)
 		{
-			Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(NewAnomalyThreatsUtility.Comp.bossManager.BossWaveComposition(Props.bossDef, pawn.Map), delegate
+			Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).Confirmation(pawn.MapHeld), delegate
 			{
 				Job job = JobMaker.MakeJob(JobDefOf.InteractThing, parent);
 				job.count = 1;

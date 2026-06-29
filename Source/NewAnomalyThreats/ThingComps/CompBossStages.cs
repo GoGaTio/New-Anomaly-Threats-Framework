@@ -176,7 +176,7 @@ namespace NAT
 		[MustTranslate]
 		public string finishedLetterText;
 
-		public AnomalyBossDef def;
+		public AnomalyBossDef_Pawn def;
 
 		public CompProperties_BossStages()
 		{

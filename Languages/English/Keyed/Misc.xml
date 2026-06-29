@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <NAT_BossEscorts>Summoning {0} threat will summon following hostile {1}</NAT_BossEscorts>
+  
+  <NAT_MoveEntity>Move {0_label}</NAT_MoveEntity>
+  <NAT_MoveEntityDesc>Select colonist to move {0_label} somewhere.</NAT_MoveEntityDesc>
+  <NAT_CancelMoveEntity>Cancel moving</NAT_CancelMoveEntity>
+  <NAT_CancelMoveEntityDesc>Cancel moving.</NAT_CancelMoveEntityDesc>
+  <NAT_ChooseWhoShouldMove>Choose who should move {0_label}</NAT_ChooseWhoShouldMove>
+  <NAT_ChooseWhereToMove>Choose where to move {0_label}</NAT_ChooseWhereToMove>
+  
+  <NAT_Locked>Locked</NAT_Locked>
+  <NAT_Sealed>Sealed</NAT_Sealed>
+  <NAT_CannotChooseSealer>Cannot choose sealer</NAT_CannotChooseSealer>
+  <NAT_PlayerPawnsInPocketMap></NAT_PlayerPawnsInPocketMap>
+  
+  <NAT_Setting_AllowRaid></NAT_Setting_AllowRaid>
+  <NAT_Setting_AllowRaid_Desc></NAT_Setting_AllowRaid_Desc>
+  
+  <NAT_PsychicRitual_NotEnoughOfferings></NAT_PsychicRitual_NotEnoughOfferings>
+  <NAT_PsychicRitualAlreadyHasHediff></NAT_PsychicRitualAlreadyHasHediff>
+  
+</LanguageData>

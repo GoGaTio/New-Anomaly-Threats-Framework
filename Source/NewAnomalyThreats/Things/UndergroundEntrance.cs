@@ -78,12 +78,12 @@ namespace NAT
 		{
 			if (!isOpened)
 			{
-				reason = "Locked".Translate();
+				reason = "NAT_Locked".Translate();
 				return false;
 			}
 			if (isSealed)
 			{
-				reason = "Sealed".Translate();
+				reason = "NAT_Sealed".Translate();
 				return false;
 			}
 			return base.IsEnterable(out reason);
@@ -151,11 +151,11 @@ namespace NAT
 						{
 							if (!acceptanceReport.Reason.NullOrEmpty())
 							{
-								Widgets.MouseAttachedLabel(("CannotChooseSealer".Translate() + ": " + acceptanceReport.Reason.CapitalizeFirst()).Colorize(ColorLibrary.RedReadable));
+								Widgets.MouseAttachedLabel(("NAT_CannotChooseSealer".Translate() + ": " + acceptanceReport.Reason.CapitalizeFirst()).Colorize(ColorLibrary.RedReadable));
 							}
 							else
 							{
-								Widgets.MouseAttachedLabel("CannotChooseSealer".Translate());
+								Widgets.MouseAttachedLabel("NAT_CannotChooseSealer".Translate());
 							}
 						}
 					});

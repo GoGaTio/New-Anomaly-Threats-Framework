@@ -16,7 +16,7 @@ namespace NAT
 {
 	public class AnomalyBossManager : IExposable
 	{
-		public class AnomalyBoss : IExposable
+		/*public class AnomalyBoss : IExposable
 		{
 			public AnomalyBoss() { }
 
@@ -120,7 +120,7 @@ namespace NAT
 				Scribe_Values.Look<sbyte>(ref mapIndex, "mapIndex", -1);
 				Scribe_Collections.Look(ref escorts, "escorts", LookMode.Def);
 			}
-		}
+		}*/
 
 		public AnomalyBossManager()
 		{
@@ -129,7 +129,19 @@ namespace NAT
 
 		public List<AnomalyBoss> bosses = new List<AnomalyBoss>();
 
-		public AcceptanceReport CanCallBoss(AnomalyBossDef def, Map map)
+		public AnomalyBoss GetBoss(AnomalyBossDef def)
+		{
+			for (int i = 0; i < bosses.Count; i++)
+			{
+				if (bosses[i].def == def)
+				{
+					return bosses[i];
+				}
+			}
+			return null;
+		}
+
+		/*public AcceptanceReport CanCallBoss(AnomalyBossDef def, Map map)
 		{
 			AnomalyBoss boss = bosses.FirstOrDefault(x => x.def == def);
 			int cooldown = Find.TickManager.TicksGame - boss.lastSummonedTick;
@@ -138,7 +150,7 @@ namespace NAT
 				return "CooldownTime".Translate() + ": " + (def.ticksCooldown - cooldown).ToStringTicksToPeriod();
 			}
 			return true;
-		}
+		}*/
 
 		public void ExposeData()
 		{
@@ -151,21 +163,16 @@ namespace NAT
 					{
 						bosses.Remove(boss);
 					}
-					else if(boss.escorts.NullOrEmpty() || boss.escorts.Any(x => x is null))
+					else
 					{
-						boss.escorts = null;
+						boss.Init();
 					}
 				}
 				InitBosses();
 			}
 		}
 
-		public List<PawnKindDefCount> GetBossEscorts(AnomalyBossDef def, Map map)
-		{
-			return bosses.FirstOrDefault(x => x.def == def).GetEscorts(map);
-		}
-
-		public string BossWaveComposition(AnomalyBossDef def, Map map)
+		/*public string BossWaveComposition(AnomalyBossDef def, Map map)
 		{
 			string s = def.description + "\n\n" + "NAT_BossGroup" + ":";
 			AnomalyBoss boss = bosses.FirstOrDefault(x => x.def == def);
@@ -176,7 +183,7 @@ namespace NAT
 				s += "\n" + "  - " + GenLabel.BestKindLabel(item.kindDef, Gender.None).CapitalizeFirst() + " x" + item.count;
 			}
 			return s;
-		}
+		}*/
 
 		public void Tick()
 		{
@@ -192,18 +199,21 @@ namespace NAT
 			{
 				if (!bosses.Any(x => x.def == bossDef))
 				{
-					bosses.Add(new AnomalyBoss() { def = bossDef });
+					AnomalyBoss boss = (AnomalyBoss)Activator.CreateInstance(bossDef.bossClass);
+					boss.def = bossDef;
+					boss.Init();
+					bosses.Add(boss);
 				}
 			}
 		}
 
-		public void CallBoss(AnomalyBossDef def, Map map)
+		/*public void CallBoss(AnomalyBossDef def, Map map)
 		{
 			AnomalyBoss boss = bosses.FirstOrDefault(x => x.def == def);
 			boss.incoming = true;
 			boss.mapIndex = (sbyte)map.Index;
 			boss.hoursTillArrival = boss.def.arrivalTimeHoursRange.RandomInRange;
 			boss.lastSummonedTick = Find.TickManager.TicksGame + (boss.hoursTillArrival * 2500);
-		}
+		}*/
 	}
 }
