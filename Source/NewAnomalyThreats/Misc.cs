@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -19,6 +20,37 @@ namespace NAT
 	{
 	}
 
+	public class Alert_AnomalyBoss : Alert_Critical
+	{
+		public override string GetLabel()
+		{
+			string s = "";
+			foreach(AnomalyBossDef def in NewAnomalyThreatsUtility.Comp.bossManager.GetIncomingBosses())
+			{
+				if (!s.NullOrEmpty())
+				{
+					s += "\n";
+				}
+				s += "AlertBossgroupIncoming".Translate(def.LabelCap);
+			}
+			if (!s.NullOrEmpty())
+			{
+				s += "\n";
+			}
+			s += "AlertBossgroupIncoming".Translate(DamageDefOf.AcidBurn.LabelCap);
+			return s;
+		}
+
+		public override TaggedString GetExplanation()
+		{
+			return BreakRiskAlertUtility.AlertExplanation;
+		}
+
+		public override AlertReport GetReport()
+		{
+			return NewAnomalyThreatsUtility.Comp.bossManager.AnyBossIncoming;
+		}
+	}
 	public class IncidentExtension : DefModExtension
 	{
 		public ThingDef thingDef;

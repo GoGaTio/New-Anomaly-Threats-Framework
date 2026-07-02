@@ -141,6 +141,32 @@ namespace NAT
 			return null;
 		}
 
+		public bool AnyBossIncoming
+		{
+			get
+			{
+				for (int i = 0; i < bosses.Count; i++)
+				{
+					if (bosses[i].ticksIncomingLeft > -10)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+
+		public IEnumerable<AnomalyBossDef> GetIncomingBosses()
+		{
+			for (int i = 0; i < bosses.Count; i++)
+			{
+				if (bosses[i].ticksIncomingLeft > -10)
+				{
+					yield return bosses[i].def;
+				}
+			}
+		}
+
 		/*public AcceptanceReport CanCallBoss(AnomalyBossDef def, Map map)
 		{
 			AnomalyBoss boss = bosses.FirstOrDefault(x => x.def == def);

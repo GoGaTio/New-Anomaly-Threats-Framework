@@ -95,6 +95,8 @@ namespace NAT
 	{
 		public PawnKindDef bossKind;
 
+		public override TaggedString LabelCap => bossKind.LabelCap;
+
 		public override void ResolveReferences()
 		{
 			base.ResolveReferences();

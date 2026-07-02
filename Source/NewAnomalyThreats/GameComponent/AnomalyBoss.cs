@@ -127,7 +127,7 @@ namespace NAT
 				escorts?.Clear();
 				escorts = new List<PawnKindDef>();
 				escorts.AddRange(Def.GetBossGroup(timesCalled, processedPoints).Generate(processedPoints));
-				lastPoints = points;
+				lastPoints = processedPoints;
 				ReCacheEscorts();
 			}
 			return cachedEscorts;
@@ -157,16 +157,6 @@ namespace NAT
 			{
 				yield return PawnGenerator.GeneratePawn(item, Faction.OfEntities, tile);
 			}
-		}
-
-		public override void Init()
-		{
-			base.Init();
-		}
-
-		public override void Tick()
-		{
-			base.Tick();
 		}
 
 		public override AcceptanceReport CanCall(IntVec3 cell, Map map)
