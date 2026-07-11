@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -16,6 +17,8 @@ namespace NAT
 
 		public List<DataStorer> dataStorage = new List<DataStorer>();
 
+		private Dictionary<RepeatedResearchProjectDef, int> repeatedResearch = new Dictionary<RepeatedResearchProjectDef, int>();
+
 		public AnomalyBossManager bossManager = new AnomalyBossManager();
 
 		public int nextId;
@@ -25,6 +28,28 @@ namespace NAT
 		public GameComponent_NewAnomalyThreats(Game game)
 		{
 			NewAnomalyThreatsUtility.gameComp = this;
+		}
+
+		public int GetResearchStep(RepeatedResearchProjectDef def)
+		{
+			if (repeatedResearch.TryGetValue(def, out int value))
+			{
+				return value;
+			}
+			return 0;
+		}
+
+		public void AdvanceResearch(RepeatedResearchProjectDef def, Pawn researcher)
+		{
+			if (repeatedResearch.TryGetValue(def, out int value))
+			{
+				repeatedResearch[def] = value + 1;
+			}
+			else
+			{
+				repeatedResearch.Add(def, 1);
+			}
+			def.Researched(researcher, repeatedResearch[def]);
 		}
 
 		public void AddEntityTracker(EntityTracker entityTracker)
@@ -107,6 +132,7 @@ namespace NAT
 				}
 			}
 			Scribe_Deep.Look(ref bossManager, "bossManager");
+			Scribe_Collections.Look(ref repeatedResearch, "repeatedResearch", LookMode.Def, LookMode.Value);
 			Scribe_Collections.Look(ref entityTrackers, "entityTrackers", LookMode.Deep);
 			Scribe_Collections.Look(ref dataStorage, "dataStorage", LookMode.Deep);
 			Scribe_Values.Look(ref nextId, "nextId");
@@ -121,6 +147,18 @@ namespace NAT
 		{
 			NewAnomalyThreatsUtility.gameComp = this;
 			bossManager.InitBosses();
+			;
+			foreach (RepeatedResearchProjectDef item in DefDatabase<RepeatedResearchProjectDef>.AllDefsListForReading)
+			{
+				if (repeatedResearch.TryGetValue(item, out int count))
+				{
+					item.EnsureCostIsCorrect(count);
+				}
+				else
+				{
+					item.EnsureCostIsCorrect(0);
+				}
+			}
 		}
 
 		public override void LoadedGame()

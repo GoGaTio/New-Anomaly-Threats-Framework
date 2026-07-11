@@ -8,6 +8,12 @@
   </JobDef>
 
   <JobDef>
+    <defName>NAT_InteractWithVault</defName>
+    <driverClass>NAT.JobDriver_InteractWithVault</driverClass>
+    <reportString>interacting with TargetA.</reportString>
+  </JobDef>
+
+  <JobDef>
     <defName>NAT_MoveEntity</defName>
     <driverClass>NAT.JobDriver_MoveEntity</driverClass>
     <reportString>moving TargetA.</reportString>

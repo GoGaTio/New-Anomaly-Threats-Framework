@@ -1,4 +1,21 @@
-﻿using System;
+﻿using DelaunatorSharp;
+using Gilzoide.ManagedJobs;
+using HarmonyLib;
+using Ionic.Crc;
+using Ionic.Zlib;
+using JetBrains.Annotations;
+using KTrie;
+using LudeonTK;
+using NVorbis.NAudioSupport;
+using RimWorld;
+using RimWorld.BaseGen;
+using RimWorld.IO;
+using RimWorld.Planet;
+using RimWorld.QuestGen;
+using RimWorld.SketchGen;
+using RimWorld.Utility;
+using RuntimeAudioClipLoader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,22 +35,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using DelaunatorSharp;
-using Gilzoide.ManagedJobs;
-using Ionic.Crc;
-using Ionic.Zlib;
-using JetBrains.Annotations;
-using KTrie;
-using LudeonTK;
-using NVorbis.NAudioSupport;
-using RimWorld;
-using RimWorld.BaseGen;
-using RimWorld.IO;
-using RimWorld.Planet;
-using RimWorld.QuestGen;
-using RimWorld.SketchGen;
-using RimWorld.Utility;
-using RuntimeAudioClipLoader;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
@@ -50,7 +51,7 @@ using Verse.Noise;
 using Verse.Profile;
 using Verse.Sound;
 using Verse.Steam;
-using HarmonyLib;
+using static RimWorld.ResearchManager;
 
 namespace NAT
 {
@@ -70,6 +71,85 @@ namespace NAT
 			}
 		}
 	}*/
+
+	[HarmonyPatch(typeof(ResearchManager), nameof(ResearchManager.FinishProject))]
+	public class Patch_ResearchManager_FinishProject
+	{
+		public static bool notifyAfterComplete;
+
+		public static bool shouldReSet;
+
+		public static KnowledgeCategoryProject anomalyCategory;
+
+		private static readonly AccessTools.FieldRef<ResearchManager, Dictionary<ResearchProjectDef, float>> progress = AccessTools.FieldRefAccess<ResearchManager, Dictionary<ResearchProjectDef, float>>(typeof(ResearchManager).DeclaredField("progress"));
+
+		private static readonly AccessTools.FieldRef<ResearchManager, Dictionary<ResearchProjectDef, float>> anomalyKnowledge = AccessTools.FieldRefAccess<ResearchManager, Dictionary<ResearchProjectDef, float>>(typeof(ResearchManager).DeclaredField("anomalyKnowledge"));
+
+		private static readonly FieldInfo currentProj = AccessTools.Field(typeof(ResearchManager), "currentProj");
+
+		[HarmonyPrefix]
+		public static void Prefix(ResearchProjectDef proj, ref bool doCompletionDialog, Pawn researcher, ref bool doCompletionLetter)
+		{
+			if(proj is RepeatedResearchProjectDef def)
+			{
+				notifyAfterComplete = doCompletionDialog || doCompletionLetter;
+				doCompletionDialog = false;
+				doCompletionLetter = false;
+				ResearchProjectDef curProj = (ResearchProjectDef)currentProj.GetValue(Find.ResearchManager);
+				if (curProj == proj)
+				{
+					shouldReSet = true;
+				}
+				else
+				{
+					if (!ModsConfig.AnomalyActive || proj.knowledgeCategory == null)
+					{
+						return;
+					}
+					foreach (KnowledgeCategoryProject currentAnomalyKnowledgeProject in Find.ResearchManager.CurrentAnomalyKnowledgeProjects)
+					{
+						if (currentAnomalyKnowledgeProject.category == proj.knowledgeCategory)
+						{
+							anomalyCategory = currentAnomalyKnowledgeProject;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		[HarmonyPostfix]
+		public static void Postfix(ResearchProjectDef proj, Pawn researcher)
+		{
+			if (proj is RepeatedResearchProjectDef def)
+			{
+				ResearchManager manager = Find.ResearchManager;
+				if (proj.knowledgeCategory == null && progress(manager).ContainsKey(proj))
+				{
+					progress(manager).SetOrAdd(proj, 0);
+				}
+				else if(anomalyKnowledge(manager).ContainsKey(proj))
+				{
+					anomalyKnowledge(manager).SetOrAdd(proj, 0);
+				}
+				if (shouldReSet)
+				{
+					shouldReSet = false;
+					currentProj.SetValue(Find.ResearchManager, proj);
+				}
+				else if (anomalyCategory != null && proj.knowledgeCategory != null)
+				{
+					anomalyCategory.project = proj;
+				}
+				if (notifyAfterComplete)
+				{
+					notifyAfterComplete = false;
+					Messages.Message(def.label + " was advanced", MessageTypeDefOf.PositiveEvent);
+				}
+				Current.Game.GetComponent<GameComponent_NewAnomalyThreats>().AdvanceResearch(def, researcher);
+			}
+		}
+	}
 
 	[HarmonyPatch(typeof(CompHoldingPlatformTarget), nameof(CompHoldingPlatformTarget.CanBeCaptured), MethodType.Getter)]
 	public class Patch_CompHoldingPlatformTarget_CanBeCaptured

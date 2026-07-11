@@ -7,9 +7,9 @@
     <thingClass>Building_TurretGun</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
     <tradeability>None</tradeability>
-    <uiIconPath>Things/Building/Ancient/ArmoredTurret/AncientArmoredTurret_MenuIcon</uiIconPath>
     <drawHighlight>true</drawHighlight>
     <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+    <uiIconScale>1.5</uiIconScale>
     <graphicData>
       <texPath>Things/Building/NAT_AncientDefenceTurret_Base</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -30,7 +30,7 @@
       <Flammability>0</Flammability>
       <Mass>25</Mass>
       <Beauty>-20</Beauty>
-      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <ShootingAccuracyTurret>0.95</ShootingAccuracyTurret>
     </statBases>
     <tickerType>Normal</tickerType>
     <comps>
@@ -67,10 +67,11 @@
     </building>
   </ThingDef>
 
-<ThingDef ParentName="NAT_AncientTurretBase">
+  <ThingDef ParentName="NAT_AncientTurretBase">
     <defName>NAT_Turret_AncientNailTurret</defName>
     <label>ancient nailgun turret</label>
-    <description>An armored security turret containing a long-lasting battery.</description>
+    <description>An armored security turret with mounted nailgun containing a long-lasting battery.</description>
+    <uiIconPath>Things/Building/NAT_AncientDefenceTurret_Nailgun_Icon</uiIconPath>
     <building>
       <combatPower>80</combatPower>
       <turretGunDef>NAT_Gun_AncientNailTurret</turretGunDef>
@@ -81,14 +82,18 @@
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>NAT_Gun_AncientNailTurret</defName>
     <label>ancient nailgun</label>
-    <description>A simple automatic gun made to be mounted on a turret.</description>
+    <description>A simple automatic nailgun made to be mounted on a turret.</description>
     <graphicData>
-      <texPath>Things/Building/Ancient/ArmoredTurret/AncientArmoredTurret_Top</texPath>
+      <texPath>Things/Building/NAT_AncientDefenceTurret_Nailgun</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <statBases>
-      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
+      <AccuracyTouch>0.40</AccuracyTouch>
+      <AccuracyShort>0.35</AccuracyShort>
+      <AccuracyMedium>0.25</AccuracyMedium>
+      <AccuracyLong>0.20</AccuracyLong>
       <Mass>5</Mass>
       <Flammability>0</Flammability>
     </statBases>
@@ -110,7 +115,8 @@
   <ThingDef ParentName="NAT_AncientTurretBase">
     <defName>NAT_Turret_AncientIncineratorTurret</defName>
     <label>ancient incinerator turret</label>
-    <description>An armored security turret containing a long-lasting battery.</description>
+    <description>An armored security turret with mounted incinerator containing a long-lasting battery.</description>
+    <uiIconPath>Things/Building/NAT_AncientDefenceTurret_Incinerator_Icon</uiIconPath>
     <building>
       <combatPower>115</combatPower>
       <turretGunDef>NAT_Gun_AncientIncineratorTurret</turretGunDef>
@@ -121,7 +127,7 @@
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>NAT_Gun_AncientIncineratorTurret</defName>
     <label>ancient incinerator</label>
-    <description>A simple automatic gun made to be mounted on a turret.</description>
+    <description>A simple automatic flamethrower made to be mounted on a turret.</description>
     <graphicData>
       <texPath>Things/Building/NAT_AncientDefenceTurret_Incinerator</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -184,5 +190,5 @@
       </li>
     </verbs>
   </ThingDef>
-  
+
 </Defs>

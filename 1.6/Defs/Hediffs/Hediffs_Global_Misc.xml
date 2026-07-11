@@ -1,6 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <Defs>
+
+  <HediffDef Name="NAT_AltarTradeBase" Abstract="True">
+    <hediffClass>NAT.HediffAltarTrade</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <keepOnBodyPartRestoration>true</keepOnBodyPartRestoration>
+    <comps>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="NAT_AltarTradeBase">
+    <defName>NAT_HoraxianCurse</defName>
+    <label>horaxian curse</label>
+    <description>.</description>
+  </HediffDef>
 
   <HediffDef>
     <defName>NAT_Subdued</defName>

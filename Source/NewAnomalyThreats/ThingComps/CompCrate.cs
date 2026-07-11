@@ -1,26 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.Xml.XPath;
-using System.Xml.Xsl;
-using DelaunatorSharp;
+﻿using DelaunatorSharp;
 using Gilzoide.ManagedJobs;
+using HarmonyLib;
 using Ionic.Crc;
 using Ionic.Zlib;
 using JetBrains.Annotations;
@@ -35,6 +15,28 @@ using RimWorld.QuestGen;
 using RimWorld.SketchGen;
 using RimWorld.Utility;
 using RuntimeAudioClipLoader;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Xml.XPath;
+using System.Xml.Xsl;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
@@ -51,13 +53,14 @@ using Verse.Noise;
 using Verse.Profile;
 using Verse.Sound;
 using Verse.Steam;
-using HarmonyLib;
 
 namespace NAT
 {
 	public class CompProperties_Crate : CompProperties
 	{
 		public ThingSetMakerDef contents;
+
+		public List<ThingDefCountRangeClass> forcedContents = new List<ThingDefCountRangeClass>();
 
 		public float chance = 1f;
 
@@ -89,24 +92,46 @@ namespace NAT
 				return;
 			}
 			Building_Crate building_Crate = (Building_Crate)parent;
-			if (Props.contents == null || Rand.Chance(1f - Props.chance))
+			try
 			{
 				preventTrigger = true;
-				building_Crate.Open();
-				preventTrigger = false;
-				return;
-			}
-			preventTrigger = true;
-			List<Thing> list = Props.contents.root.Generate(default(ThingSetMakerParams));
-			for (int num = list.Count - 1; num >= 0; num--)
-			{
-				Thing thing = list[num];
-				if (!building_Crate.TryAcceptThing(thing, allowSpecialEffects: false))
+				if (Rand.Chance(Props.chance))
 				{
-					thing.Destroy();
+					foreach(ThingDefCountRangeClass item in Props.forcedContents)
+					{
+						int count = item.countRange.RandomInRange;
+						if(count > 0)
+						{
+							Thing thing = ThingMaker.MakeThing(item.thingDef);
+							thing.stackCount = count;
+							if (!building_Crate.TryAcceptThing(thing, allowSpecialEffects: false))
+							{
+								thing.Destroy();
+							}
+						}
+					}
+					if(Props.contents != null)
+					{
+						List<Thing> list = Props.contents.root.Generate(default(ThingSetMakerParams));
+						for (int num = list.Count - 1; num >= 0; num--)
+						{
+							Thing thing = list[num];
+							if (!building_Crate.TryAcceptThing(thing, allowSpecialEffects: false))
+							{
+								thing.Destroy();
+							}
+						}
+					}
+				}
+				if (!building_Crate.HasAnyContents)
+				{
+					building_Crate.Open();
 				}
 			}
-			preventTrigger = false;
+			finally
+			{
+				preventTrigger = false;
+			}
 		}
 	}
 }

@@ -134,6 +134,12 @@ namespace NAT
 			currentCarrier = null;
 		}
 
+		public override void Notify_DebugSpawned()
+		{
+			SetFaction(Faction.OfEntities);
+			base.Notify_DebugSpawned();
+		}
+
 		public void AddOffsetFromDamage(float dist, float dir)
 		{
 			damageOffset += Quaternion.AngleAxis(dir, Vector3.up) * Vector3.forward * dist;

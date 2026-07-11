@@ -138,6 +138,50 @@ namespace NAT
 		}
 	}
 
+	public class JobDriver_InteractWithVault : JobDriver
+	{
+		protected Building_VaultDoor Vault => job.GetTarget(TargetIndex.A).Thing as Building_VaultDoor;
+
+		public override bool TryMakePreToilReservations(bool errorOnFailed)
+		{
+			return pawn.Reserve(job.GetTarget(TargetIndex.A), job, 1, -1, null, errorOnFailed);
+		}
+
+		private bool locked;
+
+		public override void Notify_Starting()
+		{
+			base.Notify_Starting();
+			locked = Vault.Locked;
+		}
+
+		protected override IEnumerable<Toil> MakeNewToils()
+		{
+			this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+			AddEndCondition(delegate
+			{
+				return Vault.Locked == locked ? JobCondition.Ongoing : JobCondition.Succeeded;
+			});
+			yield return Toils_Goto.GotoThing(TargetIndex.A, Vault.def.hasInteractionCell ? PathEndMode.InteractionCell : PathEndMode.Touch);
+			Toil toil = ToilMaker.MakeToil("MakeNewToils");
+			toil.handlingFacing = true;
+			toil.WithProgressBar(TargetIndex.A, () => Vault.Locked ? Vault.UnlockPct : (1f - Vault.UnlockPct), interpolateBetweenActorAndTarget: false, -0.5f, alwaysShow: true);
+			toil.tickAction = (Action)Delegate.Combine(toil.tickAction, (Action)delegate
+			{
+				pawn.rotationTracker.FaceTarget(Vault);
+				Vault.TickInteracting();
+			});
+			toil.defaultCompleteMode = ToilCompleteMode.Never;
+			yield return toil;
+		}
+
+		public override void ExposeData()
+		{
+			base.ExposeData();
+			Scribe_Values.Look(ref locked, "locked");
+		}
+	}
+
 	public class JobDriver_BringAdditionalOfferings : JobDriver
 	{
 		private Thing Item => job.GetTarget(TargetIndex.A).Thing;

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DoorBase">
+    <defName>NAT_ContainmentDoor</defName>
+    <label>ancient containment door</label>
+    <description>A heavily-reinforced door made of an ultratech polymer. Hack the door to open it.</description>
+    <thingClass>NAT.Building_VaultDoor</thingClass>
+    <designationCategory IsNull="True"/>
+    <graphicData>
+      <texPath>Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Mover</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <ignoreThingDrawColor>true</ignoreThingDrawColor>
+      <damageData>
+        <!--  no damage marks because they don't move with the door -->
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>6000</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <DoorOpenSpeed>0.7</DoorOpenSpeed>
+    </statBases>
+    <useBlueprintGraphicAsGhost>true</useBlueprintGraphicAsGhost>
+    <rotatable>true</rotatable>
+    <building>
+      <paintable>false</paintable>
+      <deconstructible>false</deconstructible>
+      <neverBuildable>true</neverBuildable>
+      <claimable>false</claimable>
+      <unpoweredDoorOpenSpeedFactor>1.2</unpoweredDoorOpenSpeedFactor>
+      <isAirtight>true</isAirtight>
+      <draftAttackNonDeconstructable>false</draftAttackNonDeconstructable>
+      <isSupportDoor>true</isSupportDoor>
+      <doorTopGraphic>
+        <texPath>Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Top</texPath>
+        <graphicClass>Graphic_Multi</graphicClass>
+        <drawSize>(2,2.2)</drawSize>
+      </doorTopGraphic>
+      <doorTopHorizontalOffset>(0,0,0.05)</doorTopHorizontalOffset>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <stuffCategories Inherit="False"/>
+    <costStuffCount>0</costStuffCount>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <comps Inherit="False">
+      <li Class="CompProperties_Forbiddable"/>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NAT_AncientHoldingPlatform</defName>
+    <label>ancient holding platform</label>
+    <description>An ancient platform for holding dangerous entities. Its usable parts were smashed or looted long ago, and the rest has rusted into uselessness.</description>
+    <rotatable>false</rotatable>
+    <noRightClickDraftAttack>true</noRightClickDraftAttack>
+    <graphicData>
+      <texPath>Things/Building/Ruins/NAT_AncientHoldingPlatform</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+    </graphicData>
+    <pathCost>30</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <size>(3, 3)</size>
+    <fillPercent>0.4</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <drawerType>RealtimeOnly</drawerType>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <building>
+      <canLandGravshipOn>true</canLandGravshipOn>
+      <isInert>true</isInert>
+    </building>
+    <comps>
+      <li Class="CompProperties_DrawAdditionalGraphics">
+        <graphics>
+          <li>
+            <graphicClass>Graphic_Single</graphicClass>
+            <texPath>Things/Building/HoldingPlatform/HoldingPlatform_ChainsUntethered</texPath>
+            <drawSize>(3,3)</drawSize>
+            <drawOffset>(0,0.5,0)</drawOffset>
+          </li>
+        </graphics>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="CrateBase">
+    <defName>NAT_AncientShardInhibitor</defName>
+    <label>ancient shard inhibitor</label>
+    <description>An ancient device that resonates with dark psychic energy. Its usable parts were smashed or looted long ago, and the rest has rusted into uselessness.</description>
+    <graphicData>
+      <texPath>Things/Building/Ruins/NAT_AncientShardInhibitor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <fillPercent>0.5</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>100</WorkToBuild>
+    </statBases>
+    <building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+    </building>
+    <comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Things/Building/Ruins/NAT_AncientShardInhibitor_Empty</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="NAT.CompProperties_Crate">
+        <forcedContents>
+          <Shard>0~1</Shard>
+        </forcedContents>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="CrateBase">
+    <defName>NAT_AncientElectricInhibitor</defName>
+    <label>ancient electric inhibitor</label>
+    <description>An ancient device that emits a specially tuned electromagnetic field which numbs the neural activity of captured entities. Its usable parts were smashed or looted long ago, and the rest has rusted into uselessness.</description>
+    <graphicData>
+      <texPath>Things/Building/Ruins/NAT_AncientElectricInhibitor/NAT_AncientElectricInhibitor</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,2)</drawSize>
+      <damageData>
+        <rect>(0, 0.3, 1, 1.7)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.6, 0.5, 1.8)</volume>
+        <offset>(0, 0, 0.1)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(1,2)</size>
+    <fillPercent>0.5</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <rotatable>true</rotatable>
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>150</WorkToBuild>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <building>
+      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+    </building>
+    <comps>
+      <li Class="NAT.CompProperties_Crate">
+        <forcedContents>
+          <ComponentIndustrial>1~2</ComponentIndustrial>
+        </forcedContents>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NAT_AncientProximityDetector</defName>
+    <label>ancient proximity detector</label>
+    <description>An ancient scanner capable of detecting invisible creatures. Its usable parts were smashed or looted long ago, and the rest has rusted into uselessness.</description>
+    <graphicData>
+      <texPath>Things/Building/Ruins/NAT_AncientProximityDetector</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <selectable>true</selectable>
+    <fillPercent>0.25</fillPercent>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <rotatable>false</rotatable>
+    <noRightClickDraftAttack>true</noRightClickDraftAttack>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <building>
+      <canLandGravshipOn>true</canLandGravshipOn>
+      <isInert>true</isInert>
+    </building>
+  </ThingDef>
+
+  <ThingDef Name="NAT_SealedSafeBase" ParentName="CrateBase">
+    <defName>NAT_SealedSafe</defName>
+    <label>sealed safe</label>
+    <description>A small safe that's still sealed. There may be valuables inside.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_SealedSafe_Close</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1, 1)</size>
+    <fillPercent>0.2</fillPercent>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+    </statBases>
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Things/Building/NAT_SealedSafe_Open</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(1,1)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>1.5</glowRadius>
+        <glowColor>(239,133,50,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_SealedSafeBase">
+    <defName>NAT_SealedSafe_Basic</defName>
+    <comps>
+      <li Class="CompProperties_LootSpawn">
+        <contents>NAT_SealedSafe_Basic</contents>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef Name="NAT_SealedCargoBase" ParentName="CrateBase">
+    <defName>NAT_SealedCargo</defName>
+    <label>sealed cargo</label>
+    <description>A sealed cargo container. It may contain valuable supplies.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_SealedCargo_Close</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2, 2)</size>
+    <fillPercent>0.3</fillPercent>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+    </statBases>
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="CompProperties_EmptyStateGraphic">
+        <graphicData>
+          <texPath>Things/Building/NAT_SealedCargo_Open</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>(2,2)</drawSize>
+        </graphicData>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(239,133,50,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_SealedCargoBase">
+    <defName>NAT_SealedCargo_Basic</defName>
+    <comps>
+      <li Class="CompProperties_LootSpawn">
+        <contents>NAT_SealedSafe_Basic</contents>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

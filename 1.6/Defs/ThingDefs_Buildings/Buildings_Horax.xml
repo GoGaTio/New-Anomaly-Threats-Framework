@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Name="NAT_HoraxMachineBase" ParentName="BuildingBase" Abstract="True">
+    <thingClass>NAT.Building_HoraxMachine</thingClass>
+    <rotatable>false</rotatable>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3, 3)</drawSize>
+      <addTopAltitudeBias>true</addTopAltitudeBias>
+    </graphicData>
+    <size>(3, 3)</size>
+    <drawerType>RealtimeOnly</drawerType>
+    <useHitPoints>false</useHitPoints>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <passability>Impassable</passability>
+    <pathCost>50</pathCost>
+    <tickerType>Normal</tickerType>
+    <building>
+      <draftAttackNonDeconstructable>false</draftAttackNonDeconstructable>
+      <deconstructible>false</deconstructible>
+      <repairable>false</repairable>
+      <isTargetable>false</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_InvalidOverSubstructure</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_AmbientSound">
+        <sound>MechanoidRelay_Ambient</sound>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_HoraxMachineBase">
+    <defName>NAT_HoraxMachine_</defName>
+    <label>horax machine</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_HoraxMachine</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NAT_HoraxMachine_Crashed</defName>
+    <label>crashed horax machine</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NAT_HoraxMachine_Crashed</texPath>
+      <drawSize>(3, 3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+    </statBases>
+    <rotatable>false</rotatable>
+    <killedLeavingsRanges>
+      <Shard>0~2</Shard>
+      <Bioferrite>80~150</Bioferrite>
+      <NAT_HoraxChunk>3~5</NAT_HoraxChunk>
+    </killedLeavingsRanges>
+    <size>(3, 3)</size>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <passability>Impassable</passability>
+    <pathCost>50</pathCost>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <building>
+      <deconstructible>false</deconstructible>
+      <repairable>false</repairable>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <displayAttackToDestroyOnInspectPane>true</displayAttackToDestroyOnInspectPane>
+    </building>
+  </ThingDef>
+
+</Defs>

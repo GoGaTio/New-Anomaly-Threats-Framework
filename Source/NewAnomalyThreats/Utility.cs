@@ -115,5 +115,51 @@ namespace NAT
 		{
 			Log.Message(Scribe.saver.DebugOutputFor(Current.Game.GetComponent<GameComponent_NewAnomalyThreats>()));
 		}
+
+		[DebugAction("NAT", null, false, false, false, false, false, 0, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		public static List<DebugActionNode> CallAnomalyBoss()
+		{
+			List<DebugActionNode> list = new List<DebugActionNode>();
+			Map map = Find.CurrentMap;
+			IntVec3 cell = RCellFinder.RandomAnimalSpawnCell_MapGen(map);
+			foreach (AnomalyBoss boss in Comp.bossManager.bosses)
+			{
+				AnomalyBoss localBoss = boss;
+				string text = localBoss.def.defName;
+				bool canCall = localBoss.ticksIncomingLeft < 0 && localBoss.CanCall(cell, map);
+				if (!canCall)
+				{
+					text += " [NO]";
+				}
+				DebugActionNode debugActionNode = new DebugActionNode(text);
+				if (canCall)
+				{
+					debugActionNode.childGetter = delegate
+					{
+						List<DebugActionNode> list2 = new List<DebugActionNode>();
+						GameComponent_Bossgroup component = Current.Game.GetComponent<GameComponent_Bossgroup>();
+						list2.Add(new DebugActionNode("*Current (" + StorytellerUtility.DefaultThreatPointsNow(map) + ")", DebugActionType.Action, delegate
+						{
+							localBoss.ResetPoints();
+							localBoss.Call(cell, map);
+						}));
+						foreach (float item in DebugActionsUtility.PointsOptions(extended: true))
+						{
+							float localP = item;
+							list2.Add(new DebugActionNode(localP + " points", DebugActionType.Action, delegate
+							{
+								localBoss.ResetPoints();
+								localBoss.lastPoints = localP;
+								localBoss.Call(cell, map);
+							}));
+						}
+						return list2;
+					};
+				}
+				
+				list.Add(debugActionNode);
+			}
+			return list;
+		}
 	}
 }

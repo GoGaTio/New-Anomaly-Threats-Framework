@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef Abstract="True" ParentName="BuildingBase" Name="NAT_TradeAltarBase">
+    <graphicData>
+      <graphicClass>NAT.Graphic_AltarMask</graphicClass>
+      <shaderType>CutoutComplexBlend</shaderType>
+      <addTopAltitudeBias>true</addTopAltitudeBias>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2, 0.4, 2</volume>
+      </shadowData>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <drawerType>RealtimeOnly</drawerType>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>68</pathCost>
+    <building>
+      <ai_chillDestination>true</ai_chillDestination>
+      <isInert>false</isInert>
+      <paintable>false</paintable>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <draftAttackNonDeconstructable>false</draftAttackNonDeconstructable>
+      <repairable>false</repairable>
+      <roofCollapseDamageMultiplier>0.1</roofCollapseDamageMultiplier>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <soundMeleeHitOverride>ObeliskDamaged</soundMeleeHitOverride>
+    </building>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <MeditationFocusStrength>0.2</MeditationFocusStrength>
+    </statBases>
+    <size>(2,2)</size>
+    <killedLeavings>
+      <Shard>1</Shard>
+    </killedLeavings>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Void</li>
+        </focusTypes>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_TradeAltarBase">
+    <defName>NAT_TradeAltar_Creep</defName>
+    <label>creeping altar</label>
+    <description>A mech-band signaling device more powerful than the normal mechband antenna. When activated, it puts out an ultra-powerful mech signal pulse, which will attract a mechanoid commander to attack with its escorts. If you can defeat it, you can collect special technologies from its corpse. The signal pulse burns out the dish, so this building can only be used once.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_TradeAltar_Creep</texPath>
+      <colorTwo>(200,30,220)</colorTwo>
+    </graphicData>
+    <comps>
+      <li Class="NAT.CompProperties_TradeAltar">
+        <altarConfirmationText>By activating altar {PAWN_nameDef} will connect {PAWN_objective} to distant archotech structure.</altarConfirmationText>
+        <effectHediff>NAT_HoraxianCurse</effectHediff>
+        <generator Class="NAT.AltarEffectGenerator_List">
+          <subGenerators>
+            <li Class="NAT.AltarEffectGenerator_List">
+              <countToSelect>1~2</countToSelect>
+              <positivity>-1</positivity>
+              <subGenerators>
+                <li Class="NAT.AltarEffectGenerator_Stat">
+                  <factorRange>0.5~0.75</factorRange>
+                  <stats>
+                    <li>MoveSpeed</li>
+                    <li>WorkSpeedGlobal</li>
+                    <li>ImmunityGainSpeed</li>
+                  </stats>
+                </li>
+                <li Class="NAT.AltarEffectGenerator_Stat">
+                  <offsetRange>0.2~0.3</offsetRange>
+                  <stats>
+                    <li>IncomingDamageFactor</li>
+                  </stats>
+                </li>
+                <li Class="NAT.AltarEffectGenerator_Capacity">
+                  <factorRange>0.5~0.7</factorRange>
+                  <capacities>
+                    <li>Moving</li>
+                    <li>Manipulation</li>
+                  </capacities>
+                </li>
+                <li Class="NAT.AltarEffectGenerator_Damage">
+                  <factorRange>1.5~2</factorRange>
+                  <damages>
+                    <li>Bullet</li>
+                    <li>Bomb</li>
+                    <li>Flame</li>
+                  </damages>
+                </li>
+              </subGenerators>
+            </li>
+            <li Class="NAT.AltarEffectGenerator_CreepjoinerAbility"/>
+          </subGenerators>
+        </generator>
+        <effecterDef>MechbandDishUsed</effecterDef>
+        <activeTicks>1</activeTicks>
+        <ticksToActivate>180</ticksToActivate>
+        <activateTexPath>UI/Commands/NAT_CallAnomalyBoss</activateTexPath>
+        <targetingParameters>
+          <canTargetBuildings>false</canTargetBuildings>
+          <canTargetAnimals>false</canTargetAnimals>
+          <canTargetMechs>false</canTargetMechs>
+          <onlyTargetControlledPawns>true</onlyTargetControlledPawns>
+        </targetingParameters>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

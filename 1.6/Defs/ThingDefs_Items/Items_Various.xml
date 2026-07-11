@@ -57,50 +57,17 @@
     </statBases>
   </ThingDef>
 
-  <ThingDef ParentName="NAT_AnomalousResourceBase" Name="ADREMC">
-    <defName>ADREMC_A</defName>
-    <label>pain clot</label>
-    <description>A piece of clotted pain.</description>
-    <thingClass>ThingWithComps</thingClass>
-    <tradeability>None</tradeability>
-    <genericMarketSellable>false</genericMarketSellable>
-    <drawerType>MapMeshOnly</drawerType>
-    <graphicData>
-      <texPath>ADREMC_</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1, 1)</drawSize>
-    </graphicData>
-    <stackLimit>75</stackLimit>
-    <statBases>
-      <Mass>0.05</Mass>
-      <Beauty>-10</Beauty>
-      <Flammability>0</Flammability>
-    </statBases>
-  </ThingDef>
-
-  <ThingDef ParentName="ADREMC">
-    <defName>ADREMC_B</defName>
-    <graphicData>
-      <drawSize>(2, 2)</drawSize>
-    </graphicData>
-  </ThingDef>
-  
-  <ThingDef ParentName="ADREMC">
-    <defName>ADREMC_C</defName>
-    <graphicData>
-      <drawSize>(3, 3)</drawSize>
-    </graphicData>
-  </ThingDef>
-
   <ThingDef ParentName="ChunkBase">
     <defName>NAT_HoraxChunk</defName>
     <label>dark archochunk</label>
     <description>A chunk of steel slag. While it's useless in its current form, it can be smelted to recover steel.</description>
     <graphicData>
-      <texPath>Things/Item/Chunk/ChunkSlag</texPath>
+      <texPath>Things/Item/NAT_HoraxChunk</texPath>
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
     <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <Flammability>0</Flammability>
       <Mass>10</Mass>
     </statBases>
     <soundDrop>ChunkSlag_Drop</soundDrop>

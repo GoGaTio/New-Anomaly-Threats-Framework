@@ -7,11 +7,28 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
 namespace NAT
 {
+	public class Graphic_AltarMask : Graphic_WithPropertyBlock
+	{
+		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
+		{
+			CompTradeAltar comp = thing.TryGetComp<CompTradeAltar>();
+			if (comp == null)
+			{
+				return;
+			}
+			Color value = colorTwo;
+			value.a = comp.Alpha;
+			propertyBlock.SetColor(ShaderPropertyIDs.ColorTwo, value);
+			base.DrawWorker(loc, rot, thingDef, thing, extraRotation);
+		}
+	}
+
 	public interface IAlwaysTargetable
 	{
 	}
@@ -31,19 +48,14 @@ namespace NAT
 				{
 					s += "\n";
 				}
-				s += "AlertBossgroupIncoming".Translate(def.LabelCap);
+				s += "NAT_BossIncomingLabel".Translate(def.LabelCap);
 			}
-			if (!s.NullOrEmpty())
-			{
-				s += "\n";
-			}
-			s += "AlertBossgroupIncoming".Translate(DamageDefOf.AcidBurn.LabelCap);
 			return s;
 		}
 
 		public override TaggedString GetExplanation()
 		{
-			return BreakRiskAlertUtility.AlertExplanation;
+			return "NAT_BossIncomingDesc".Translate();
 		}
 
 		public override AlertReport GetReport()
@@ -71,21 +83,5 @@ namespace NAT
 		public int amount;
 
 		public float armorPenetration;
-	}
-
-	public class DamageWorker_Deadlife : DamageWorker
-	{
-		public override void ExplosionAffectCell(Explosion explosion, IntVec3 c, List<Thing> damagedThings, List<Thing> ignoredThings, bool canThrowMotes)
-		{
-			if (c.DistanceTo(explosion.Position) < explosion.radius / 2f && canThrowMotes)
-			{
-				GasUtility.AddDeadifeGas(c, explosion.Map, explosion.instigator?.Faction ?? Faction.OfEntities, 255);
-			}
-			else
-			{
-				GasUtility.MarkDeadlifeCorpsesForFaction(c, explosion.Map, explosion.instigator?.Faction ?? Faction.OfEntities, 255);
-			}
-			base.ExplosionAffectCell(explosion, c, damagedThings, ignoredThings, canThrowMotes);
-		}
 	}
 }

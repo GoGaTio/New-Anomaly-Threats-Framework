@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <StructureLayoutDef>
+    <defName>NAT_AncientResearchFacility</defName>
+    <workerClass>NAT.LayoutWorker_AncientResearchFacility</workerClass>
+    <canHaveMultipleLayoutsInRoom>true</canHaveMultipleLayoutsInRoom>
+    <clearRoomsEntirely>true</clearRoomsEntirely>
+    <minRoomWidth>8</minRoomWidth>
+    <minRoomHeight>8</minRoomHeight>
+    
+    <!-- Structure -->
+    <importantRoomDef>NAT_AncientContainmentRoom</importantRoomDef>
+    <corridorDef>NAT_AncientResearchFacilityCorridor</corridorDef>
+    <corridorShapes>Cross, T, H</corridorShapes>
+    
+    <exteriorDoorDef>NAT_ContainmentDoor</exteriorDoorDef>
+    <wallLampDef>AncientEmergencyLight_Red</wallLampDef>
+    <wallDef>AncientFortifiedWall</wallDef>
+    <doorStuffDef>Steel</doorStuffDef>
+    
+    <roomDefs>
+      <!-- Special -->
+      <NAT_AncientContainmentRoom>
+        <countRange>2~4</countRange>
+        <weight>0.7</weight>
+      </NAT_AncientContainmentRoom>
+
+      <NAT_AncientWeaponsRoom>
+        <countRange>1</countRange>
+        <weight>1</weight>
+      </NAT_AncientWeaponsRoom>
+
+      <!-- Decorative -->
+      
+      <!--<AncientRuinsShelfRoom>1</AncientRuinsShelfRoom>
+      <AncientRuinsLockerRoom>1</AncientRuinsLockerRoom>-->
+      
+      <!-- Smaller threats -->
+      <NAT_AncientRuinsIndustrialStorage>1</NAT_AncientRuinsIndustrialStorage>
+      <NAT_AncientRuinsStorage>1</NAT_AncientRuinsStorage>
+    </roomDefs>
+
+    <junkScaterrers>
+      <Filth_Trash>
+        <groupsPerHundredCells>0~3</groupsPerHundredCells>
+        <itemsPerGroup>2~4</itemsPerGroup>
+        <groupDistRange>3~5</groupDistRange>
+      </Filth_Trash>
+      <Filth_BlastMark>
+        <groupsPerHundredCells>-2~1</groupsPerHundredCells> <!-- ~66% to not appear -->
+        <itemsPerGroup>1~1</itemsPerGroup>
+      </Filth_BlastMark>
+      <Filth_MachineBits>
+        <groupsPerHundredCells>-1~1</groupsPerHundredCells> <!-- ~50% to not appear -->
+        <itemsPerGroup>2~4</itemsPerGroup>
+        <groupDistRange>2~4</groupDistRange>
+      </Filth_MachineBits>
+      <Filth_RubbleRock>
+        <groupsPerHundredCells>2~4</groupsPerHundredCells>
+        <itemsPerGroup>3~8</itemsPerGroup>
+        <groupDistRange>3~5</groupDistRange>
+        <minGroups>1</minGroups>
+      </Filth_RubbleRock>
+    </junkScaterrers>
+  </StructureLayoutDef>
+
+</Defs>

@@ -37,9 +37,23 @@ namespace NAT
 	{
 		public static ThingDef NAT_SignalAction_Sightstealers;
 
+		public static ThingDef NAT_ContainmentDoor;
+
+		public static ThingDef NAT_AncientHoldingPlatform;
+
+		public static ThingDef NAT_AncientElectricInhibitor;
+
+		public static ThingDef NAT_HoraxMachine_Crashed;
+
+		public static PawnKindDef NAT_Researcher;
+
 		public static JobDef NAT_Seal;
 
+		public static JobDef NAT_InteractWithVault;
+
 		public static JobDef NAT_BringAdditionalOfferings;
+
+		public static JobDef NAT_MoveEntity;
 
 		public static HediffDef NAT_InducedPain;
 
@@ -70,6 +84,6 @@ namespace NAT
 
 		public static HediffDef NAT_Nail;
 
-		public static JobDef NAT_MoveEntity;
+		public static DamageDef NociosphereVaporize;
 	}
 }

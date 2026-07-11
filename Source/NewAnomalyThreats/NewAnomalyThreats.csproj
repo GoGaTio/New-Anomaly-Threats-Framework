@@ -64,9 +64,12 @@
   <ItemGroup>
     <Compile Include="Abilities.cs" />
     <Compile Include="ActivityWorkers.cs" />
+    <Compile Include="AltarEffectGenerators.cs" />
+    <Compile Include="AltarEffects.cs" />
     <Compile Include="Cult\Ability.cs" />
     <Compile Include="Damages.cs" />
     <Compile Include="DefOf.cs" />
+    <Compile Include="Defs\RepeatedResearchProjectDef.cs" />
     <Compile Include="Defs\DefGeneratorDef.cs" />
     <Compile Include="Defs\AnomalyBossDef.cs" />
     <Compile Include="Defs\EndGameRaidDef.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Harmony\MiscPatches.cs" />
     <Compile Include="Harmony\DefLoad.cs" />
     <Compile Include="Harmony\ResearchPatches.cs" />
+    <Compile Include="Hediffs\HediffAltarTrade.cs" />
     <Compile Include="Hediffs\Hediff_NoMerge.cs" />
     <Compile Include="Hediffs\Hediff_InducedPain.cs" />
     <Compile Include="Hediffs\HediffComp_GiveAbilityCharges.cs" />
@@ -91,13 +95,19 @@
     <Compile Include="Jobs\JobGivers.cs" />
     <Compile Include="Jobs\Lords.cs" />
     <Compile Include="MapGen\DungeonUtility.cs" />
-    <Compile Include="MapGen\GenStep_UndergroundLayout.cs" />
+    <Compile Include="MapGen\GenSteps.cs" />
     <Compile Include="GameComponent\GameComponent.cs" />
+    <Compile Include="MapGen\Layouts\LayoutWorkers.cs" />
+    <Compile Include="MapGen\Layouts\RoomContents.cs" />
+    <Compile Include="MapGen\Layouts\RoomParts.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="NAT_PainPulses.cs" />
+    <Compile Include="Things\Building_HoraxMachine.cs" />
+    <Compile Include="Things\Building_VaultDoor.cs" />
+    <Compile Include="Verbs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
+    <Compile Include="ThingComps\CompTradeAltar.cs" />
     <Compile Include="ThingComps\CompKnowledgeOnDeath.cs" />
     <Compile Include="ThingComps\CompConstantFleckEmitter.cs" />
     <Compile Include="ThingComps\CompArmor.cs" />
@@ -110,7 +120,6 @@
     <Compile Include="ThingComps\CompUniqueName.cs" />
     <Compile Include="ThingComps\CompPreventFrendlyFire.cs" />
     <Compile Include="ThingComps\CompCrate.cs" />
-    <Compile Include="ThingComps\CompPainFigure.cs" />
     <Compile Include="ThingComps\CompTargetEffect_InducePain.cs" />
     <Compile Include="ThingComps\CompUndergroundEntrance.cs" />
     <Compile Include="ThingComps\CompUseEffect_AddPainToTargetPawns.cs" />
@@ -123,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -57,7 +57,6 @@ namespace NAT
 {
 	public abstract class CompHoldingPlatformTargetPlus : CompHoldingPlatformTarget
 	{
-
 		public abstract bool CanCapture { get; }
 
 		public virtual void CapturePawn(ThingOwner newOwner)

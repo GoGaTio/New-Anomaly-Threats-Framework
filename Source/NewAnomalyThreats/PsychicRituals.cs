@@ -66,6 +66,7 @@ namespace NAT
 			list.Insert(0, new PsychicRitualToil_BringAdditionalOfferings(this));
 			return list;
 		}
+
         public override IEnumerable<string> BlockingIssues(PsychicRitualRoleAssignments assignments, Map map)
         {
 			foreach (string item in base.BlockingIssues(assignments, map))

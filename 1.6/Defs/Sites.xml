@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Ancient Reactor -->
+
+  <SitePartDef>
+    <defName>NAT_AncientResearchFacility</defName>
+    <label>ancient research facility</label>
+    <description>An ancient reactor is hidden within nearby ruins. The reactor is cracked and leaking toxic fallout over the whole region. Locate and disable the reactor to obtain a gravcore and stop the fallout.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/DestroyedSettlement</expandingIconTexture>
+    <gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minMapSize>(200, 0, 200)</minMapSize>
+    <considerEnteringAsAttack>false</considerEnteringAsAttack>
+    <tags>
+      <li>NAT_AncientResearchFacility</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>NAT_AncientResearchFacility</defName>
+    <linkWithSite>NAT_AncientResearchFacility</linkWithSite>
+    <order>740</order>
+    <genStep Class="NAT.GenStep_AncientFacility">
+      <layoutDef>NAT_AncientResearchFacility</layoutDef>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

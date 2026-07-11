@@ -24,7 +24,11 @@ namespace NAT
 
 		public sbyte mapIndex = -1;
 
+		public float lastPoints = -1;
+
 		public IntVec3 callCell;
+
+		public virtual string Label => def.label;
 
 		public Map Map
 		{
@@ -37,6 +41,8 @@ namespace NAT
 				return null;
 			}
 		}
+
+		public virtual void ResetPoints() { lastPoints = -1; }
 
 		public virtual void Init()
 		{
@@ -63,7 +69,7 @@ namespace NAT
 			return true;
 		}
 
-		public virtual void Call(Pawn pawn, IntVec3 cell, Map map)
+		public virtual void Call(IntVec3 cell, Map map)
 		{
 			ticksIncomingLeft = def.arrivalTimeHoursRange.RandomInRange;
 			lastCalledTick = Find.TickManager.TicksGame;
@@ -80,6 +86,11 @@ namespace NAT
 			callCell = IntVec3.Invalid;
 		}
 
+		public virtual void SendLetter(LookTargets targets)
+		{
+			Find.LetterStack.ReceiveLetter(def.arrivedLetterLabel.Formatted(), def.arrivedLetterText.Formatted(), LetterDefOf.ThreatBig, targets);
+		}
+
 		public virtual void ExposeData()
 		{
 			Scribe_Values.Look(ref ticksIncomingLeft, "ticksIncomingLeft", defaultValue: -10);
@@ -87,6 +98,7 @@ namespace NAT
 			Scribe_Values.Look(ref timesCalled, "timesCalled", 0);
 			Scribe_Values.Look(ref callCell, "callCell");
 			Scribe_Values.Look<sbyte>(ref mapIndex, "mapIndex", -1);
+			Scribe_Values.Look(ref lastPoints, "lastPoints", -1);
 		}
 	}
 
@@ -98,11 +110,9 @@ namespace NAT
 
 		public List<PawnKindDefCount> cachedEscorts = new List<PawnKindDefCount>();
 
-		public float lastPoints = -1;
-
 		public string BossWaveComposition(Map map)
 		{
-			string s = "NAT_BossEscorts".Translate(def.label, Def.escortsLabel ?? FactionDefOf.Entities.pawnsPlural) + ":"; //"Summoning {0} threat will summon following hostile {1}:"
+			string s = def.confirmationText.Formatted(Label, Def.escortsLabel ?? FactionDefOf.Entities.pawnsPlural) + ":"; //"Summoning {0} threat will summon following hostile {1}:"
 			float points = StorytellerUtility.DefaultThreatPointsNow(map);
 			List<PawnKindDefCount> list = GetEscorts(map, points);
 			foreach (PawnKindDefCount item in list)
@@ -110,6 +120,13 @@ namespace NAT
 				s += "\n" + "  - " + GenLabel.BestKindLabel(item.kindDef, Gender.None).CapitalizeFirst() + " x" + item.count;
 			}
 			return s;
+		}
+
+		public override void ResetPoints()
+		{
+			base.ResetPoints();
+			escorts = null;
+			cachedEscorts.Clear();
 		}
 
 		public virtual float ProcessPoints(float points, Map map)
@@ -168,6 +185,19 @@ namespace NAT
 			return false;
 		}
 
+		public override void Call(IntVec3 cell, Map map)
+		{
+			if (escorts == null)
+			{
+				if(lastPoints < 0)
+				{
+					lastPoints = StorytellerUtility.DefaultThreatPointsNow(map);
+				}
+				GetEscorts(map, lastPoints);
+			}
+			base.Call(cell, map);
+		}
+
 		public override bool TryArrive()
 		{
 			if(Map == null)
@@ -220,7 +250,7 @@ namespace NAT
 
 		public virtual void PrePostArrived(List<Pawn> list)
 		{
-
+			SendLetter(list);
 		}
 
 		public override void PostArrived()
@@ -233,7 +263,6 @@ namespace NAT
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look(ref lastPoints, "lastPoints", -1);
 			Scribe_Collections.Look(ref escorts, "escorts", LookMode.Def);
 		}
 	}
@@ -241,6 +270,8 @@ namespace NAT
 	public class AnomalyBoss_Pawn : AnomalyBoss_PawnGroup
 	{
 		private AnomalyBossDef_Pawn Def => (AnomalyBossDef_Pawn)def;
+
+		public override string Label => Def.bossKind.label;
 
 		public override string Confirmation(Map map)
 		{

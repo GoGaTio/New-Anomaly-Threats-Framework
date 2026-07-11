@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,22 @@ namespace NAT
 				pawn.health.AddHediff(NATDefOf.NAT_Nail, damageResult.LastHitPart, dinfo);
 			}
 			return damageResult;
+		}
+	}
+
+	public class DamageWorker_Deadlife : DamageWorker
+	{
+		public override void ExplosionAffectCell(Explosion explosion, IntVec3 c, List<Thing> damagedThings, List<Thing> ignoredThings, bool canThrowMotes)
+		{
+			if (c.DistanceTo(explosion.Position) < explosion.radius / 2f && canThrowMotes)
+			{
+				GasUtility.AddDeadifeGas(c, explosion.Map, explosion.instigator?.Faction ?? Faction.OfEntities, 255);
+			}
+			else
+			{
+				GasUtility.MarkDeadlifeCorpsesForFaction(c, explosion.Map, explosion.instigator?.Faction ?? Faction.OfEntities, 255);
+			}
+			base.ExplosionAffectCell(explosion, c, damagedThings, ignoredThings, canThrowMotes);
 		}
 	}
 }

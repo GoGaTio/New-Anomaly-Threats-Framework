@@ -24,6 +24,9 @@ namespace NAT
 		[MustTranslate]
 		public string arrivedLetterText;
 
+		[MustTranslate]
+		public string confirmationText;
+
 		public int ticksCooldown = 180000;
 
 		public IntRange arrivalTimeHoursRange = new IntRange(2, 10);

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <NAT.RepeatedResearchProjectDef>
+    <defName>NAT_TEST</defName>
+    <label>TEST</label>
+    <description>Extract bioferrite directly from captured entities. Use it to craft weapons and apparel at a crafting spot or bioferrite shaper.</description>
+    <tab>NewAnomalyThreats</tab>
+    <knowledgeCost>5</knowledgeCost>
+    <knowledgeOffset>5</knowledgeOffset>
+    <knowledgeCategory>Basic</knowledgeCategory>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>3.40</researchViewY>
+    <customUnlockTexts>
+      <li>Test buff to everything</li>
+    </customUnlockTexts>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->bioferrite extraction</li>
+
+        <li>subject_story->extracted an organic compound from a rapidly mutating flesh sample</li>
+        <li>subject_story->stripped and boiled the flesh of a harbinger tree</li>
+        <li>subject_story->investigated reports of an archotech phenomenon</li>
+        <li>subject_story->discovered a novel organic metal</li>
+
+        <li>subject_gerund->extracting bioferrite</li>
+      </rulesStrings>
+    </generalRules>
+  </NAT.RepeatedResearchProjectDef>
+
+</Defs>

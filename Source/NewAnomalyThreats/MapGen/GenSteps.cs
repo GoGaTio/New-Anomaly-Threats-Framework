@@ -93,6 +93,48 @@ namespace NAT
 			MapGenUtility.SpawnScatter(map, ThingDefOf.Filth_BlastMark, BlastMarksPer10K);
 		}
 	}
+
+	public class GenStep_AncientFacility : GenStep_LargeRuins
+	{
+		public LayoutDef layoutDef;
+
+		public override int SeedPart => 79881699;
+
+		protected override int RegionSize => 45;
+
+		protected override FloatRange DefaultMapFillPercentRange => new FloatRange(0.6f, 0.75f);
+
+		protected override FloatRange MergeRange => new FloatRange(1f, 1f);
+
+		protected override int MoveRangeLimit => 6;
+
+		protected override int ContractLimit => 6;
+
+		protected override int MinRegionSize => 15;
+
+		protected override IntRange RuinsMinMaxRange => IntRange.One;
+
+		protected override LayoutDef LayoutDef => layoutDef;
+
+		protected override Faction Faction => Faction.OfAncientsHostile;
+
+		public override void Generate(Map map, GenStepParams parms)
+		{
+			base.Generate(map, parms);
+		}
+
+		protected override LayoutStructureSketch GenerateAndSpawn(CellRect rect, Map map, GenStepParams parms, LayoutDef layoutDef)
+		{
+			MapGenerator.SetVar("SpawnRect", rect.ExpandedBy(1));
+			return base.GenerateAndSpawn(rect, map, parms, layoutDef);
+		}
+
+		/*public override void PostMapInitialized(Map map, GenStepParams parms)
+		{
+			BaseGenUtility.ScatterSentryDronesInMap(SentryCountFromPointsCurve, map, Faction.OfAncientsHostile, parms);
+		}*/
+	}
+
 	public class GenStep_UndergroundEntrance : GenStep
 	{
 		public ThingDef entranceDef;

@@ -52,7 +52,7 @@ namespace NAT
 				Props.effecterDef.Spawn(parent, parent.Map, offset);
 			}
 			ticksTillDestroy = Props.destroyDelayTicks;
-			NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).Call(caster, parent.PositionHeld, parent.MapHeld);
+			NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).Call(parent.PositionHeld, parent.MapHeld);
 		}
 
 		public override string CompInspectStringExtra()
@@ -77,7 +77,7 @@ namespace NAT
 		public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
 		{
 			AcceptanceReport acceptanceReport = CanInteract(selPawn);
-			FloatMenuOption floatMenuOption = new FloatMenuOption(Props.jobString.CapitalizeFirst(), delegate
+			FloatMenuOption floatMenuOption = new FloatMenuOption(ActivateOptionLabel, delegate
 			{
 				OrderActivation(selPawn);
 			});

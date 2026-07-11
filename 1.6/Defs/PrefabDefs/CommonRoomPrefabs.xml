@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PrefabDef>
+    <defName>NAT_AncientHoldingPlatforms4_Shard</defName>
+    <size>(7,7)</size>
+    <things>
+      <NAT_AncientHoldingPlatform>
+        <positions>
+          <li>(1, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+          <li>(1, 0, 5)</li>
+          <li>(5, 0, 5)</li>
+        </positions>
+      </NAT_AncientHoldingPlatform>
+      <NAT_AncientShardInhibitor>
+        <position>(3, 0, 3)</position>
+      </NAT_AncientShardInhibitor>
+    </things>
+  </PrefabDef>
+  
+  <PrefabDef>
+    <defName>NAT_AncientHoldingPlatforms2_Shard</defName>
+    <size>(7,3)</size>
+    <things>
+      <NAT_AncientHoldingPlatform>
+        <positions>
+          <li>(1, 0, 1)</li>
+          <li>(5, 0, 1)</li>
+        </positions>
+      </NAT_AncientHoldingPlatform>
+      <NAT_AncientShardInhibitor>
+        <position>(3, 0, 1)</position>
+      </NAT_AncientShardInhibitor>
+    </things>
+  </PrefabDef>
+  
+  <PrefabDef>
+    <defName>NAT_AncientHoldingPlatform</defName>
+    <size>(3,3)</size>
+    <things>
+      <NAT_AncientHoldingPlatform>
+        <position>(1, 0, 1)</position>
+      </NAT_AncientHoldingPlatform>
+    </things>
+  </PrefabDef>
+  
+  <PrefabDef>
+    <defName>NAT_AncientHoldingPlatform_Cluster</defName>
+    <size>(7,5)</size>
+    <things>
+      <NAT_AncientHoldingPlatform>
+        <positions>
+          <li>(5, 0, 1)</li>
+          <li>(1, 0, 3)</li>
+        </positions>
+      </NAT_AncientHoldingPlatform>
+      <NAT_AncientShardInhibitor>
+        <position>(3, 0, 2)</position>
+      </NAT_AncientShardInhibitor>
+      <NAT_AncientElectricInhibitor>
+        <position>(2, 0, 0)</position>
+        <relativeRotation>Counterclockwise</relativeRotation>
+      </NAT_AncientElectricInhibitor>
+      <NAT_AncientElectricInhibitor>
+        <position>(4, 0, 4)</position>
+        <relativeRotation>Clockwise</relativeRotation>
+      </NAT_AncientElectricInhibitor>
+    </things>
+  </PrefabDef>
+
+</Defs>
