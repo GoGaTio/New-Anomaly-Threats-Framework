@@ -19,4 +19,20 @@
     </projectile>
   </ThingDef>
 
+  <ThingDef ParentName="BaseBullet">
+    <defName>NAT_Bullet_Heatspear</defName>
+    <label>heatspear shot</label>
+    <graphicData>
+      <texPath>Things/Projectile/NAT_Heatspear</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.4</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>EnergyBolt</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <speed>110</speed>
+    </projectile>
+  </ThingDef>
+
 </Defs>

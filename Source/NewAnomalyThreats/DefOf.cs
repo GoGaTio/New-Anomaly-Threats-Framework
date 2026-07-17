@@ -45,6 +45,10 @@ namespace NAT
 
 		public static ThingDef NAT_HoraxMachine_Crashed;
 
+		public static ThingDef NAT_HoraxStabilizer;
+
+		public static ThingDef NAT_HoraxMachineIncoming;
+
 		public static PawnKindDef NAT_Researcher;
 
 		public static JobDef NAT_Seal;

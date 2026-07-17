@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <ThingDef ParentName="BuildingBase">
+    <defName>NAT_HoraxStabilizer</defName>
+    <label>horax machine stabilizer</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <thingClass>NAT.Building_HoraxStabilizer</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NAT_HoraxStabilizer</texPath>
+      <drawSize>(2, 2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Blueprint</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+    </statBases>
+    <rotatable>false</rotatable>
+    <killedLeavingsRanges>
+      <Bioferrite>20~40</Bioferrite>
+      <NAT_HoraxChunk>1</NAT_HoraxChunk>
+    </killedLeavingsRanges>
+    <drawerType>RealtimeOnly</drawerType>
+    <size>(1, 1)</size>
+    <fillPercent>0.35</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <passability>PassThroughOnly</passability>
+    <terrainAffordanceNeeded ISNull="True"/>
+    <pathCost>10</pathCost>
+    <building>
+      <deconstructible>false</deconstructible>
+      <repairable>false</repairable>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <displayAttackToDestroyOnInspectPane>true</displayAttackToDestroyOnInspectPane>
+    </building>
+    <comps>
+      <li Class="NAT.CompProperties_Armor"/>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_InvalidOverSubstructure</li>
+    </placeWorkers>
+  </ThingDef>
+
   <ThingDef Name="NAT_HoraxMachineBase" ParentName="BuildingBase" Abstract="True">
     <thingClass>NAT.Building_HoraxMachine</thingClass>
     <rotatable>false</rotatable>
@@ -17,14 +61,25 @@
     <passability>Impassable</passability>
     <pathCost>50</pathCost>
     <tickerType>Normal</tickerType>
+    <altitudeLayer>Blueprint</altitudeLayer>
+    <noRightClickDraftAttack>true</noRightClickDraftAttack>
+    <terrainAffordanceNeeded ISNull="True"/>
     <building>
       <draftAttackNonDeconstructable>false</draftAttackNonDeconstructable>
+      <quickTargetable>false</quickTargetable>
+      <ai_neverTrashThis>true</ai_neverTrashThis>
+      <ai_combatDangerous>false</ai_combatDangerous>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <deconstructible>false</deconstructible>
       <repairable>false</repairable>
       <isTargetable>false</isTargetable>
       <isInert>true</isInert>
       <claimable>false</claimable>
       <expandHomeArea>false</expandHomeArea>
+      <buildingTags>
+        <li>NAT_HoraxMachine</li>
+        <li>NAT_RustedSiegeMember</li>
+      </buildingTags>
     </building>
     <placeWorkers>
       <li>PlaceWorker_InvalidOverSubstructure</li>
@@ -37,11 +92,111 @@
   </ThingDef>
 
   <ThingDef ParentName="NAT_HoraxMachineBase">
-    <defName>NAT_HoraxMachine_</defName>
-    <label>horax machine</label>
+    <defName>NAT_HoraxMachine_Deadlife</defName>
+    <label>deadlife machine</label>
     <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
     <graphicData>
-      <texPath>Things/Building/NAT_HoraxMachine</texPath>
+      <texPath>Things/Building/NAT_HoraxMachine_Deadlife</texPath>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_CausesGameCondition">
+        <conditionDef>NAT_DeadlifeFog</conditionDef>
+        <worldRange>10</worldRange>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_HoraxMachineBase">
+    <defName>NAT_HoraxMachine_Darkness</defName>
+    <label>darkness machine</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_HoraxMachine_Darkness</texPath>
+    </graphicData>
+    <comps>
+      <li Class="NAT.CompProperties_CausesGameCondition_UnnaturalDarkness"/>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_HoraxMachineBase">
+    <defName>NAT_HoraxMachine_Decimator</defName>
+    <label>decimator machine</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <uiIconPath>Things/Building/NAT_HoraxMachine_Decimator_Icon</uiIconPath>
+    <graphicData>
+      <texPath>Things/Building/NAT_HoraxMachine_Decimator</texPath>
+      <addTopAltitudeBias>true</addTopAltitudeBias>
+      <graphicClass>NAT.Graphic_EyedMachine</graphicClass>
+      <shaderType>CutoutComplexBlend</shaderType>
+      <colorTwo>(1,0.45,0.15,1)</colorTwo>
+    </graphicData>
+    <comps>
+      <li Class="NAT.CompProperties_EyedMachine">
+        <maxOffset>0.1</maxOffset>
+        <lineMote>NAT_Mote_DecimatorLine</lineMote>
+        <aimMote>NAT_Mote_DecimatorAim</aimMote>
+        <eyeOffset>(0,0,0.984)</eyeOffset>
+        <warmUpTicks>900</warmUpTicks>
+        <cooldownTicksCurve>
+          <points>
+            <li>(10, 0)</li>
+            <li>(30, 1000)</li>
+            <li>(50, 3000)</li>
+          </points>
+        </cooldownTicksCurve>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>NAT_Mote_DecimatorAim</defName>
+    <thingClass>MoteAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.5</fadeInTime>
+      <fadeOutTime>0.3</fadeOutTime>
+      <solidTime>999999</solidTime>
+      <needsMaintenance>True</needsMaintenance>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <texPath>Things/Mote/NAT_DecimatorAim_Target</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteHellfireCannon_Target</shaderType>
+      <shaderParameters>
+        <_ScanTex>/Things/Mote/NAT_DecimatorAim_Target_Scan</_ScanTex>
+        <_ScanMask>/Things/Mote/NAT_DecimatorAim_Target_Scan_Mask</_ScanMask>
+        <_ScanSpeed>.1</_ScanSpeed>
+        <_ScanSpeedAccel>0.1</_ScanSpeedAccel>
+      </shaderParameters>
+      <drawSize>(8, 8)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>NAT_Mote_DecimatorLine</defName>
+    <thingClass>MoteDualAttached</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0.3</fadeInTime>
+      <fadeOutTime>0.3</fadeOutTime>
+      <solidTime>0.1</solidTime>
+      <rotateTowardsTarget>True</rotateTowardsTarget>
+      <scaleToConnectTargets>True</scaleToConnectTargets>
+    </mote>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <color>(1,0.3,0.1)</color>
+      <texPath>Things/Mote/GraserBeam</texPath>
+      <graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+      <shaderType>MoteBeam</shaderType>
+      <shaderParameters>
+        <_ExtraTexA>/Things/Mote/BeamSecondaryNoise_A</_ExtraTexA>
+        <_ExtraTexB>/Things/Mote/BeamSecondaryNoise_B</_ExtraTexB>
+        <_ScrollSpeedA>-4 </_ScrollSpeedA>
+        <_ScrollSpeedB>3</_ScrollSpeedB>
+        <_Intensity>2</_Intensity>
+      </shaderParameters>
     </graphicData>
   </ThingDef>
 
@@ -56,10 +211,13 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
     </statBases>
     <rotatable>false</rotatable>
     <killedLeavingsRanges>
-      <Shard>0~2</Shard>
+      <Shard>1~2</Shard>
       <Bioferrite>80~150</Bioferrite>
       <NAT_HoraxChunk>3~5</NAT_HoraxChunk>
     </killedLeavingsRanges>
@@ -68,7 +226,7 @@
     <canOverlapZones>false</canOverlapZones>
     <passability>Impassable</passability>
     <pathCost>50</pathCost>
-    <defaultPlacingRot>North</defaultPlacingRot>
+    <defaultPlacingRot>South</defaultPlacingRot>
     <building>
       <deconstructible>false</deconstructible>
       <repairable>false</repairable>
@@ -76,6 +234,9 @@
       <expandHomeArea>false</expandHomeArea>
       <displayAttackToDestroyOnInspectPane>true</displayAttackToDestroyOnInspectPane>
     </building>
+    <comps>
+      <li Class="NAT.CompProperties_Armor"/>
+    </comps>
   </ThingDef>
 
 </Defs>

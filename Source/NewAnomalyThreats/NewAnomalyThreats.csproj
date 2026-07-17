@@ -102,6 +102,9 @@
     <Compile Include="MapGen\Layouts\RoomParts.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Mod.cs" />
+    <Compile Include="ThingComps\CompProperties_CausesGameCondition_UnnaturalDarkness.cs" />
+    <Compile Include="ThingComps\CompEyedMachine.cs" />
+    <Compile Include="Things\Building_HoraxStabilizer.cs" />
     <Compile Include="Things\Building_HoraxMachine.cs" />
     <Compile Include="Things\Building_VaultDoor.cs" />
     <Compile Include="Verbs.cs" />

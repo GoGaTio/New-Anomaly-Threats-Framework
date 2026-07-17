@@ -29,6 +29,22 @@ namespace NAT
 		}
 	}
 
+	public class Graphic_EyedMachine : Graphic_WithPropertyBlock
+	{
+		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
+		{
+			CompEyedMachine comp = thing.TryGetComp<CompEyedMachine>();
+			if (comp == null)
+			{
+				return;
+			}
+			Color value = colorTwo;
+			value.a = Mathf.Clamp01(comp.ChargePercent);
+			propertyBlock.SetColor(ShaderPropertyIDs.ColorTwo, value);
+			base.DrawWorker(loc, rot, thingDef, thing, extraRotation);
+		}
+	}
+
 	public interface IAlwaysTargetable
 	{
 	}

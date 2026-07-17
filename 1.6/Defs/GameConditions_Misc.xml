@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!--<GameConditionDef>
-    <defName>NAT_DeadlifeSpewer</defName>
+  <GameConditionDef>
+    <defName>NAT_DeadlifeFog</defName>
     <conditionClass>NAT.GameCondition_DeadlifeSpewer</conditionClass>
-    <label>deadlife spewer</label>
+    <label>deadlife fog</label>
     <description>The dead will rise! Burn, bury, destroy, or move corpses indoors to prevent them from resurrecting.</description>
-    <letterText>A death-gray cloud has descended on the area.\n\nThe cloud is made of microscopic self-powered archites created by some unknown superintelligence. Where they land on dead flesh, they will enter the body and reanimate it to create a twisted imitation of life.\n\nThe dead will rise! Burn, bury, destroy, or move corpses indoors to prevent them from resurrecting.</letterText>
-    <letterDef>NegativeEvent</letterDef>
     <weatherDef>UnnaturalFog</weatherDef>
     <canBePermanent>true</canBePermanent>
     <natural>false</natural>
     <allowUnderground>true</allowUnderground>
+    <displayOnUI>false</displayOnUI>
   </GameConditionDef>
   
-  <GameConditionDef>
+  <!--<GameConditionDef>
     <defName>HateChantDrone</defName>
     <conditionClass>GameCondition_HateChantDrone</conditionClass>
     <label>hate chanting</label>

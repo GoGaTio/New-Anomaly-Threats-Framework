@@ -26,5 +26,28 @@
       <li Class="NAT.CanHaveFactionExtension"/>
     </modExtensions>
   </ThingDef>
+
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>NAT_HoraxMachineIncoming</defName>
+    <label>horax machine (incoming)</label>
+    <skyfaller>
+      <movementType>Decelerate</movementType>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(3, 3)</shadowSize>
+      <ticksToImpactRange>200</ticksToImpactRange>
+      <rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+      <motesPerCell>0</motesPerCell>
+      <angleCurve>
+        <points>
+          <li>(0,0)</li>
+        </points>
+      </angleCurve>
+      <rotationCurve>
+        <points>
+          <li>(0,0)</li>
+        </points>
+      </rotationCurve>
+    </skyfaller>
+  </ThingDef>
   
 </Defs>

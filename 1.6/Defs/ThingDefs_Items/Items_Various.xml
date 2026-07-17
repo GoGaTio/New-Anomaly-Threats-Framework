@@ -65,8 +65,8 @@
       <texPath>Things/Item/NAT_HoraxChunk</texPath>
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
+    <useHitPoints>false</useHitPoints>
     <statBases>
-      <MaxHitPoints>500</MaxHitPoints>
       <Flammability>0</Flammability>
       <Mass>10</Mass>
     </statBases>
