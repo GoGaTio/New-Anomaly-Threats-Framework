@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace NAT
 {
 	public class AltarEffectGenerator
 	{
 		public int? positivity;
+
+		public float weight = 1f;
 
 		public virtual IEnumerable<AltarEffect> Generate()
 		{
@@ -52,6 +55,21 @@ namespace NAT
 			for (int i = 0; i < count; i++)
 			{
 				yield return list[i];
+			}
+		}
+	}
+
+	public class AltarEffectGenerator_PickOne : AltarEffectGenerator
+	{
+		public List<AltarEffectGenerator> subGenerators = new List<AltarEffectGenerator>();
+
+		public override IEnumerable<AltarEffect> Generate()
+		{
+			AltarEffectGenerator subGenerator = subGenerators.RandomElementByWeight(x => x.weight);
+			foreach (AltarEffect effect in subGenerator.Generate())
+			{
+				effect.positivity = positivity ?? effect.positivity;
+				yield return effect;
 			}
 		}
 	}
@@ -127,6 +145,22 @@ namespace NAT
 		}
 	}
 
+	public class AltarEffectGenerator_Ability : AltarEffectGenerator
+	{
+		public List<AbilityDef> abilities = new List<AbilityDef>();
+
+		public bool useCharges;
+
+		public override IEnumerable<AltarEffect> Generate()
+		{
+			AbilityEffect effect = new AbilityEffect();
+			effect.ability = abilities.RandomElement();
+			effect.useCharges = useCharges;
+			effect.positivity = positivity ?? effect.positivity;
+			yield return effect;
+		}
+	}
+
 	public class AltarEffectGenerator_CreepjoinerAbility : AltarEffectGenerator
 	{
 		public override IEnumerable<AltarEffect> Generate()
@@ -139,6 +173,22 @@ namespace NAT
 				abilities.AddRange(def.abilities);
 			}
 			effect.ability = abilities.RandomElement();
+			effect.positivity = positivity ?? effect.positivity;
+			yield return effect;
+		}
+	}
+
+	public class AltarEffectGenerator_Trait : AltarEffectGenerator
+	{
+		public TraitDef trait;
+
+		public int degree;
+
+		public override IEnumerable<AltarEffect> Generate()
+		{
+			TraitEffect effect = new TraitEffect();
+			effect.trait = trait;
+			effect.degree = degree;
 			effect.positivity = positivity ?? effect.positivity;
 			yield return effect;
 		}

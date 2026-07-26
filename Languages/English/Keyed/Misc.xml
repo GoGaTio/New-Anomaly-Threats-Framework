@@ -19,5 +19,6 @@
   
   <NAT_PsychicRitual_NotEnoughOfferings></NAT_PsychicRitual_NotEnoughOfferings>
   <NAT_PsychicRitualAlreadyHasHediff></NAT_PsychicRitualAlreadyHasHediff>
+  <NAT_ConvertionChance>Chance {0}</NAT_ConvertionChance>
   
 </LanguageData>

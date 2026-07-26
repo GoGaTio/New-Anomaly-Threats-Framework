@@ -1,10 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/canAffectAllPlanetLayers</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]</xpath>
+      <value>
+        <canAffectAllPlanetLayers>true</canAffectAllPlanetLayers>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/canAffectAllPlanetLayers</xpath>
+      <value>
+        <canAffectAllPlanetLayers>true</canAffectAllPlanetLayers>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/layerWhitelist</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/layerWhitelist</xpath>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/layerBlacklist</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/GameConditionDef[defName = "UnnaturalDarkness"]/layerBlacklist</xpath>
+    </match>
+  </Operation>
+
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName = "Nociosphere"]/killedLeavings</xpath>
     <value>
       <NAT_PainClot>60</NAT_PainClot>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName = "Nociosphere"]/killedLeavings/ChunkSlagSteel</xpath>
+    <value>
+      <NAT_HoraxChunk>4</NAT_HoraxChunk>
     </value>
   </Operation>
 
@@ -13,6 +53,140 @@
     <value>
       <li>NAT_PainQuenchSerum</li>
     </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name = "HoldingPlatformBase"]/comps/li/linkableFacilities</xpath>
+    <value>
+      <li>NAT_SuperInhibitor</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/ThingDef[defName = "Shard"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Shard"]</xpath>
+      <value>
+        <comps>
+          <li Class="NAT.CompProperties_ConverterSubject">
+            <ticksToConvert>15000</ticksToConvert>
+            <products>
+              <li>
+                <def>NAT_PainClot</def>
+                <chance>0.75</chance>
+                <countRange>3~5</countRange>
+              </li>
+              <li>
+                <def>NAT_VoidOil</def>
+                <countRange>7~11</countRange>
+              </li>
+              <li>
+                <def>NAT_DarkMetal</def>
+                <countRange>5~10</countRange>
+              </li>
+            </products>
+          </li>
+        </comps>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Shard"]/comps</xpath>
+      <value>
+        <li Class="NAT.CompProperties_ConverterSubject">
+          <ticksToConvert>15000</ticksToConvert>
+          <products>
+            <li>
+              <def>NAT_PainClot</def>
+              <chance>0.75</chance>
+              <countRange>3~5</countRange>
+            </li>
+            <li>
+              <def>NAT_VoidOil</def>
+              <countRange>7~11</countRange>
+            </li>
+            <li>
+              <def>NAT_DarkMetal</def>
+              <countRange>5~10</countRange>
+            </li>
+          </products>
+        </li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/ThingDef[defName = "Bioferrite"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Bioferrite"]</xpath>
+      <value>
+        <comps>
+          <li Class="NAT.CompProperties_ConverterSubject">
+            <ticksToConvert>1250</ticksToConvert>
+            <products>
+              <li>
+                <def>NAT_VoidOil</def>
+                <chance>0.05</chance>
+                <countRange>1</countRange>
+              </li>
+            </products>
+          </li>
+        </comps>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Bioferrite"]/comps</xpath>
+      <value>
+        <li Class="NAT.CompProperties_ConverterSubject">
+          <ticksToConvert>1250</ticksToConvert>
+          <products>
+            <li>
+              <def>NAT_VoidOil</def>
+              <chance>0.05</chance>
+              <countRange>1</countRange>
+            </li>
+          </products>
+        </li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/ThingDef[defName = "Meat_Twisted"]/comps</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Meat_Twisted"]</xpath>
+      <value>
+        <comps>
+          <li Class="NAT.CompProperties_ConverterSubject">
+            <ticksToConvert>600</ticksToConvert>
+            <products>
+              <li>
+                <def>Bioferrite</def>
+                <chance>0.2</chance>
+                <countRange>1</countRange>
+              </li>
+            </products>
+          </li>
+        </comps>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName = "Meat_Twisted"]/comps</xpath>
+      <value>
+        <li Class="NAT.CompProperties_ConverterSubject">
+          <ticksToConvert>600</ticksToConvert>
+          <products>
+            <li>
+              <def>Bioferrite</def>
+              <chance>0.2</chance>
+              <countRange>1</countRange>
+            </li>
+          </products>
+        </li>
+      </value>
+    </match>
   </Operation>
 
 </Patch>

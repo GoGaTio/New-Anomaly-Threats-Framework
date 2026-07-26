@@ -76,11 +76,16 @@ namespace NAT
 			}
 			if(activateBy != null)
 			{
-				for (int i = 0;i < effects.Count; i++)
+				if (!activateBy.RaceProps.Humanlike)
 				{
-					if (!effects[i].CanUse(activateBy))
+					return false;
+				}
+				for (int i = 0; i < effects.Count; i++)
+				{
+					AcceptanceReport report = effects[i].CanUse(activateBy);
+					if (!report.Accepted)
 					{
-						return false;
+						return report;
 					}
 				}
 			}
@@ -138,11 +143,16 @@ namespace NAT
 				yield break;
 			}
 			AcceptanceReport acceptanceReport = CanInteract(selPawn);
+			bool flag = !acceptanceReport.Accepted;
+			if (flag && acceptanceReport.Reason.NullOrEmpty())
+			{
+				yield break;
+			}
 			FloatMenuOption floatMenuOption = new FloatMenuOption(ActivateOptionLabel, delegate
 			{
 				OrderActivation(selPawn);
 			});
-			if (!acceptanceReport.Accepted)
+			if (flag)
 			{
 				floatMenuOption.Disabled = true;
 				floatMenuOption.Label = floatMenuOption.Label + " (" + acceptanceReport.Reason + ")";

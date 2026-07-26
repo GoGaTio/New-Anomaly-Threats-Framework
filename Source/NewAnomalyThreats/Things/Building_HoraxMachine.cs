@@ -101,7 +101,7 @@ namespace NAT
 				thing.SetFaction(faction);
 			}
 			GenPlace.TryPlaceThing(thing, position, map, ThingPlaceMode.Direct);
-			GenExplosion.DoExplosion(position, map, 2.9f, NATDefOf.NociosphereVaporize, thing, 1200, 9f, ignoredThings: new List<Thing>() { thing });
+			GenExplosion.DoExplosion(position, map, 2.9f, VanillaDefOf.NociosphereVaporize, thing, 1200, 9f, ignoredThings: new List<Thing>() { thing });
 			for (int i = 0; i < cellRect.Area; i++)
 			{
 				FleckMaker.ThrowDustPuff(cellRect.RandomVector3.WithY(AltitudeLayer.MoteLow.AltitudeFor()), map, 2f);

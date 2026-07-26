@@ -91,9 +91,11 @@
     <Compile Include="Incidents\ArrivalMethods.cs" />
     <Compile Include="Incidents\IncidentWorker_Misc.cs" />
     <Compile Include="Incidents\IncidentWorker_SerpentAssault.cs" />
+    <Compile Include="Incidents\Quests.cs" />
     <Compile Include="Jobs\JobDrivers_Misc.cs" />
     <Compile Include="Jobs\JobGivers.cs" />
     <Compile Include="Jobs\Lords.cs" />
+    <Compile Include="Jobs\WorkGivers.cs" />
     <Compile Include="MapGen\DungeonUtility.cs" />
     <Compile Include="MapGen\GenSteps.cs" />
     <Compile Include="GameComponent\GameComponent.cs" />
@@ -102,11 +104,17 @@
     <Compile Include="MapGen\Layouts\RoomParts.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="ThingComps\CompProperties_CausesGameCondition_UnnaturalDarkness.cs" />
+    <Compile Include="ThingComps\CompConverterSubject.cs" />
+    <Compile Include="ThingComps\CompAutoResearcher.cs" />
+    <Compile Include="ThingComps\CompConverter.cs" />
+    <Compile Include="ThingComps\CompCauseGameCondition_UnnaturalDarkness.cs" />
     <Compile Include="ThingComps\CompEyedMachine.cs" />
+    <Compile Include="Things\Building_Converter.cs" />
     <Compile Include="Things\Building_HoraxStabilizer.cs" />
     <Compile Include="Things\Building_HoraxMachine.cs" />
     <Compile Include="Things\Building_VaultDoor.cs" />
+    <Compile Include="IWantsDelivery.cs" />
+    <Compile Include="UI\ITabs.cs" />
     <Compile Include="Verbs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychicRituals.cs" />
@@ -133,11 +141,6 @@
     <Compile Include="Things\UndergroundEntrance.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

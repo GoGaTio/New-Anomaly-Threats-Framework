@@ -21,6 +21,7 @@
 
   <LayoutRoomDef>
     <defName>NAT_AncientRuinsStorage</defName>
+    <edgeTerrain>AncientTile</edgeTerrain>
     <fillEdges>
       <AncientDisplayBank>
         <groupsPerTenEdgeCells>1~3</groupsPerTenEdgeCells>

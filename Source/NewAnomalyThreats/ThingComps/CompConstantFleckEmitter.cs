@@ -1,9 +1,11 @@
-﻿using RimWorld;
+﻿using HarmonyLib;
+using RimWorld;
+using System;
+using System.Reflection;
+using System.Security.Cryptography;
 using UnityEngine;
 using Verse;
 using Verse.Noise;
-using System.Reflection;
-using System;
 using Verse.Sound;
 
 namespace NAT
@@ -30,9 +32,58 @@ namespace NAT
     {
         public CompProperties_ConstantFleckEmitter Props => (CompProperties_ConstantFleckEmitter)this.props;
 
-        private int lifeTime = 0;
+		public static FieldInfo originField = AccessTools.Field(typeof(Projectile), "origin");
 
-        public override void CompTick()
+		public static FieldInfo destinationField = AccessTools.Field(typeof(Projectile), "destination");
+
+		private int lifeTime = 0;
+
+		private bool isProjectile = true;
+
+		protected Vector3? origin = null;
+
+		protected Vector3? destination = null;
+
+		public Vector3 DrawPos
+		{
+			get
+			{
+				Vector3 pos = parent.DrawPos;
+				if (isProjectile)
+				{
+					float num = parent.def.projectile.arcHeightFactor;
+					if (parent is Projectile proj && num > 0)
+					{
+						if(origin == null)
+						{
+							origin = (Vector3)originField.GetValue(proj);
+						}
+						if (destination == null)
+						{
+							destination = (Vector3)destinationField.GetValue(proj);
+						}
+						float num2 = (destination - origin).Value.MagnitudeHorizontalSquared();
+						if (num * num > num2 * 0.2f * 0.2f)
+						{
+							num = Mathf.Sqrt(num2) * 0.2f;
+						}
+						float num3 = (origin - destination).Value.magnitude / parent.def.projectile.SpeedTilesPerTick;
+						if (num3 <= 0f)
+						{
+							num3 = 0.001f;
+						}
+						pos += new Vector3(0f, 0f, 1f) * num * GenMath.InverseParabola(Mathf.Clamp01((float)(lifeTime) / num3));
+					}
+					else
+					{
+						isProjectile = false;
+					}
+				}
+				return pos;
+			}
+		}
+
+		public override void CompTick()
         {
 			if (Props.startEmitFromTick <= lifeTime && parent.Spawned && parent.Position.ShouldSpawnMotesAt(parent.MapHeld))
 			{
@@ -40,7 +91,7 @@ namespace NAT
 				{
 					Props.soundOnEmitStart.PlayOneShot(parent);
 				}
-				ThrowFleck(parent.DrawPos, lifeTime);
+				ThrowFleck(DrawPos, lifeTime);
 			}
 			lifeTime++;
 		}
@@ -61,6 +112,6 @@ namespace NAT
         {
             base.PostExposeData();
             Scribe_Values.Look(ref lifeTime, "NAT_lifeTime");
-        }
+		}
     }
 }

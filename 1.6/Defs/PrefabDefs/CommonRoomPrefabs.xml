@@ -2,6 +2,50 @@
 <Defs>
 
   <PrefabDef>
+    <defName>NAT_ShelfEdge</defName>
+    <edgeOnly>true</edgeOnly>
+    <size>(2,1)</size>
+    <things>
+      <Shelf>
+        <position>(1, 0, 0)</position>
+        <relativeRotation>Opposite</relativeRotation>
+        <stuff>Steel</stuff>
+      </Shelf>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>NAT_SealedCargo</defName>
+    <size>(2,2)</size>
+    <things>
+      <NAT_SealedCargo_Basic>
+        <position>(0, 0, 0)</position>
+      </NAT_SealedCargo_Basic>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>NAT_SealedSafe</defName>
+    <size>(1,1)</size>
+    <things>
+      <NAT_SealedSafe_Basic>
+        <position>(0, 0, 0)</position>
+      </NAT_SealedSafe_Basic>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
+    <defName>NAT_SealedSafe_Edge</defName>
+    <size>(1,1)</size>
+    <edgeOnly>true</edgeOnly>
+    <things>
+      <NAT_SealedSafe_Basic>
+        <position>(0, 0, 0)</position>
+      </NAT_SealedSafe_Basic>
+    </things>
+  </PrefabDef>
+
+  <PrefabDef>
     <defName>NAT_AncientHoldingPlatforms4_Shard</defName>
     <size>(7,7)</size>
     <things>

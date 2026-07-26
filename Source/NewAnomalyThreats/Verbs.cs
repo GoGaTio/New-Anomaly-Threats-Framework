@@ -31,6 +31,40 @@ using UnityEngine.SceneManagement;
 
 namespace NAT
 {
+	public class Verb_ShootOverhead : Verb_Shoot
+	{
+		public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo targ)
+		{
+			Map map = Caster.Map;
+			if (map == null || root.Roofed(map))
+			{
+				return false;
+			}
+			if (targ.Cell.GetRoof(map)?.isThickRoof == true)
+			{
+				return false;
+			}
+			return base.CanHitTargetFrom(root, targ);
+		}
+	}
+
+	public class Verb_ShootOneUseOverhead : Verb_ShootOneUse
+	{
+		public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo targ)
+		{
+			Map map = Caster.Map;
+			if (map == null || root.Roofed(map))
+			{
+				return false;
+			}
+			if (targ.Cell.Roofed(map))
+			{
+				return false;
+			}
+			return base.CanHitTargetFrom(root, targ);
+		}
+	}
+
 	public class Verb_CastTargetEffectPainLance : Verb_CastBase
 	{
 		public override void DrawHighlight(LocalTargetInfo target)

@@ -28,7 +28,7 @@
     <li>CETeam.CombatExtended_steam</li>
     <li>22.AnomalyPortal</li>
 	</loadAfter>
-	<packageId>GoGaTio.NewAnomalyThreats.Framework</packageId>
+	<packageId>GoGaTio.NewAnomalyThreats.Frameworks</packageId>
 	<description>
 Mod adds 5 new entities and incidents for them.
 	</description>

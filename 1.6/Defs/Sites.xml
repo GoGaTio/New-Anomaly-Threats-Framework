@@ -13,6 +13,7 @@
     <wantsThreatPoints>true</wantsThreatPoints>
     <minMapSize>(200, 0, 200)</minMapSize>
     <considerEnteringAsAttack>false</considerEnteringAsAttack>
+    <selectionWeight>10</selectionWeight>
     <tags>
       <li>NAT_AncientResearchFacility</li>
     </tags>

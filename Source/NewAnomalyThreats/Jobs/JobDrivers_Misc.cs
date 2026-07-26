@@ -207,4 +207,33 @@ namespace NAT
 			yield return doWork;
 		}
 	}
+
+	public class JobDriver_Delivery : JobDriver
+	{
+		private Building_Converter Converter => job.GetTarget(TargetIndex.A).Thing as Building_Converter;
+
+		private Thing Item => job.GetTarget(TargetIndex.B).Thing;
+
+		public override bool TryMakePreToilReservations(bool errorOnFailed)
+		{
+			if(pawn.Reserve(Converter, job, 1, -1, null, errorOnFailed))
+			{
+				return pawn.Reserve(Item, job, 1, job.count, null, errorOnFailed);
+			}
+			return false;
+		}
+
+		protected override IEnumerable<Toil> MakeNewToils()
+		{
+			yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch);
+			yield return Toils_Haul.StartCarryThing(TargetIndex.B);
+			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
+			Toil doWork = ToilMaker.MakeToil("MakeNewToils");
+			doWork.initAction = delegate
+			{
+				Converter.innerContainer.TryAddOrTransfer(Item);
+			};
+			yield return doWork;
+		}
+	}
 }

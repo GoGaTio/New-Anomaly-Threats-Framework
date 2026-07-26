@@ -15,8 +15,13 @@
   <NAT.RoomPart_PreDoorThingDef>
     <defName>NAT_DoorProximityDetector</defName>
     <thingDef>NAT_AncientProximityDetector</thingDef>
-    <chancePerDoor>0.25</chancePerDoor>
+    <chancePerDoor>1</chancePerDoor>
   </NAT.RoomPart_PreDoorThingDef>
+
+  <RoomPartDef>
+    <defName>NAT_Breached</defName>
+    <workerClass>RoomPart_Breached</workerClass>
+  </RoomPartDef>
 
   <!--<RoomPartDef>
     <defName>Breached</defName>

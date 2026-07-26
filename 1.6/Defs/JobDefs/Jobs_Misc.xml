@@ -25,4 +25,10 @@
     <reportString>carrying TargetA</reportString>
   </JobDef>
 
+  <JobDef>
+    <defName>NAT_Delivery</defName>
+    <driverClass>NAT.JobDriver_Delivery</driverClass>
+    <reportString>hauling TargetB to TargetA</reportString>
+  </JobDef>
+
 </Defs>

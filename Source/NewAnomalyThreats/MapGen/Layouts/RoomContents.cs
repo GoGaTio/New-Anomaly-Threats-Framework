@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 using static HarmonyLib.Code;
 
 namespace NAT
@@ -98,6 +99,15 @@ namespace NAT
 				{
 					return false;
 				}
+				CellRect rect = new CellRect();
+				if(!room.TryGetRectContainingCell(c, out rect) || !rect.ContractedBy(1).Contains(c))
+				{
+					return false;
+				}
+				if (!rect.ContractedBy(1).Contains((c + new IntVec3(0, 0, 1).RotatedBy(r))))
+				{
+					return false;
+				}
 				foreach (IntVec3 item in GenAdj.OccupiedRect(c, r, NATDefOf.NAT_AncientElectricInhibitor.Size))
 				{
 					if (!item.InBounds(map))
@@ -141,7 +151,7 @@ namespace NAT
 	{
 		public override void FillRoom(Map map, LayoutRoom room, Faction faction, float? threatPoints = null)
 		{
-			RoomGenUtility.GenerateRows(ThingDefOf.Shelf, room, map, ThingDefOf.Steel);
+			RoomGenUtility.FillAroundEdges(ThingDefOf.Shelf, new FloatRange(5), new IntRange(5), room, map, stuff: ThingDefOf.Steel);
 			ThingSetMakerDef thingSetMakerDef = room.defs.FirstOrDefault((LayoutRoomDef x) => x.thingSetMakerDef != null)?.thingSetMakerDef;
 			if (thingSetMakerDef != null)
 			{
@@ -185,32 +195,81 @@ namespace NAT
 		}
 	}
 
-	/*public class RoomContents_ResearchCenterRoom : RoomContents_VaultRoom
+	public class RoomContents_ResearchCenterRoom : RoomContents_VaultRoom
 	{
 		public override void FillRoom(Map map, LayoutRoom room, Faction faction, float? threatPoints = null)
 		{
+
 			List<IntVec3> cells = GenerateRoomLoot(map, room, faction);
 			base.FillRoom(map, room, faction, threatPoints);
+			foreach (IntVec3 c in cells)
+			{
+				map.terrainGrid.SetTerrain(c, VanillaDefOf.SterileTile);
+			}
 		}
 
 		private List<IntVec3> GenerateRoomLoot(Map map, LayoutRoom room, Faction faction)
 		{
-			float value = Rand.Value;
-			if (value < 0)
+			CellRect rect = room.rects[0].ContractedBy(3);
+			List<IntVec3> list = new List<IntVec3>();
+			ThingDef def = GetDef();
+			if (rect.TryFindRandomInnerRectTouchingEdge(def.Size, out var thingRect, r => !r.Cells.Any(c => c.GetEdifice(map) != null)))
 			{
-				return GenerateAltar(room.rects[0].CenterCell, map).OccupiedRect().ExpandedBy(1).Cells.ToList();
+				IntVec3 center = thingRect.CenterCell;
+				if(thingRect.Width % 2 == 0)
+				{
+					center.x--;
+				}
+				if (thingRect.Height % 2 == 0)
+				{
+					center.z--;
+				}
+				Thing thing = ThingMaker.MakeThing(def);
+				thing.SetFaction(faction);
+				GenSpawn.Spawn(thing, center, map);
+				list.AddRange(thingRect.ExpandedBy(1));
+			}
+			if (rect.TryFindRandomInnerRectTouchingEdge(NATDefOf.NAT_Turret_AncientIncineratorTurret.Size, out var turretRect, r => !r.Cells.Any(c => list.Contains(c) || c.GetEdifice(map) != null)))
+			{
+				IntVec3 center = turretRect.CenterCell;
+				Thing thing = ThingMaker.MakeThing(NATDefOf.NAT_Turret_AncientIncineratorTurret);
+				thing.SetFaction(faction);
+				GenSpawn.Spawn(thing, center, map);
+				list.AddRange(turretRect.ExpandedBy(1));
+			}
+			return list;
+		}
+
+		/*public static bool TryGetRandomRectOfSize(IntVec2 size, LayoutRoom room, out CellRect result, Predicate<CellRect> validator = null, int contractedBy = 1)
+		{
+			foreach(CellRect rect in room.rects.InRandomOrder())
+			{
+				if (rect.ContractedBy(contractedBy).TryFindRandomInnerRect(size, out result, validator))
+				{
+					return true;
+				}
+			}
+			result = CellRect.Empty;
+			return false;
+		}*/
+
+		private ThingDef GetDef()
+		{
+			float value = Rand.Value;
+			if (value < 0.4)
+			{
+				return DefDatabase<ThingDef>.AllDefs.Where(x => x.building != null && x.building.buildingTags.Contains("NAT_TradeAltar")).RandomElementByWeight(x => x.generateCommonality);
+			}
+			else
+			{
+				return NATDefOf.NAT_SealedCargo_AnomalyDevice;
 			}
 		}
-
-		private Thing GenerateAltar(IntVec3 cell, Map map)
-		{
-
-		}
-	}*/
+	}
 
 	public class RoomContents_FacilityCorridor : RoomContents_Corridor
 	{
-		private static readonly FloatRange ShelvesPer10EdgeCells = new FloatRange(0.35f, 0.35f);
+		private static readonly FloatRange ShelvesPer10EdgeCells = new FloatRange(0.35f, 0.5f);
 
 		private static readonly IntRange ShelfGroupSizeRange = new IntRange(1, 2);
 

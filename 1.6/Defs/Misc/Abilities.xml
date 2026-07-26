@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <AbilityDef>
+    <defName>NAT_DarkSkip</defName>
+    <label>entity skip NAT</label> <!-- non-player facing -->
+    <category MayRequire="Ludeon.RimWorld.Royalty">Skip</category>
+    <description>Teleport to a target destination.</description> <!-- non-player facing -->
+    <showPsycastEffects>false</showPsycastEffects>
+    <cooldownTicksRange>12000</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+    <showOnCharacterCard>false</showOnCharacterCard>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <charges>1</charges>
+    <cooldownPerCharge>true</cooldownPerCharge>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <drawAimPie>false</drawAimPie>
+      <warmupTime>0</warmupTime>
+      <range>29.9</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <ai_IsWeapon>false</ai_IsWeapon>
+      <targetParams>
+        <canTargetPawns>false</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NAT.CompProperties_AbilityTeleportCaster">
+        <destClamorType>Ability</destClamorType>
+        <destClamorRadius>10</destClamorRadius>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

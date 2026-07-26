@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  
+
   <ThingDef Abstract="True" ParentName="BuildingBase" Name="NAT_BossCallerBase">
     <graphicData>
       <texPath>Things/Building/NAT_AnomalyBossCaller</texPath>
@@ -48,11 +48,112 @@
     </thingCategories>
   </ThingDef>
 
-  <ThingDef ParentName="BuildingBase">
-    <defName>NAT_ElectricInhibitor</defName>
+  <ThingDef Abstract="True" ParentName="BuildingBase" Name="NAT_AnomalyBuildingBase">
+    <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>50</pathCost>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <statBases>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>0.7</Flammability>
+    </statBases>
+    <building>
+      <buildingTags>
+        <li>Anomaly</li>
+      </buildingTags>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AnomalyBuildingBase">
+    <defName>NAT_Converter</defName>
+    <label>converter</label>
+    <description>A device that emits a specially tuned electromagnetic field which numbs the neural activity of captured entities. As long as it is powered, it improves the containment strength of any holding platform that it is pointed at. The electric field does not affect humans or normal animals.</description>
+    <size>(2,2)</size>
+    <graphicData>
+      <texPath>Things/Building/NAT_Converter</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2, 0.5, 2)</volume>
+      </shadowData>
+    </graphicData>
+    <thingClass>NAT.Building_Converter</thingClass>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Mass>50</Mass>
+    </statBases>
+    <costList>
+      <ComponentSpacer>3</ComponentSpacer>
+      <ComponentIndustrial>7</ComponentIndustrial>
+      <Steel>150</Steel>
+    </costList>
+    <inspectorTabs>
+      <li>NAT.ITab_Converter</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="NAT.CompProperties_Converter">
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AnomalyBuildingBase">
+    <defName>NAT_AutoResearcher</defName>
+    <label>autoresearcher</label>
+    <description>A device that emits a specially tuned electromagnetic field which numbs the neural activity of captured entities. As long as it is powered, it improves the containment strength of any holding platform that it is pointed at. The electric field does not affect humans or normal animals.</description>
+    <size>(2,2)</size>
+    <graphicData>
+      <texPath>Things/Building/ElectricInhibitor/ElectricInhibitor</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <rect>(0, 0.3, 1, 1.7)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.6, 0.5, 1.8)</volume>
+        <offset>(0, 0, 0.1)</offset>
+      </shadowData>
+    </graphicData>
+    <fillPercent>0.2</fillPercent>
+    <pathCost>30</pathCost>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>20</Mass>
+    </statBases>
+    <costList>
+      <ComponentSpacer>2</ComponentSpacer>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>100</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+      <li Class="NAT.CompProperties_AutoResearcher">
+        <researchIntervalTicks>8000~12000</researchIntervalTicks>
+        <progressAmount>0.2~0.3</progressAmount>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AnomalyBuildingBase">
+    <defName>NAT_SuperInhibitor</defName>
     <label>electric inhibitor</label>
     <description>A device that emits a specially tuned electromagnetic field which numbs the neural activity of captured entities. As long as it is powered, it improves the containment strength of any holding platform that it is pointed at. The electric field does not affect humans or normal animals.</description>
-    <tickerType>Normal</tickerType>
     <size>(3,2)</size>
     <graphicData>
       <texPath>Things/Building/ElectricInhibitor/ElectricInhibitor</texPath>
@@ -66,22 +167,10 @@
         <offset>(0, 0, 0.1)</offset>
       </shadowData>
     </graphicData>
-    <drawerType>MapMeshAndRealTime</drawerType>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>50</pathCost>
+    <rotatable>true</rotatable>
     <defaultPlacingRot>East</defaultPlacingRot>
-    <uiOrder>105</uiOrder>
-    <canOverlapZones>false</canOverlapZones>
-    <thingCategories>
-      <li>BuildingsMisc</li>
-    </thingCategories>
-    <minifiedDef>MinifiedThing</minifiedDef>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
-      <WorkToBuild>6000</WorkToBuild>
-      <Flammability>0.7</Flammability>
       <Mass>40</Mass>
     </statBases>
     <costList>
@@ -93,11 +182,6 @@
       <li>PlaceWorker_ElectricInhibitor</li>
     </placeWorkers>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <building>
-      <buildingTags>
-        <li>Anomaly</li>
-      </buildingTags>
-    </building>
     <comps>
       <li Class="CompProperties_Flickable"/>
       <li Class="CompProperties_Power">

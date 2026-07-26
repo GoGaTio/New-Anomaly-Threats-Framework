@@ -12,8 +12,14 @@
   </HediffDef>
 
   <HediffDef ParentName="NAT_AltarTradeBase">
-    <defName>NAT_HoraxianCurse</defName>
-    <label>horaxian curse</label>
+    <defName>NAT_AltarTrade_Creep</defName>
+    <label>creeping altar effect</label>
+    <description>.</description>
+  </HediffDef>
+
+  <HediffDef ParentName="NAT_AltarTradeBase">
+    <defName>NAT_AltarTrade_Spike</defName>
+    <label>spiked altar effect</label>
     <description>.</description>
   </HediffDef>
 

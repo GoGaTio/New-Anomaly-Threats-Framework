@@ -6,7 +6,7 @@
     <tradeability>None</tradeability>
     <category>Item</category>
     <drawerType>MapMeshAndRealTime</drawerType>
-    <tickerType>Normal</tickerType>
+    <tickerType>Rare</tickerType>
     <rotatable>false</rotatable>
     <altitudeLayer>Item</altitudeLayer>
     <selectable>true</selectable>
@@ -15,6 +15,7 @@
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <useHitPoints>false</useHitPoints>
     <healthAffectsPrice>false</healthAffectsPrice>
+    <genericMarketSellable>false</genericMarketSellable>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -40,9 +41,6 @@
     <defName>NAT_PainClot</defName>
     <label>pain clot</label>
     <description>A piece of clotted pain.</description>
-    <thingClass>ThingWithComps</thingClass>
-    <tradeability>None</tradeability>
-    <genericMarketSellable>false</genericMarketSellable>
     <drawerType>MapMeshOnly</drawerType>
     <graphicData>
       <texPath>Things/Item/NAT_PainClot</texPath>
@@ -52,32 +50,104 @@
     <stackLimit>75</stackLimit>
     <statBases>
       <Mass>0.05</Mass>
-      <Beauty>-10</Beauty>
-      <Flammability>0</Flammability>
+      <MarketValue>5</MarketValue>
     </statBases>
   </ThingDef>
 
-  <ThingDef ParentName="ChunkBase">
+  <ThingDef ParentName="NAT_AnomalousResourceBase">
+    <defName>NAT_DarkMetal</defName>
+    <label>dark metal</label>
+    <description>A piece of clotted pain.</description>
+    <drawerType>MapMeshOnly</drawerType>
+    <burnableByRecipe>false</burnableByRecipe>
+    <graphicData>
+      <texPath>Things/Item/NAT_DarkMetal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <stackLimit>75</stackLimit>
+    <statBases>
+      <Mass>0.5</Mass>
+      <MarketValue>2</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_AnomalousResourceBase">
+    <defName>NAT_VoidOil</defName>
+    <label>void oil</label>
+    <description>A piece of clotted pain.</description>
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <texPath>Things/Item/NAT_VoidOil</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <stackLimit>75</stackLimit>
+    <statBases>
+      <Mass>0.1</Mass>
+      <MarketValue>1</MarketValue>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef>
     <defName>NAT_HoraxChunk</defName>
-    <label>dark archochunk</label>
+    <label>dark metal chunk</label>
     <description>A chunk of steel slag. While it's useless in its current form, it can be smelted to recover steel.</description>
     <graphicData>
       <texPath>Things/Item/NAT_HoraxChunk</texPath>
       <graphicClass>Graphic_Random</graphicClass>
     </graphicData>
+    <thingClass>ThingWithComps</thingClass>
     <useHitPoints>false</useHitPoints>
     <statBases>
       <Flammability>0</Flammability>
       <Mass>10</Mass>
+      <Beauty>-4</Beauty>
     </statBases>
     <soundDrop>ChunkSlag_Drop</soundDrop>
     <thingCategories>
       <li>Chunks</li>
     </thingCategories>
-    <smeltable>true</smeltable>
-    <smeltProducts>
-      <Steel>15</Steel>
-    </smeltProducts>
+    <category>Item</category>
+    <altitudeLayer>Item</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.50</fillPercent>
+    <selectable>true</selectable>
+    <pathCost>42</pathCost>
+    <pathCostIgnoreRepeat>true</pathCostIgnoreRepeat>
+    <drawerType>MapMeshOnly</drawerType>
+    <randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+    <designateHaulable>true</designateHaulable>
+    <saveCompressible>true</saveCompressible>
+    <stackLimit>1</stackLimit>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <comps>
+      <li Class="NAT.CompProperties_ConverterSubject">
+        <allowByDefault>true</allowByDefault>
+        <ticksToConvert>20000</ticksToConvert>
+        <products>
+          <li>
+            <def>Shard</def>
+            <chance>0.15</chance>
+            <countRange>1</countRange>
+          </li>
+          <li>
+            <def>NAT_PainClot</def>
+            <chance>0.5</chance>
+            <countRange>4~6</countRange>
+          </li>
+          <li>
+            <def>NAT_VoidOil</def>
+            <countRange>5~8</countRange>
+          </li>
+          <li>
+            <def>NAT_DarkMetal</def>
+            <countRange>10~15</countRange>
+          </li>
+        </products>
+      </li>
+    </comps>
   </ThingDef>
   
 </Defs>

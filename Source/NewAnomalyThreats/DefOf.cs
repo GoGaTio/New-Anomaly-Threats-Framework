@@ -33,6 +33,14 @@ namespace NAT
 	}
 
 	[DefOf]
+	public static class VanillaDefOf
+	{
+		public static DamageDef NociosphereVaporize;
+
+		public static TerrainDef SterileTile;
+	}
+
+	[DefOf]
 	public static class NATDefOf
 	{
 		public static ThingDef NAT_SignalAction_Sightstealers;
@@ -49,6 +57,12 @@ namespace NAT
 
 		public static ThingDef NAT_HoraxMachineIncoming;
 
+		public static ThingDef NAT_SealedCargo_AnomalyDevice;
+
+		public static ThingDef NAT_Converter;
+
+		public static ThingDef NAT_Turret_AncientIncineratorTurret;
+
 		public static PawnKindDef NAT_Researcher;
 
 		public static JobDef NAT_Seal;
@@ -58,6 +72,8 @@ namespace NAT
 		public static JobDef NAT_BringAdditionalOfferings;
 
 		public static JobDef NAT_MoveEntity;
+
+		public static JobDef NAT_Delivery;
 
 		public static HediffDef NAT_InducedPain;
 
@@ -88,6 +104,6 @@ namespace NAT
 
 		public static HediffDef NAT_Nail;
 
-		public static DamageDef NociosphereVaporize;
+		public static StatCategoryDef NAT_ConvertionProducts;
 	}
 }

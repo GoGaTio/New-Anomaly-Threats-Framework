@@ -1,0 +1,116 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.2.14f1
+CRC: 1224086958
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 335041212cb263d739dcc832811736f6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1cfddeea06ce0ec573e0d0ec81ebe20e
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 7386be5b8240a8e852486d94126b78ad
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerOuter.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientProximityDetector.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_TradeAltar_Spike_m.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Decimator_Icon.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Valve.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientElectricInhibitor/NAT_AncientElectricInhibitor_north.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Bile/NAT_Bile_A.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Mote/NAT_DecimatorAim_Target_Scan_Mask.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AutoResearcher.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop4.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Serum/NAT_SerumPainQuench.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SealedCargo_Open.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop2.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_PainClot/NAT_PainClotC.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AncientDefenceTurret_Nailgun.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop1.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Single.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Nail.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Single.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerInner.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop5.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_OShape.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_EmergencyLight/NAT_AncientEmergencyLight_south.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_PainClot/NAT_PainClotB.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop1.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_VoidOil/NAT_VoidOilA.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/UI/Commands/NAT_CallAnomalyBoss.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_TradeAltar_Spike.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Artifact/NAT_PainLance/NAT_PainLance_south.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_VoidOil/NAT_VoidOilC.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_TradeAltar_Creep.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxStabilizer.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Heatspear/NAT_Heatspear_A.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Decimator_Eye.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Right.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop3.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop4.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_UShape.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Artifact/NAT_PainLance/NAT_PainLance_north.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Decimator_m.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Right.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop5.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_DarkMetal/NAT_DarkMetalC.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Top_east.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Icon.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientShardInhibitor_Empty.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Artifact/NAT_PainLance/NAT_PainLance_east.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Artifact/NAT_PainPulser.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_DarkMetal/NAT_DarkMetalB.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_HoraxChunk/NAT_HoraxChunk_C.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop3.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_Flat.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Top_south.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientElectricInhibitor/NAT_AncientElectricInhibitor_east.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SealedCargo_Close.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalFloor.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SuperInhibitor/NAT_SuperInhibitor_north.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_HoraxChunk/NAT_HoraxChunk_B.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_TradeAltar_Creep_m.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Mote/NAT_BileSpray.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SuperInhibitor/NAT_SuperInhibitor_south.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_VoidOil/NAT_VoidOilB.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_EmergencyLight/NAT_AncientEmergencyLight_east.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AnomalyBossCaller.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AncientDefenceTurret_Incinerator.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SealedSafe_Open.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/NAT_Nailgun.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Darkness.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop2.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_Converter.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SealedSafe_Close.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AncientDefenceTurret_Base.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Mover.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Bile/NAT_Bile_B.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_HoraxChunk/NAT_HoraxChunk_A.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Bile/NAT_Bile_C.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Left.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_DarkMetal/NAT_DarkMetalA.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/Artifact/NAT_PainLance/NAT_PainLance.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Item/NAT_PainClot/NAT_PainClotA.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_EmergencyLight/NAT_AncientEmergencyLight_north.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Mote/NAT_HateShield.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Crashed.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientShardInhibitor.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Left.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Deadlife.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Projectile/NAT_Heatspear/NAT_Heatspear_B.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/UI/PsychicRituals/NAT_PsychicRitual_PainPulse.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Mote/NAT_DecimatorAim_Target_Scan.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientHoldingPlatform.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_SuperInhibitor/NAT_SuperInhibitor_east.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AncientDefenceTurret_Nailgun_Icon.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_HoraxMachine_Decimator.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Mote/NAT_DecimatorAim_Target.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/NAT_AncientDefenceTurret_Incinerator_Icon.png
+- Assets/Data/GoGaTio.NewAnomalyThreats.Frameworks/Textures/Things/Building/Ruins/NAT_AncientElectricInhibitor/NAT_AncientElectricInhibitor_south.png
+Dependencies: []

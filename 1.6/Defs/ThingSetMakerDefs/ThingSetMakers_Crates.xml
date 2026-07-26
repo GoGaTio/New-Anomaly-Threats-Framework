@@ -2,20 +2,31 @@
 <Defs>
 
   <ThingSetMakerDef>
-    <defName>NAT_Sealed</defName>
+    <defName>NAT_SealedCargo_Basic</defName>
     <root Class="ThingSetMaker_RandomOption">
       <options>
 
-        <!-- Orbital device -->
-        <li>
-          <weight>1</weight>
+        <!-- Rusted sculptures -->
+        <li MayRequire="GoGaTio.NewAnomalyThreats.RustedArmy">
+          <weight>0.25</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <filter>
                 <thingDefs>
-                  <li>OrbitalTargeterBombardment</li>
-                  <li>OrbitalTargeterPowerBeam</li>
-                  <li MayRequire="Ludeon.RimWorld.Royalty">OrbitalTargeterMechCluster</li>
+                  <li>NAT_RustedSculpture_Soldier</li>
+                  <li>NAT_RustedSculpture_Trooper</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li MayRequire="GoGaTio.NewAnomalyThreats.RustedArmy">
+          <weight>0.05</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_RustedSculpture_Guardsman</li>
                 </thingDefs>
               </filter>
             </fixedParams>
@@ -23,8 +34,8 @@
         </li>
 
         <!-- Unique weapon -->
-        <li>
-          <weight>1</weight>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">
+          <weight>0.3</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <qualityGenerator>Super</qualityGenerator>
@@ -38,8 +49,8 @@
         </li>
 
         <!-- Gravship upgrades -->
-        <li>
-          <weight>0.5</weight>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">
+          <weight>0.1</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <filter>
@@ -53,70 +64,51 @@
           </thingSetMaker>
         </li>
 
-      </options>
-    </root>
-  </ThingSetMakerDef>
-
-  <ThingSetMakerDef>
-    <defName>Reward_AncientSafe</defName>
-    <root Class="ThingSetMaker_RandomOption">
-      <options>
-
-        <!-- Map -->
+        <!-- Books -->
         <li>
-          <weight>2.75</weight>
+          <weight>0.5</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <qualityGenerator>Reward</qualityGenerator>
               <filter>
                 <thingDefs>
-                  <li>Map</li>
+                  <li>Schematic</li>
+                  <li>TextBook</li>
+                  <li>Tome</li>
+                  <li MayRequire="Ludeon.RimWorld.Odyssey">Map</li>
                 </thingDefs>
               </filter>
             </fixedParams>
           </thingSetMaker>
         </li>
 
-        <!-- Gold -->
-        <li>
-          <weight>2</weight>
-          <thingSetMaker Class="ThingSetMaker_StackCount">
-            <fixedParams>
-              <filter>
-                <thingDefs>
-                  <li>Gold</li>
-                </thingDefs>
-              </filter>
-              <countRange>10~60</countRange>
-            </fixedParams>
-          </thingSetMaker>
-        </li>
-
-        <!-- Misc high value -->
+        <!-- Serums -->
         <li>
           <weight>0.5</weight>
           <thingSetMaker Class="ThingSetMaker_StackCount">
             <fixedParams>
               <filter>
+                <tradeTagsToAllow>
+                  <li>Serum</li>
+                </tradeTagsToAllow>
+              </filter>
+              <countRange>5~10</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Pulsers -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
                 <thingDefs>
-                  <li>Apparel_PsychicInsanityLance</li>
-                  <li>Apparel_PsychicShockLance</li>
-                  <li>ArchotechArm</li>
-                  <li>ArchotechEye</li>
-                  <li>ArchotechLeg</li>
-                  <li>MechSerumHealer</li>
-                  <li>MechSerumResurrector</li>
+                  <li>ShardAnimalPulser</li>
+                  <li>BiomutationPulser</li>
+                  <li>NAT_PainPulser</li>
                   <li>PsychicAnimalPulser</li>
                   <li>PsychicSoothePulser</li>
-                  <li>Shell_AntigrainWarhead</li>
-                  <li>TechprofSubpersonaCore</li>
-                  <li>TornadoGenerator</li>
-                  <li>SentienceCatalyst</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">ArchiteCapsule</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCapacitySerum</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">Genepack</li>
-                  <li MayRequire="Ludeon.RimWorld.Anomaly">BiomutationPulser</li>
-                  <li MayRequire="Ludeon.RimWorld.Anomaly">Apparel_BiomutationLance</li>
                 </thingDefs>
               </filter>
               <countRange>1</countRange>
@@ -124,33 +116,274 @@
           </thingSetMaker>
         </li>
 
-        <!-- Seeds -->
+        <!-- Lances -->
         <li>
-          <weight>0.2</weight>
-          <thingSetMaker Class="ThingSetMaker_StackCount">
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <filter>
                 <thingDefs>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">PoluxSeed</li>
-                  <li MayRequire="Ludeon.RimWorld.Anomaly">HarbingerSeed</li>
-                  <li>ArcheanSeed</li>
+                  <li>Apparel_ShardPsychicShockLance</li>
+                  <li>Apparel_BiomutationLance</li>
+                  <li>Apparel_ShardPsychicInsanityLance</li>
+                  <li>Apparel_PsychicInsanityLance</li>
+                  <li>Apparel_PsychicShockLance</li>
                 </thingDefs>
               </filter>
-              <countRange>1~1</countRange>
+              <countRange>1</countRange>
             </fixedParams>
           </thingSetMaker>
         </li>
 
-        <!-- Unique weapon -->
+        <!-- Ghoul implants -->
         <li>
-          <weight>0.1</weight>
+          <weight>0.35</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
-              <qualityGenerator>Reward</qualityGenerator>
               <filter>
-                <thingSetMakerTagsToAllow>
-                  <li>UniqueWeapon</li>
-                </thingSetMakerTagsToAllow>
+                <thingDefs>
+                  <li>GhoulPlating</li>
+                  <li>GhoulBarbs</li>
+                  <li>AdrenalHeart</li>
+                  <li>CorrosiveHeart</li>
+                  <li>MetalbloodHeart</li>
+                  <li MayRequire="Ludeon.RimWorld.Odyssey">BloodWarmer</li>
+                </thingDefs>
+              </filter>
+              <countRange>2~3</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Armor -->
+        <li>
+          <weight>0.25</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_ArmorRecon</li>
+                  <li>Apparel_ArmorHelmetRecon</li>
+                  <li>Apparel_PowerArmor</li>
+                  <li>Apparel_PowerArmorHelmet</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Super</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_AdvancedHelmet</li>
+                  <li>Apparel_FlakJacket</li>
+                  <li>Apparel_PlateArmor</li>
+                  <li>Apparel_FlakPants</li>
+                  <li>Apparel_FlakVest</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Utility -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_ShieldBelt</li>
+                  <li>Apparel_DisruptorFlarePack</li>
+                  <li>Apparel_PackTurret</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Human organs -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Kidney</li>
+                  <li>Heart</li>
+                  <li>Lung</li>
+                  <li>Liver</li>
+                </thingDefs>
+              </filter>
+              <countRange>2~4</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Bionics -->
+        <li>
+          <weight>0.75</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <tradeTagsToAllow>
+                  <li>Bionic</li>
+                </tradeTagsToAllow>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Shards -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Shard</li>
+                </thingDefs>
+              </filter>
+              <countRange>1~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Resources -->
+        <li>
+          <weight>0.35</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Gold</li>
+                </thingDefs>
+              </filter>
+              <countRange>20~40</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Plasteel</li>
+                </thingDefs>
+              </filter>
+              <countRange>40~70</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Hyperweave</li>
+                </thingDefs>
+              </filter>
+              <countRange>40~70</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Misc high value -->
+        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>ArchotechArm</li>
+                  <li>ArchotechEye</li>
+                  <li>ArchotechLeg</li>
+                  <li>MechSerumHealer</li>
+                  <li>MechSerumResurrector</li>
+                  <li>OrbitalTargeterBombardment</li>
+                  <li>OrbitalTargeterPowerBeam</li>
+                  <li>TornadoGenerator</li>
+                  <li>PsychicEmanator</li>
+                  <li>Shell_AntigrainWarhead</li>
+                  <li>TechprofSubpersonaCore</li>
+                  <li>VanometricPowerCell</li>
+                  <li>RevenantVertebrae</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+      </options>
+    </root>
+  </ThingSetMakerDef>
+
+  <ThingSetMakerDef>
+    <defName>NAT_SealedCargo_AnomalyDevice</defName>
+    <root Class="ThingSetMaker_RandomOption">
+      <options>
+
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>FrenzyInducer</li>
+                  <li>SleepSuppressor</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <li>
+          <weight>1.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_Converter</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <li>
+          <weight>1.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_AutoResearcher</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <li>
+          <weight>1.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_SuperInhibitor</li>
+                </thingDefs>
               </filter>
             </fixedParams>
           </thingSetMaker>
@@ -167,7 +400,7 @@
 
         <!-- Books -->
         <li>
-          <weight>1</weight>
+          <weight>0.5</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <qualityGenerator>Reward</qualityGenerator>
@@ -183,7 +416,7 @@
         </li>
 
         <li>
-          <weight>1</weight>
+          <weight>0.85</weight>
           <thingSetMaker Class="ThingSetMaker_Count">
             <fixedParams>
               <qualityGenerator>Reward</qualityGenerator>
@@ -223,14 +456,14 @@
                   <li>Serum</li>
                 </tradeTagsToAllow>
               </filter>
-              <countRange>4~8</countRange>
+              <countRange>3~5</countRange>
             </fixedParams>
           </thingSetMaker>
         </li>
 
         <!-- Medicine -->
         <li>
-          <weight>1</weight>
+          <weight>0.9</weight>
           <thingSetMaker Class="ThingSetMaker_StackCount">
             <fixedParams>
               <filter>
@@ -245,7 +478,7 @@
 
         <!-- Luciferium -->
         <li>
-          <weight>0.5</weight>
+          <weight>0.45</weight>
           <thingSetMaker Class="ThingSetMaker_StackCount">
             <fixedParams>
               <filter>
@@ -254,6 +487,90 @@
                 </thingDefs>
               </filter>
               <countRange>12~15</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Shards -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Shard</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Resources -->
+        <li>
+          <weight>0.2</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_PainClot</li>
+                </thingDefs>
+              </filter>
+              <countRange>5~10</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_VoidOil</li>
+                </thingDefs>
+              </filter>
+              <countRange>20~25</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_DarkMetal</li>
+                </thingDefs>
+              </filter>
+              <countRange>10~15</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        <li>
+          <weight>0.25</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Gold</li>
+                </thingDefs>
+              </filter>
+              <countRange>15~30</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Bionics -->
+        <li>
+          <weight>0.75</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <tradeTagsToAllow>
+                  <li>Bionic</li>
+                </tradeTagsToAllow>
+              </filter>
+              <countRange>1</countRange>
             </fixedParams>
           </thingSetMaker>
         </li>
@@ -268,6 +585,85 @@
                   <li>ShardAnimalPulser</li>
                   <li>BiomutationPulser</li>
                   <li>NAT_PainPulser</li>
+                  <li>PsychicAnimalPulser</li>
+                  <li>PsychicSoothePulser</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Lances -->
+        <li>
+          <weight>0.5</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_ShardPsychicShockLance</li>
+                  <li>Apparel_BiomutationLance</li>
+                  <li>Apparel_ShardPsychicInsanityLance</li>
+                  <li>Apparel_PsychicInsanityLance</li>
+                  <li>Apparel_PsychicShockLance</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Armor -->
+        <li>
+          <weight>0.25</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_ArmorRecon</li>
+                  <li>Apparel_ArmorHelmetRecon</li>
+                  <li>Apparel_PowerArmor</li>
+                  <li>Apparel_PowerArmorHelmet</li>
+                </thingDefs>
+              </filter>
+              <countRange>1</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        
+        <!-- Rusted sculptures -->
+        <li MayRequire="GoGaTio.NewAnomalyThreats.RustedArmy">
+          <weight>0.1</weight>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>NAT_RustedSculpture_Trooper</li>
+                </thingDefs>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <!-- Misc low value -->
+        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
+              <filter>
+                <thingDefs>
+                  <li>ReinforcedBarrel</li>
+                  <li>VoidSculpture</li>
+                  <li>Apparel_DisruptorFlarePack</li>
+                  <li>Apparel_PackTurret</li>
+                  <li>NerveSpiker</li>
+                  <li>Gun_HellcatRifle</li>
+                  <li>Gun_Incinerator</li>
+                  <li MayRequire="Ludeon.RimWorld.Biotech">ArchiteCapsule</li>
+                  <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCapacitySerum</li>
+                  <li MayRequire="Ludeon.RimWorld.Biotech">Genepack</li>
                 </thingDefs>
               </filter>
               <countRange>1</countRange>
@@ -277,36 +673,24 @@
 
         <!-- Misc high value -->
         <li>
-          <weight>2.0</weight>
+          <weight>0.25</weight>
           <thingSetMaker Class="ThingSetMaker_StackCount">
             <fixedParams>
+              <qualityGenerator>Trader</qualityGenerator>
               <filter>
                 <thingDefs>
-                  <li>Apparel_PsychicInsanityLance</li>
-                  <li>Apparel_PsychicShockLance</li>
                   <li>ArchotechArm</li>
                   <li>ArchotechEye</li>
                   <li>ArchotechLeg</li>
-                  <li>Gun_DoomsdayRocket</li>
-                  <li>Gun_TripleRocket</li>
-                  <li>Gun_BeamRepeater</li>
                   <li>MechSerumHealer</li>
                   <li>MechSerumResurrector</li>
                   <li>OrbitalTargeterBombardment</li>
                   <li>OrbitalTargeterPowerBeam</li>
-                  <li>PsychicAnimalPulser</li>
+                  <li>TornadoGenerator</li>
                   <li>PsychicEmanator</li>
-                  <li>PsychicSoothePulser</li>
-                  <li>ReinforcedBarrel</li>
                   <li>Shell_AntigrainWarhead</li>
                   <li>TechprofSubpersonaCore</li>
-                  <li>TornadoGenerator</li>
                   <li>VanometricPowerCell</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">ArchiteCapsule</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCapacitySerum</li>
-                  <li MayRequire="Ludeon.RimWorld.Biotech">Genepack</li>
-                  <li MayRequire="Ludeon.RimWorld.Anomaly">BiomutationPulser</li>
-                  <li MayRequire="Ludeon.RimWorld.Anomaly">Apparel_BiomutationLance</li>
                 </thingDefs>
               </filter>
               <countRange>1</countRange>

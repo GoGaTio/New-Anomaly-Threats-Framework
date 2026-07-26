@@ -55,6 +55,16 @@ using static RimWorld.ResearchManager;
 
 namespace NAT
 {
+	[HarmonyPatch(typeof(MemoryUtility), "ClearAllMapsAndWorld")]
+	public static class MemoryUtility_ClearAllMapsAndWorld
+	{
+		[HarmonyPostfix]
+		public static void Postfix()
+		{
+			CompConverterSubject.subjects.Clear();
+			NewAnomalyThreatsUtility.gameComp = null;
+		}
+	}
 	/*[HarmonyPatch(typeof(PsychicRitualToil_GatherForInvocation), "InvokerGatherPhaseToils")]
 	public static class Patch_InvokerGatherPhaseToils
 	{

@@ -10,33 +10,28 @@
     <minRoomHeight>8</minRoomHeight>
     
     <!-- Structure -->
-    <importantRoomDef>NAT_AncientContainmentRoom</importantRoomDef>
+    <importantRoomDef>NAT_ResearchCenterRoom</importantRoomDef>
     <corridorDef>NAT_AncientResearchFacilityCorridor</corridorDef>
     <corridorShapes>Cross, T, H</corridorShapes>
     
     <exteriorDoorDef>NAT_ContainmentDoor</exteriorDoorDef>
-    <wallLampDef>AncientEmergencyLight_Red</wallLampDef>
-    <wallDef>AncientFortifiedWall</wallDef>
+    <wallLampDef>NAT_AncientEmergencyLight</wallLampDef>
+    <wallDef>NAT_AncientBrickWall</wallDef>
     <doorStuffDef>Steel</doorStuffDef>
     
     <roomDefs>
       <!-- Special -->
-      <NAT_AncientContainmentRoom>
-        <countRange>2~4</countRange>
-        <weight>0.7</weight>
-      </NAT_AncientContainmentRoom>
-
       <NAT_AncientWeaponsRoom>
         <countRange>1</countRange>
         <weight>1</weight>
       </NAT_AncientWeaponsRoom>
-
+      
+      <NAT_AncientContainmentRoom>
+        <countRange>2~5</countRange>
+        <weight>0.7</weight>
+      </NAT_AncientContainmentRoom>
+      
       <!-- Decorative -->
-      
-      <!--<AncientRuinsShelfRoom>1</AncientRuinsShelfRoom>
-      <AncientRuinsLockerRoom>1</AncientRuinsLockerRoom>-->
-      
-      <!-- Smaller threats -->
       <NAT_AncientRuinsIndustrialStorage>1</NAT_AncientRuinsIndustrialStorage>
       <NAT_AncientRuinsStorage>1</NAT_AncientRuinsStorage>
     </roomDefs>
@@ -63,6 +58,12 @@
         <minGroups>1</minGroups>
       </Filth_RubbleRock>
     </junkScaterrers>
+    <parts>
+      <NAT_Breached>0.15</NAT_Breached>
+      <NAT_DeadResearcher>0.1</NAT_DeadResearcher>
+      <NAT_CornerNailTurret>0.2</NAT_CornerNailTurret>
+      <NAT_DoorProximityDetector>0.1</NAT_DoorProximityDetector>
+    </parts>
   </StructureLayoutDef>
 
 </Defs>

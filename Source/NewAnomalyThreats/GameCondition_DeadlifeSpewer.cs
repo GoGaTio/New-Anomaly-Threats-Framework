@@ -54,9 +54,143 @@ using Verse.Steam;
 
 namespace NAT
 {
-	public class GameCondition_DeadlifeSpewer : GameCondition_ForceWeather
+	public class GameCondition_DeadlifeSpewer : GameCondition
 	{
-		private static readonly IntRange ResurrectIntervalRange = new IntRange(600, 1800);
+		private static readonly IntRange ResurrectIntervalRangeSuccess = new IntRange(60, 300);
+
+		private static readonly IntRange ResurrectIntervalRange = new IntRange(2500, 5000);
+
+		private SkyColorSet skyColorsDay = new SkyColorSet(new Color(0.482f, 0.603f, 0.682f), new Color(0.92f, 0.92f, 0.92f), new Color(0.25f, 0.2f, 0.2f), 0.5f);
+
+		private SkyColorSet skyColorsNight = new SkyColorSet(new Color(0.35f, 0.40f, 0.45f), new Color(0.92f, 0.92f, 0.92f), new Color(0.15f, 0.1f, 0.1f), 0.5f);
+
+		private int resurrectionTicksLeft;
+
+		private Lord lord;
+
+		private readonly List<SkyOverlay> overlays = new List<SkyOverlay>
+		{
+			new WeatherOverlay_DeathpallFog(),
+			new WeatherOverlay_DeathpallAshes()
+		};
+
+		public override int TransitionTicks => 7500;
+
+		public override void Init()
+		{
+			base.Init();
+			resurrectionTicksLeft = TransitionTicks;
+		}
+
+		public override void GameConditionTick()
+		{
+			List<Map> affectedMaps = base.AffectedMaps;
+			resurrectionTicksLeft--;
+			if(resurrectionTicksLeft <= 0)
+			{
+				Pawn shambler = null;
+				for (int i = 0; i < affectedMaps.Count; i++)
+				{
+					foreach (Thing item in affectedMaps[i].listerThings.ThingsInGroup(ThingRequestGroup.Corpse))
+					{
+						if (item is Corpse corpse && MutantUtility.CanResurrectAsShambler(corpse) && corpse.Age >= 2500)
+						{
+							shambler = ResurrectPawn(corpse);
+							if (!shambler.Position.Fogged(affectedMaps[i]))
+							{
+								Messages.Message("DeathPallResurrectedMessage".Translate(shambler), shambler, MessageTypeDefOf.NegativeEvent, historical: false);
+							}
+							if(lord == null)
+							{
+								lord = LordMaker.MakeNewLord(Faction.OfEntities, new LordJob_ShamblerAssault(), affectedMaps[i], Gen.YieldSingle(shambler));
+							}
+							else if(lord.CanAddPawn(shambler))
+							{
+								lord.AddPawn(shambler);
+							}
+							break;
+						}
+					}
+				}
+				if (shambler == null)
+				{
+					resurrectionTicksLeft = ResurrectIntervalRange.RandomInRange;
+				}
+				else
+				{
+					resurrectionTicksLeft = ResurrectIntervalRangeSuccess.RandomInRange;
+				}
+			}
+			for (int j = 0; j < overlays.Count; j++)
+			{
+				for (int k = 0; k < affectedMaps.Count; k++)
+				{
+					overlays[j].TickOverlay(affectedMaps[k], 1f);
+				}
+			}
+		}
+
+		private Pawn ResurrectPawn(Corpse corpse)
+		{
+			Pawn innerPawn = corpse.InnerPawn;
+			MutantUtility.ResurrectAsShambler(innerPawn, 60000, Faction.OfEntities);
+			return innerPawn;
+		}
+
+		public override void GameConditionDraw(Map map)
+		{
+			for (int i = 0; i < overlays.Count; i++)
+			{
+				overlays[i].DrawOverlay(map);
+			}
+		}
+
+		public override float SkyTargetLerpFactor(Map map)
+		{
+			return GameConditionUtility.LerpInOutValue(this, TransitionTicks, 1f);
+		}
+
+		public override SkyTarget? SkyTarget(Map map)
+		{
+			float num = GenCelestial.CurCelestialSunGlow(map);
+			SkyTarget result = new SkyTarget
+			{
+				glow = Math.Min(num, 1f),
+				colors = SkyColorSet.Lerp(skyColorsNight, skyColorsDay, num)
+			};
+			if (GenCelestial.IsDaytime(num))
+			{
+				result.lightsourceShineIntensity = 1f;
+				result.lightsourceShineSize = 1f;
+			}
+			else
+			{
+				result.lightsourceShineIntensity = 0.7f;
+				result.lightsourceShineSize = 0.5f;
+			}
+			return result;
+		}
+
+		public override bool AllowEnjoyableOutsideNow(Map map)
+		{
+			return false;
+		}
+
+		public override List<SkyOverlay> SkyOverlays(Map map)
+		{
+			return overlays;
+		}
+
+		public override void ExposeData()
+		{
+			base.ExposeData();
+			Scribe_Values.Look(ref resurrectionTicksLeft, "resurrectionTicksLeft", 0);
+		}
+	}
+
+	/*public class GameCondition_DeadlifeSpewer : GameCondition
+	{
+		
 
 		private int nextResurrectTick;
 
@@ -74,46 +208,22 @@ namespace NAT
 
 		public override void GameConditionTick()
 		{
+			bool b = false;
 			if (Find.TickManager.TicksGame < nextResurrectTick || Find.TickManager.TicksGame % 60 != 0)
 			{
-				return;
+				b = true;
 			}
 			List<Pawn> shamblers = new List<Pawn>();
-			bool b = false;
-			foreach (Map affectedMap in base.AffectedMaps)
+			List<Map> affectedMaps = base.AffectedMaps;
+			for (int i = 0; i < affectedMaps.Count; i++)
 			{
-                if (b)
-                {
-					break;
-                }
-				foreach (Thing item in affectedMap.listerThings.ThingsInGroup(ThingRequestGroup.Corpse))
+				for (int j = 0; j < overlays.Count; j++)
 				{
-					if (item is Corpse corpse && MutantUtility.CanResurrectAsShambler(corpse) && corpse.Age >= 15000)
-					{
-						Pawn pawn = ResurrectPawn(corpse);
-						if (!pawn.Position.Fogged(affectedMap))
-						{
-							Messages.Message("DeathPallResurrectedMessage".Translate(pawn), pawn, MessageTypeDefOf.NegativeEvent, historical: false);
-						}
-						nextResurrectTick = Find.TickManager.TicksGame + ResurrectIntervalRange.RandomInRange;
-						shamblers.Add(pawn);
-						b = true;
-						break;
-					}
+					overlays[j].TickOverlay(affectedMaps[i], 1f);
 				}
-				if (Rand.Chance(0.1f))
-                {
-					foreach (Pawn p in affectedMap.mapPawns.SpawnedPawnsInFaction(Faction.OfEntities))
-					{
-                        if (p.IsShambler && p.GetLord() == null)
-                        {
-							shamblers.Add(p);
-						}
-					}
-					if (shamblers.Count > 5)
-                    {
-						LordMaker.MakeNewLord(Faction.OfEntities, new LordJob_ShamblerAssault(), affectedMap, shamblers);
-					}
+				if (!b)
+				{
+					
 				}
 			}
 		}
@@ -131,5 +241,24 @@ namespace NAT
 			base.End();
 			base.SingleMap.weatherDecider.StartNextWeather();
 		}
-	}
+
+		private List<SkyOverlay> overlays = new List<SkyOverlay>
+		{
+			new WeatherOverlay_DeathpallFog(),
+			new WeatherOverlay_DeathpallAshes()
+		};
+
+		public override void GameConditionDraw(Map map)
+		{
+			for (int i = 0; i < overlays.Count; i++)
+			{
+				overlays[i].DrawOverlay(map);
+			}
+		}
+
+		public override List<SkyOverlay> SkyOverlays(Map map)
+		{
+			return overlays;
+		}
+	}*/
 }

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <TerrainDef Abstract="True" Name="NAT_DarkMetalFloorBase">
+    <pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+    <pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+    <pollutionColor>(1, 1, 1, 0.8)</pollutionColor>
+    <pollutionOverlayScale>(0.75, 0.75)</pollutionOverlayScale>
+    <canEverTerraform>false</canEverTerraform>
+    <texturePath>Terrain/NAT_DarkMetalFloor</texturePath>
+    <layerable>false</layerable>
+    <renderPrecedence>240</renderPrecedence>
+    <fertility>0</fertility>
+    <designationCategory />
+    <pathCost>0</pathCost>
+    <edgeType>Hard</edgeType>
+    <statBases>
+      <Beauty>0</Beauty>
+      <Cleanliness>1</Cleanliness>
+      <Flammability>0</Flammability>
+      <CleaningTimeFactor>0.7</CleaningTimeFactor>
+    </statBases>
+    <affordances>
+      <li>Light</li>
+      <li>Medium</li>
+      <li>Heavy</li>
+      <li>Walkable</li>
+    </affordances>
+  </TerrainDef>
+
+  <TerrainDef ParentName="NAT_DarkMetalFloorBase">
+    <defName>NAT_DarkMetalPlatform</defName>
+    <label>dark metal platform</label>
+    <spaceEdgeGraphicData MayRequire="Ludeon.RimWorld.Odyssey">
+      <OShapeTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_OShape</OShapeTexPath>
+      <UShapeTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_UShape</UShapeTexPath>
+      <CornerInnerTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerInner</CornerInnerTexPath>
+      <CornerOuterTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerOuter</CornerOuterTexPath>
+      <FlatTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_Flat</FlatTexPath>
+
+      <LoopLeftTexPath>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Left</LoopLeftTexPath>
+      <LoopRightTexPath>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Right</LoopRightTexPath>
+      <LoopSingleTexPath>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Single</LoopSingleTexPath>
+
+      <LoopTexPaths>
+        <li>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop1</li>
+        <li>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop2</li>
+        <li>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop3</li>
+        <li>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop4</li>
+        <li>Terrain/NAT_DarkMetalPlatformEdge/NAT_DarkMetalEdge_Loop5</li>
+      </LoopTexPaths>
+    </spaceEdgeGraphicData>
+  </TerrainDef>
+
+  <TerrainDef ParentName="NAT_DarkMetalFloorBase">
+    <defName>NAT_DarkMetalSubstructure</defName>
+    <label>dark metal substructure</label>
+    <spaceEdgeGraphicData MayRequire="Ludeon.RimWorld.Odyssey">
+      <OShapeTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_OShape</OShapeTexPath>
+      <UShapeTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_UShape</UShapeTexPath>
+      <CornerInnerTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerInner</CornerInnerTexPath>
+      <CornerOuterTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_CornerOuter</CornerOuterTexPath>
+      <FlatTexPath>Terrain/NAT_DarkMetalBorder/NAT_DarkMetalBorder_Flat</FlatTexPath>
+
+      <LoopLeftTexPath>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Left</LoopLeftTexPath>
+      <LoopRightTexPath>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Right</LoopRightTexPath>
+      <LoopSingleTexPath>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Single</LoopSingleTexPath>
+
+      <LoopTexPaths>
+        <li>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop1</li>
+        <li>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop2</li>
+        <li>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop3</li>
+        <li>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop4</li>
+        <li>Terrain/NAT_DarkMetalSubstructureEdge/NAT_DarkMetalEdge_Loop5</li>
+      </LoopTexPaths>
+    </spaceEdgeGraphicData>
+  </TerrainDef>
+
+</Defs>

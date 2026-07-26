@@ -223,10 +223,12 @@ namespace NAT
 					if (mote == null || mote.Destroyed)
 					{
 						mote = MoteMaker.MakeStaticMote(targetingPos, parent.Map, Props.aimMote, 1f, makeOffscreen: true);
-						mote.animationPaused = true;
 					}
-					mote.exactPosition = targetingPos;
-					mote.Maintain();
+					else
+					{
+						mote.exactPosition = targetingPos;
+					}
+					mote?.Maintain();
 					if (eyeWarmUpTicks <= 0)
 					{
 						eyeCooldownTicks = Mathf.RoundToInt(Props.cooldownTicksCurve.Evaluate(dist));
@@ -254,9 +256,9 @@ namespace NAT
 					currentTarget = LocalTargetInfo.Invalid;
 				}
 				currentTarget = GetTarget();
-				targetingPos = currentTarget.CenterVector3;
 				if (currentTarget.IsValid)
 				{
+					targetingPos = currentTarget.CenterVector3;
 					eyeWarmUpTicks = Props.warmUpTicks;
 					drawEyeOnTarget = true;
 				}
@@ -270,7 +272,7 @@ namespace NAT
 		protected virtual void Cast()
 		{
 			MoteMaker.MakeInteractionOverlay(Props.lineMote, new TargetInfo(parent.Position, parent.Map), new TargetInfo(TargetingCell, parent.Map), eyeOffset, Vector3.zero).Maintain();
-			GenExplosion.DoExplosion(TargetingCell, parent.Map, Props.explosionRadius, NATDefOf.NociosphereVaporize, parent, 200, 9f, ignoredThings: new List<Thing>() { parent });
+			GenExplosion.DoExplosion(TargetingCell, parent.Map, Props.explosionRadius, VanillaDefOf.NociosphereVaporize, parent, 200, 9f, ignoredThings: new List<Thing>() { parent });
 		}
 
 		protected virtual LocalTargetInfo GetTarget()
@@ -358,7 +360,7 @@ namespace NAT
 			string s = "";
 			if(eyeCooldownTicks > 0)
 			{
-				s = "CooldownTime".Translate() + " " + eyeCooldownTicks.ToStringTicksToPeriod();
+				s = "CooldownTime".Translate() + " " + eyeCooldownTicks.ToStringSecondsFromTicks();
 			}
 			if (DebugSettings.godMode)
 			{

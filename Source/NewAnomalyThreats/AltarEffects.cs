@@ -66,7 +66,7 @@ namespace NAT
 		public virtual void AddedOrMerged(HediffAltarTrade hediff) { }
 		public virtual void Removed(HediffAltarTrade hediff) { }
 
-		public virtual bool CanUse(Pawn pawn) { return true; }
+		public virtual AcceptanceReport CanUse(Pawn pawn) { return true; }
 	}
 
 	public class PainEffect : AltarEffect
@@ -351,7 +351,7 @@ namespace NAT
 
 		public bool useCharges = false;
 
-		public override TaggedString Desc => descPrefix + ("GivesAbility".Translate().CapitalizeFirst() + ": " + ability.LabelCap).Colorize(ColoredText.TipSectionTitleColor);
+		public override TaggedString Desc => descPrefix + ("GivesAbility".Translate().CapitalizeFirst() + ": " + ability.LabelCap).Colorize(ColoredText.FactionColor_Ally);
 
 		public override bool TryMerge(AltarEffect other)
 		{
@@ -398,13 +398,69 @@ namespace NAT
 			}
 		}
 
-		public override bool CanUse(Pawn pawn)
+		public override AcceptanceReport CanUse(Pawn pawn)
 		{
 			if(pawn.abilities == null)
 			{
 				return false;
 			}
-			return useCharges || pawn.abilities.GetAbility(ability) == null;
+			if(!useCharges && pawn.abilities.GetAbility(ability) != null)
+			{
+				return "NAT_AlreadyHasAbility".Translate(pawn.Named("PAWN"), ability.LabelCap.Named("ABILITY"));
+			}
+			return true;
+		}
+	}
+
+	public class TraitEffect : AltarEffect
+	{
+		public TraitDef trait;
+
+		public int degree;
+
+		protected override TaggedString String => "NAT_GivesTrait".Translate().CapitalizeFirst() + ": " + trait.DataAtDegree(degree).LabelCap;
+
+		public override bool TryMerge(AltarEffect other)
+		{
+			return false;
+		}
+
+		public override void ExposeData()
+		{
+			base.ExposeData();
+			Scribe_Values.Look(ref degree, "degree");
+			Scribe_Defs.Look(ref trait, "trait");
+		}
+
+		public override void AddedOrMerged(HediffAltarTrade hediff)
+		{
+			Trait num = new Trait(trait, degree);
+			hediff.pawn.story.traits.GainTrait(num, suppressConflicts: true);
+		}
+
+		public override void Removed(HediffAltarTrade hediff)
+		{
+			if (hediff.pawn?.story?.traits != null)
+			{
+				Trait num = hediff.pawn.story.traits.GetTrait(trait, degree);
+				if(num != null)
+				{
+					hediff.pawn.story.traits.RemoveTrait(num, true);
+				}
+			}
+		}
+
+		public override AcceptanceReport CanUse(Pawn pawn)
+		{
+			if (pawn.story?.traits == null)
+			{
+				return false;
+			}
+			if(pawn.story.traits.HasTrait(trait, degree))
+			{
+				return "NAT_AlreadyHasTrait".Translate(pawn.Named("PAWN"), trait.DataAtDegree(degree).LabelCap.Named("TRAIT"));
+			}
+			return true;
 		}
 	}
 }

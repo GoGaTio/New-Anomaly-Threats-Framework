@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <StatCategoryDef>
+    <defName>NAT_ConvertionProducts</defName>
+    <label>Convertion products</label>
+    <displayOrder>71</displayOrder>
+  </StatCategoryDef>
+  
+</Defs>

@@ -39,6 +39,10 @@
     </building>
     <comps>
       <li Class="NAT.CompProperties_Armor"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
+      </li>
     </comps>
     <placeWorkers>
       <li>PlaceWorker_InvalidOverSubstructure</li>
@@ -87,6 +91,10 @@
     <comps>
       <li Class="CompProperties_AmbientSound">
         <sound>MechanoidRelay_Ambient</sound>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
       </li>
     </comps>
   </ThingDef>

@@ -59,7 +59,7 @@ namespace NAT
 
 		public float chancePerDoor = 1f;
 
-		public IntRange? countRange = null;
+		public IntRange? countRange = IntRange.One;
 
 		public RoomPart_PreDoorThingDef()
 		{

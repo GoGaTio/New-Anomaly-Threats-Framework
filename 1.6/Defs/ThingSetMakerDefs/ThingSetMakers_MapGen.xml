@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingSetMakerDef>
+    <defName>NAT_MapGen_WeaponsRoom</defName>
+    <root Class="ThingSetMaker_Sum">
+      <options>
+
+        <li>
+          <chance>1</chance>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <tradeTagsToAllow>
+                  <li>WeaponRanged</li>
+                </tradeTagsToAllow>
+                <thingSetMakerTagsToDisallow>
+                  <li>UniqueWeapon</li>
+                  <li>SingleUseWeapon</li>
+                </thingSetMakerTagsToDisallow>
+                <disallowedCategories>
+                  <li>Grenades</li>
+                </disallowedCategories>
+                <disallowCheaperThan>200</disallowCheaperThan>
+              </filter>
+              <techLevel>Industrial</techLevel>
+              <countRange>2~3</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <li>
+          <chance>1</chance>
+          <thingSetMaker Class="ThingSetMaker_Count">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>Apparel_DisruptorFlarePack</li>
+                  <li>Apparel_PackTurret</li>
+                  <li>Apparel_DeadlifePack</li>
+                  <li>Apparel_SmokepopBelt</li>
+                  <li>Apparel_FirefoampopPack</li>
+                  <li>Apparel_ShieldBelt</li>
+                </thingDefs>
+              </filter>
+              <countRange>0~2</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+        
+        <li>
+          <chance>0.35</chance>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>MealSurvivalPack</li>
+                </thingDefs>
+              </filter>
+              <countRange>8~12</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+        <li>
+          <chance>0.35</chance>
+          <thingSetMaker Class="ThingSetMaker_StackCount">
+            <fixedParams>
+              <filter>
+                <thingDefs>
+                  <li>MedicineIndustrial</li>
+                </thingDefs>
+              </filter>
+              <countRange>5~8</countRange>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+      </options>
+    </root>
+  </ThingSetMakerDef>
+
+</Defs>

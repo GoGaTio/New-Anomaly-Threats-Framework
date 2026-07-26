@@ -1,6 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <ThingDef ParentName="NonBuildableLampBase">
+    <defName>NAT_AncientEmergencyLight</defName>
+    <label>ancient emergency light</label>
+    <description>An ancient light containing a long-lasting battery.</description>
+    <rotatable>true</rotatable>
+    <graphicData>
+      <texPath>Things/Building/Ruins/NAT_EmergencyLight/NAT_AncientEmergencyLight</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+      <drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>35</MaxHitPoints>
+      <Mass>2</Mass>
+    </statBases>
+    <passability>Standable</passability>
+    <terrainAffordanceNeeded IsNull="True" />
+    <pathCost>0</pathCost>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <building>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+      <claimable>false</claimable>
+    </building>
+    <placeWorkers>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>9</glowRadius>
+        <glowColor>(224, 54, 54, 0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Wall">
+    <defName>NAT_AncientBrickWall</defName>
+    <label>ancient brick wall</label>
+    <description>An ancient reinforced brick wall.</description>
+    <uiIconPath>Things/Building/Linked/WallBricks_MenuIcon</uiIconPath>
+    <designationCategory IsNull="True"/>
+    <graphicData>
+      <texPath>Things/Building/Linked/Wall/Wall_Atlas_Bricks</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(97,97,79)</color>
+    </graphicData>
+    <building>
+      <paintable>false</paintable>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <neverBuildable>true</neverBuildable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <isAirtight>false</isAirtight>
+    </building>
+    <stuffCategories Inherit="False"/>
+    <costStuffCount>0</costStuffCount>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <statBases>
+      <MaxHitPoints>2500</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <MeditationFocusStrength>0</MeditationFocusStrength>
+    </statBases>
+    <comps Inherit="False"/>
+  </ThingDef>
+
   <ThingDef ParentName="DoorBase">
     <defName>NAT_ContainmentDoor</defName>
     <label>ancient containment door</label>
@@ -18,7 +90,7 @@
     </graphicData>
     <uiIconPath>Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Icon</uiIconPath>
     <statBases>
-      <MaxHitPoints>6000</MaxHitPoints>
+      <MaxHitPoints>2000</MaxHitPoints>
       <Flammability>0</Flammability>
       <DoorOpenSpeed>0.7</DoorOpenSpeed>
     </statBases>
@@ -36,9 +108,9 @@
       <doorTopGraphic>
         <texPath>Things/Building/NAT_ContainmentDoor/NAT_ContainmentDoor_Top</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
-        <drawSize>(2,2.2)</drawSize>
+        <drawSize>(2,2)</drawSize>
       </doorTopGraphic>
-      <doorTopHorizontalOffset>(0,0,0.05)</doorTopHorizontalOffset>
+      <doorTopHorizontalOffset>(0,0,0)</doorTopHorizontalOffset>
       <expandHomeArea>false</expandHomeArea>
     </building>
     <stuffCategories Inherit="False"/>
@@ -128,7 +200,7 @@
     </comps>
   </ThingDef>
 
-  <ThingDef ParentName="CrateBase">
+  <ThingDef ParentName="BuildingBase">
     <defName>NAT_AncientElectricInhibitor</defName>
     <label>ancient electric inhibitor</label>
     <description>An ancient device that emits a specially tuned electromagnetic field which numbs the neural activity of captured entities. Its usable parts were smashed or looted long ago, and the rest has rusted into uselessness.</description>
@@ -156,15 +228,9 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <building>
-      <openingStartedSound>Building_Deconstructed</openingStartedSound>
+      <canLandGravshipOn>true</canLandGravshipOn>
+      <isInert>true</isInert>
     </building>
-    <comps>
-      <li Class="NAT.CompProperties_Crate">
-        <forcedContents>
-          <ComponentIndustrial>1~2</ComponentIndustrial>
-        </forcedContents>
-      </li>
-    </comps>
   </ThingDef>
 
   <ThingDef ParentName="BuildingBase">
@@ -267,7 +333,16 @@
     <defName>NAT_SealedCargo_Basic</defName>
     <comps>
       <li Class="CompProperties_LootSpawn">
-        <contents>NAT_SealedSafe_Basic</contents>
+        <contents>NAT_SealedCargo_Basic</contents>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_SealedCargoBase">
+    <defName>NAT_SealedCargo_AnomalyDevice</defName>
+    <comps>
+      <li Class="CompProperties_LootSpawn">
+        <contents>NAT_SealedCargo_AnomalyDevice</contents>
       </li>
     </comps>
   </ThingDef>

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.Grammar;
 
 namespace NAT
 {
@@ -99,5 +100,29 @@ namespace NAT
 		public int amount;
 
 		public float armorPenetration;
+	}
+
+	public class Rule_TranslateByKey : Rule
+	{
+		public string key;
+
+		public override float BaseSelectionWeight => 1f;
+
+		public override Rule DeepCopy()
+		{
+			Rule_TranslateByKey obj = (Rule_TranslateByKey)base.DeepCopy();
+			obj.key = key;
+			return obj;
+		}
+
+		public override string Generate()
+		{
+			return key.Translate();
+		}
+
+		public override string ToString()
+		{
+			return keyword + "->(" + key + ")";
+		}
 	}
 }
