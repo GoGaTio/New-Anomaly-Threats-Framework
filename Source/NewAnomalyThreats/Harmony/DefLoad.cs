@@ -18,6 +18,16 @@ namespace NAT
 		
 	}
 
+	/*[HarmonyPatch(typeof(RecipeDefGenerator), "CreateRecipeDefFromMaker")]
+	public class Patch_RecipeDefGenerator
+	{
+		[HarmonyPrefix]
+		public static void Prefix(ThingDef def, int adjustedCount = 1, bool hotReload = false)
+		{
+			Log.Message(def.defName);
+		}
+	}*/
+
 	[HarmonyPatch(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve))]
 	public class Patch_PreDefLoaded
 	{
@@ -65,20 +75,36 @@ namespace NAT
 	{
 		public static void Notify_DefsLoaded()
 		{
-			foreach (EntityCodexEntryDef def in DefDatabase<EntityCodexEntryDef>.AllDefs)
+			NewAnomalyThreatsSettings settings = LoadedModManager.GetMod<NewAnomalyThreatsMod>()?.settings;
+			if (settings.allowDiscoveredEntitiesIncrease)
 			{
-				if (def.HasModExtension<CodexEntryExtension>())
+				foreach (EntityCodexEntryDef def in DefDatabase<EntityCodexEntryDef>.AllDefs)
 				{
-					if(def.category.defName == "Basic")
+					if (def.HasModExtension<CodexEntryExtension>())
 					{
-						MonolithLevelDefOf.Waking.entityCountCompletionRequired++;
-					}
-					else if (def.category.defName == "Advanced")
-					{
-						MonolithLevelDefOf.VoidAwakened.entityCountCompletionRequired++;
+						if (def.category.defName == "Basic")
+						{
+							MonolithLevelDefOf.Waking.entityCountCompletionRequired++;
+						}
+						else if (def.category.defName == "Advanced")
+						{
+							MonolithLevelDefOf.VoidAwakened.entityCountCompletionRequired++;
+						}
 					}
 				}
 			}
+			if(settings != null && !settings.events.NullOrEmpty())
+			{
+				foreach (AnomalyEvent item in settings.events.ToList())
+				{
+					if (item.defName.NullOrEmpty())
+					{
+						settings.events.Remove(item);
+					}
+					else item.Apply();
+				}
+			}
+			
 		}
 	}
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+ <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef/comps/li[@Class="NAT.CompProperties_Armor"]</xpath>
+    <value>
+      <combatExtendedArmor>true</combatExtendedArmor>
+    </value>
+  </Operation>
+
+</Patch>

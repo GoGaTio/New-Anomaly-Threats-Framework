@@ -31,7 +31,7 @@ using UnityEngine.SceneManagement;
 
 namespace NAT
 {
-	public class IncidentWorker_SerpentAssault : IncidentWorker
+	/*public class IncidentWorker_SerpentAssault : IncidentWorker
 	{
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
@@ -156,5 +156,5 @@ namespace NAT
 			stateGraph.AddToil(toil);
 			return stateGraph;
 		}
-	}
+	}*/
 }

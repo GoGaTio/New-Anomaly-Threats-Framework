@@ -31,12 +31,22 @@ using UnityEngine.SceneManagement;
 
 namespace NAT
 {
-	public class IncidentWorker_ObeliskFromExtension : IncidentWorker_Obelisk
+	public class IncidentWorker_ObeliskFromExtension : IncidentWorker_Obelisk, IAnomalyEvent
 	{
+		public Def Def => def;
+
+		public float CommonalityFactor { get; set; } = 1f;
+
+		public bool AdjustPoints => false;
+
+		public float PointsFactor { get; set; } = 1f;
+
+		public override float BaseChanceThisGame => base.BaseChanceThisGame * CommonalityFactor;
+
 		public override ThingDef ObeliskDef => def.GetModExtension<IncidentExtension>().thingDef;
 	}
 
-	public class IncidentWorker_ThingArrive : IncidentWorker
+	public class IncidentWorker_ThingArrive : IncidentWorker, IAnomalyEvent
 	{
 		public virtual ThingDef SkyfallerDef => def.GetModExtension<IncidentExtension>().skyfallerDef;
 
@@ -45,6 +55,16 @@ namespace NAT
 		public virtual PawnKindDef KindDef => def.GetModExtension<IncidentExtension>()?.pawnKindDef;
 
 		public virtual FactionDef FactionDef => def.GetModExtension<IncidentExtension>()?.factionDef;
+
+		public Def Def => def;
+
+		public float CommonalityFactor { get; set; } = 1f;
+
+		public bool AdjustPoints => false;
+
+		public float PointsFactor { get; set; } = 1f;
+
+		public override float BaseChanceThisGame => base.BaseChanceThisGame * CommonalityFactor;
 
 		public override float ChanceFactorNow(IIncidentTarget target)
 		{

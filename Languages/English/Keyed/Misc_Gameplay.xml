@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <NAT_BossEscorts></NAT_BossEscorts>
-  
   <NAT_AttackToOpen>Attack to open</NAT_AttackToOpen>
 
-  <!--Settings-->
-  <NAT_Setting_AllowRaid>Allow void awakening extensions</NAT_Setting_AllowRaid>
-  <NAT_Setting_AllowRaid_Desc>Allow extra features in void awakening game ending.</NAT_Setting_AllowRaid_Desc>
+  <NAT_BossIncomingLabel>Incoming {0}</NAT_BossIncomingLabel>
+  <NAT_MultipleBossesIncomingLabel>Incoming {0}</NAT_MultipleBossesIncomingLabel>
+  <NAT_BossIncomingDesc>Incoming</NAT_BossIncomingDesc>
+  <NAT_MultipleBossesIncomingDesc>Incoming</NAT_MultipleBossesIncomingDesc>
+
+  <NAT_ConvertionTime>Convertion time</NAT_ConvertionTime>
+  <NAT_CannotClose>Cannot close</NAT_CannotClose>
+  <NAT_Close>Close</NAT_Close>
+  <NAT_AlreadyHasAbility>{PAWN_nameDef} already has {ABILITY}</NAT_AlreadyHasAbility>
+  <NAT_GivesTrait>gives trait</NAT_GivesTrait> 
+  <NAT_AlreadyHasTrait>{PAWN_nameDef} already has {TRAIT}</NAT_AlreadyHasTrait>
+  <NAT_IsBoss>Is boss</NAT_IsBoss>
 
 </LanguageData>

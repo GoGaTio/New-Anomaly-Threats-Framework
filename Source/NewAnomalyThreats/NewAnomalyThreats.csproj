@@ -83,6 +83,8 @@
     <Compile Include="Harmony\DefLoad.cs" />
     <Compile Include="Harmony\ResearchPatches.cs" />
     <Compile Include="Hediffs\HediffAltarTrade.cs" />
+    <Compile Include="Hediffs\HediffGivers\HediffGiver_RevertDebuff.cs" />
+    <Compile Include="Hediffs\HediffGivers\HediffGiver_Rust.cs" />
     <Compile Include="Hediffs\Hediff_NoMerge.cs" />
     <Compile Include="Hediffs\Hediff_InducedPain.cs" />
     <Compile Include="Hediffs\HediffComp_GiveAbilityCharges.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="MapGen\Layouts\LayoutWorkers.cs" />
     <Compile Include="MapGen\Layouts\RoomContents.cs" />
     <Compile Include="MapGen\Layouts\RoomParts.cs" />
+    <Compile Include="DefModExtensions.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="ThingComps\CompConverterSubject.cs" />
@@ -113,7 +116,7 @@
     <Compile Include="Things\Building_HoraxStabilizer.cs" />
     <Compile Include="Things\Building_HoraxMachine.cs" />
     <Compile Include="Things\Building_VaultDoor.cs" />
-    <Compile Include="IWantsDelivery.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="UI\ITabs.cs" />
     <Compile Include="Verbs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

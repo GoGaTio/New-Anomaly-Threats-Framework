@@ -32,6 +32,8 @@ namespace NAT
 
 		private static NewAnomalyThreatsSettings settings;
 
+		public static string NeedGameRestart => "NAT_NeedGameRestart".Translate().Colorize(ColorLibrary.RedReadable);
+
 		/*public static void Log(string message)
 		{
 			if (Prefs.DevMode)

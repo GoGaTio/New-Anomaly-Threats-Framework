@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="NAT_Bullet_Heatspear"]/projectile</xpath>
+		<value>
+			<thingClass>CombatExtended.BulletCE</thingClass>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<damageDef>EnergyBolt</damageDef>
+				<damageAmountBase>45</damageAmountBase>
+				<speed>72</speed>
+				<armorPenetrationSharp>60</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+			</projectile>
+		</value>
+	</Operation>
+
+</Patch>

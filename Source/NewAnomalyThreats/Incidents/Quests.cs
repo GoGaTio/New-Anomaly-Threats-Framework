@@ -21,41 +21,7 @@ namespace NAT
 		[MustTranslate]
 		public string rewardDesc;
 
-		private static List<LandmarkDef> allowedLandmarksCached;
-
 		private const string SitePartTag = "NAT_AncientResearchFacility";
-
-		protected static List<LandmarkDef> AllowedLandmarks
-		{
-			get
-			{
-				if (ModsConfig.OdysseyActive && allowedLandmarksCached == null)
-				{
-					allowedLandmarksCached = new List<LandmarkDef>
-					{
-						LandmarkDefOf.Oasis,
-						LandmarkDefOf.Lake,
-						LandmarkDefOf.LakeWithIsland,
-						LandmarkDefOf.LakeWithIslands,
-						LandmarkDefOf.Pond,
-						LandmarkDefOf.DryLake,
-						LandmarkDefOf.ToxicLake,
-						LandmarkDefOf.Wetland,
-						LandmarkDefOf.HotSprings,
-						LandmarkDefOf.CoastalIsland,
-						LandmarkDefOf.Peninsula,
-						LandmarkDefOf.Valley,
-						LandmarkDefOf.Cavern,
-						LandmarkDefOf.Chasm,
-						LandmarkDefOf.Cliffs,
-						LandmarkDefOf.Hollow,
-						LandmarkDefOf.TerraformingScar,
-						LandmarkDefOf.Dunes
-					};
-				}
-				return allowedLandmarksCached;
-			}
-		}
 
 		protected override bool TestRunInt(Slate slate)
 		{
@@ -104,7 +70,7 @@ namespace NAT
 			string inSignalEnable = QuestGenUtility.HardcodedSignalWithQuestID("site.MapGenerated");
 			string inSignal = QuestGenUtility.HardcodedSignalWithQuestID("site.NoActiveThreats");
 			string inSignal2 = QuestGenUtility.HardcodedSignalWithQuestID("site.MapRemoved");
-			quest.Letter(LetterDefOf.PositiveEvent, null, null, label: "DistressSignalLabel".Translate(), text: "DistressSignalText".Translate(site.Faction.Named("FACTION")).Resolve(), lookTargets: Gen.YieldSingle(site), relatedFaction: site.Faction);
+			quest.Letter(LetterDefOf.PositiveEvent, null, null, label: "[resolvedQuestName]", text: "[resolvedQuestDescription]", lookTargets: Gen.YieldSingle(site), relatedFaction: site.Faction);
 			QuestPart_Choice questPart_Choice = quest.RewardChoice();
 			QuestPart_Choice.Choice item = new QuestPart_Choice.Choice
 			{
@@ -120,26 +86,9 @@ namespace NAT
 			quest.End(QuestEndOutcome.Fail, 0, null, inSignal2);
 		}
 
-		private bool FactionUsable(Faction f, float points)
-		{
-			if (ModsConfig.RoyaltyActive && points < 2000f && f == Faction.OfEmpire)
-			{
-				return false;
-			}
-			if (!f.def.canGenerateQuestSites)
-			{
-				return false;
-			}
-			if (f.def.humanlikeFaction && !f.def.pawnGroupMakers.NullOrEmpty())
-			{
-				return !f.def.permanentEnemy;
-			}
-			return false;
-		}
-
 		private bool TryFindSiteTile(out PlanetTile tile, bool exitOnFirstTileFound = false)
 		{
-			return TileFinder.TryFindNewSiteTile(out tile, 3, 9, allowCaravans: false, AllowedLandmarks, 0.5f, canSelectComboLandmarks: true, TileFinderMode.Near, exitOnFirstTileFound, validator: t => (t.Tile.hilliness < Hilliness.LargeHills));
+			return TileFinder.TryFindNewSiteTile(out tile, 3, 9, allowCaravans: false, null, 0.5f, canSelectComboLandmarks: true, TileFinderMode.Near, exitOnFirstTileFound, validator: t => (t.Tile.hilliness < Hilliness.LargeHills));
 		}
 	}
 

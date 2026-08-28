@@ -70,7 +70,7 @@
       <value>
         <comps>
           <li Class="NAT.CompProperties_ConverterSubject">
-            <ticksToConvert>15000</ticksToConvert>
+            <ticksToConvert>20000</ticksToConvert>
             <products>
               <li>
                 <def>NAT_PainClot</def>
@@ -94,7 +94,7 @@
       <xpath>Defs/ThingDef[defName = "Shard"]/comps</xpath>
       <value>
         <li Class="NAT.CompProperties_ConverterSubject">
-          <ticksToConvert>15000</ticksToConvert>
+          <ticksToConvert>20000</ticksToConvert>
           <products>
             <li>
               <def>NAT_PainClot</def>
@@ -123,7 +123,7 @@
       <value>
         <comps>
           <li Class="NAT.CompProperties_ConverterSubject">
-            <ticksToConvert>1250</ticksToConvert>
+            <ticksToConvert>2500</ticksToConvert>
             <products>
               <li>
                 <def>NAT_VoidOil</def>
@@ -139,7 +139,7 @@
       <xpath>Defs/ThingDef[defName = "Bioferrite"]/comps</xpath>
       <value>
         <li Class="NAT.CompProperties_ConverterSubject">
-          <ticksToConvert>1250</ticksToConvert>
+          <ticksToConvert>2500</ticksToConvert>
           <products>
             <li>
               <def>NAT_VoidOil</def>
@@ -160,7 +160,7 @@
       <value>
         <comps>
           <li Class="NAT.CompProperties_ConverterSubject">
-            <ticksToConvert>600</ticksToConvert>
+            <ticksToConvert>1250</ticksToConvert>
             <products>
               <li>
                 <def>Bioferrite</def>
@@ -176,7 +176,7 @@
       <xpath>Defs/ThingDef[defName = "Meat_Twisted"]/comps</xpath>
       <value>
         <li Class="NAT.CompProperties_ConverterSubject">
-          <ticksToConvert>600</ticksToConvert>
+          <ticksToConvert>1250</ticksToConvert>
           <products>
             <li>
               <def>Bioferrite</def>

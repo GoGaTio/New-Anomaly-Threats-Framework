@@ -137,7 +137,7 @@ namespace NAT
 
 		public bool allowByDefault = false;
 
-		public int ticksToConvert = 1250;
+		public int ticksToConvert = 2500;
 
 		public float butcheryRandomOffsetPct = 0;
 

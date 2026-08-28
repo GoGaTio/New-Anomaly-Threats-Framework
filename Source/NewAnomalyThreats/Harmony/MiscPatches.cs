@@ -52,6 +52,7 @@ using Verse.Profile;
 using Verse.Sound;
 using Verse.Steam;
 using static RimWorld.ResearchManager;
+using static Verse.PawnCapacityUtility;
 
 namespace NAT
 {
@@ -301,6 +302,19 @@ namespace NAT
 		}
 	}*/
 
+	[HarmonyPatch(typeof(PawnCapacityUtility), nameof(PawnCapacityUtility.CalculateCapacityLevel))]
+	public static class PawnCapacityUtility_CalculateCapacityLevel
+	{
+		[HarmonyPostfix]
+		public static void Postfix(ref float __result, HediffSet diffSet, PawnCapacityDef capacity, ref List<CapacityImpactor> impactors)
+		{
+			if(diffSet.pawn is ICapacityAffect aff)
+			{
+				__result = aff.AffectCapacity(__result, diffSet, capacity, ref impactors);
+			}
+		}
+	}
+
 	[HarmonyPatch(typeof(QuestPart_EntityArrival), "Notify_QuestSignalReceived")]
 	public class Patch_EntityArrivalOverride
 	{
@@ -315,7 +329,7 @@ namespace NAT
 		[HarmonyPrefix]
 		public static bool Prefix(Map ___map, Signal signal, string ___inSignal)
 		{
-			if (!signal.tag.StartsWith(___inSignal) || !NewAnomalyThreatsUtility.Settings.allowEndGameRaid)
+			if (!signal.tag.StartsWith(___inSignal) || NewAnomalyThreatsUtility.Settings.endingExtensionsChance < 0.01f)
 			{
 				return true;
 			}
@@ -330,7 +344,7 @@ namespace NAT
 				return true;
 			}
 			defs.RemoveWhere((x) => !x.isWave);
-			if (!Rand.Chance(NewAnomalyThreatsUtility.Settings.endGameRaidChanceFactor * ChanceOfOverrideByDefsCount.Evaluate(defs.Sum((x)=>x.commonality))))
+			if (!Rand.Chance(NewAnomalyThreatsUtility.Settings.endingExtensionsChance * ChanceOfOverrideByDefsCount.Evaluate(defs.Sum((x)=>x.commonality))))
 			{
 				return true;
 			}

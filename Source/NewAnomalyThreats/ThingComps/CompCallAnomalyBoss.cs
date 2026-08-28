@@ -42,17 +42,31 @@ namespace NAT
 			OrderActivation(target.Pawn);
 		}
 
+		public override AcceptanceReport CanInteract(Pawn activateBy = null, bool checkOptionalItems = true)
+		{
+			AcceptanceReport report = NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).CanCall(parent.PositionHeld, parent.MapHeld);
+			if (report.Accepted)
+			{
+				return base.CanInteract(activateBy, checkOptionalItems);
+			}
+			return report;
+		}
+
 		protected override void OnInteracted(Pawn caster)
 		{
-			if(Props.effecterDef != null)
+			AnomalyBoss boss = NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef);
+			if(boss.CanCall(caster.PositionHeld, caster.MapHeld))
 			{
-				Vector3 offset = Vector3.zero;
-				float num = 0.5f * (1f + Mathf.Sin(Mathf.PI * 2f * (float)GenTicks.TicksGame / 300f)) * 0.35f;
-				offset.z += num;
-				Props.effecterDef.Spawn(parent, parent.Map, offset);
+				ticksTillDestroy = Props.destroyDelayTicks;
+				boss.Call(parent.PositionHeld, parent.MapHeld);
+				if (Props.effecterDef != null)
+				{
+					Vector3 offset = Vector3.zero;
+					float num = 0.5f * (1f + Mathf.Sin(Mathf.PI * 2f * (float)GenTicks.TicksGame / 300f)) * 0.35f;
+					offset.z += num;
+					Props.effecterDef.Spawn(parent, parent.Map, offset);
+				}
 			}
-			ticksTillDestroy = Props.destroyDelayTicks;
-			NewAnomalyThreatsUtility.Comp.bossManager.GetBoss(Props.bossDef).Call(parent.PositionHeld, parent.MapHeld);
 		}
 
 		public override string CompInspectStringExtra()

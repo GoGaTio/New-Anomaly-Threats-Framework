@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <NAT_Settings_General>General</NAT_Settings_General>
+  <NAT_Settings_Incidents>Incidents</NAT_Settings_Incidents>
+  <NAT_Settings_ModSpecific>Mod specific</NAT_Settings_ModSpecific>
+
+  <NAT_Setting_EndingExpansionsChance>Ending expansions chance factor</NAT_Setting_EndingExpansionsChance>
+  <NAT_Setting_EndingExpansionsChance_Desc>Chance factor for modded entity waves on Anomaly ending. Final chance is aslo affected by count of modded waves existing, so if you have only one modded chance would much lower compared to 5 for example.</NAT_Setting_EndingExpansionsChance_Desc>
+  
+  <NAT_Setting_AllowDiscoveredEntitiesIncrease>Adjust entity count for monolith</NAT_Setting_AllowDiscoveredEntitiesIncrease>
+  <NAT_Setting_AllowDiscoveredEntitiesIncrease_Desc>Adjust count of discovered entities required to upgrade monolith to next level.</NAT_Setting_AllowDiscoveredEntitiesIncrease_Desc>
+  
+  <NAT_IncidentCommonalityFactor>Incident commonality factor</NAT_IncidentCommonalityFactor>
+  <NAT_IncidentPointsFactor>Incident threat points factor</NAT_IncidentPointsFactor>
+  
+</LanguageData>

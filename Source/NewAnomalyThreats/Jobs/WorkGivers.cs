@@ -18,7 +18,7 @@ namespace NAT
 		{
 			foreach (Building item in pawn.Map.listerBuildings.allBuildingsColonist)
 			{
-				if (item is IWantsDelivery b && b.NeedDelivery)
+				if (item is Interfaces b && b.NeedDelivery)
 				{
 					yield return item;
 				}
@@ -30,7 +30,7 @@ namespace NAT
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			if (t is IWantsDelivery b)
+			if (t is Interfaces b)
 			{
 				/*if (!b.NeedDelivery)
 				{
@@ -59,7 +59,7 @@ namespace NAT
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			if (!(t is IWantsDelivery b))
+			if (!(t is Interfaces b))
 			{
 				return null;
 			}

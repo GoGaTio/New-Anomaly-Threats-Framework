@@ -14,6 +14,14 @@ using Verse.Grammar;
 
 namespace NAT
 {
+	public class CapacityImpactorBoss : PawnCapacityUtility.CapacityImpactor
+	{
+		public override string Readable(Pawn pawn)
+		{
+			return "NAT_IsBoss".Translate();
+		}
+	}
+
 	public class Graphic_AltarMask : Graphic_WithPropertyBlock
 	{
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
@@ -46,60 +54,40 @@ namespace NAT
 		}
 	}
 
-	public interface IAlwaysTargetable
-	{
-	}
-
-	public class CanHaveFactionExtension : DefModExtension
-	{
-	}
-
 	public class Alert_AnomalyBoss : Alert_Critical
 	{
 		public override string GetLabel()
 		{
 			string s = "";
+			int bossCount = 0;
 			foreach(AnomalyBossDef def in NewAnomalyThreatsUtility.Comp.bossManager.GetIncomingBosses())
 			{
 				if (!s.NullOrEmpty())
 				{
-					s += "\n";
+					s += ", ";
 				}
-				s += "NAT_BossIncomingLabel".Translate(def.LabelCap);
+				bossCount++;
+				s += def.LabelCap;
 			}
-			return s;
+			return bossCount > 1 ? "NAT_MultipleBossesIncomingLabel".Translate(s) : "NAT_BossIncomingLabel".Translate(s);
 		}
 
 		public override TaggedString GetExplanation()
 		{
-			return "NAT_BossIncomingDesc".Translate();
+			string s = "";
+			int bossCount = 0;
+			foreach (AnomalyBossDef def in NewAnomalyThreatsUtility.Comp.bossManager.GetIncomingBosses())
+			{
+				bossCount++;
+				s += "\n  " + def.LabelCap;
+			}
+			return bossCount > 1 ? "NAT_MultipleBossesIncomingDesc".Translate() : "NAT_BossIncomingDesc".Translate() + ":" + s;
 		}
 
 		public override AlertReport GetReport()
 		{
 			return NewAnomalyThreatsUtility.Comp.bossManager.AnyBossIncoming;
 		}
-	}
-	public class IncidentExtension : DefModExtension
-	{
-		public ThingDef thingDef;
-
-		public ThingDef skyfallerDef;
-
-		public PawnKindDef pawnKindDef;
-
-		public List<ThingDef> thingDefList = new List<ThingDef>();
-
-		public FactionDef factionDef;
-	}
-
-	public class DamageExtension : DefModExtension
-	{
-		public DamageDef damageDef;
-
-		public int amount;
-
-		public float armorPenetration;
 	}
 
 	public class Rule_TranslateByKey : Rule

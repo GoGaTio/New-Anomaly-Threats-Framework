@@ -17,7 +17,7 @@ using static RimWorld.Building_HoldingPlatform;
 namespace NAT
 {
 	[StaticConstructorOnStartup]
-	public class Building_Converter : Building, IThingHolder, ISearchableContents, IWantsDelivery
+	public class Building_Converter : Building, IThingHolder, ISearchableContents, Interfaces
 	{
 		private static readonly Material UnfilledMat = SolidColorMaterials.NewSolidColorMaterial(new Color(0.3f, 0.3f, 0.3f, 0.65f), ShaderDatabase.MetaOverlay);
 

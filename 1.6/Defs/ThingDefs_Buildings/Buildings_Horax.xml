@@ -173,7 +173,7 @@
       <shaderType>MoteHellfireCannon_Target</shaderType>
       <shaderParameters>
         <_ScanTex>/Things/Mote/NAT_DecimatorAim_Target_Scan</_ScanTex>
-        <_ScanMask>/Things/Mote/NAT_DecimatorAim_Target_Scan_Mask</_ScanMask>
+        <_ScanMask>/Things/Mote/FleshmelterBolt_Target_Scan_Mask</_ScanMask>
         <_ScanSpeed>.1</_ScanSpeed>
         <_ScanSpeedAccel>0.1</_ScanSpeedAccel>
       </shaderParameters>

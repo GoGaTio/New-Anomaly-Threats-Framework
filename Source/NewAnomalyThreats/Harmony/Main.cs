@@ -54,7 +54,7 @@ using HarmonyLib;
 
 namespace NAT
 {
-	public class PatchMod : Mod
+	/*public class PatchMod : Mod
 	{
 		public static Harmony harmony;
 		public PatchMod(ModContentPack content)
@@ -68,5 +68,5 @@ namespace NAT
 			harmony.Patch((MethodBase)AccessTools.Method(typeof(MainTabWindow_Research), "DrawStartButton", (Type[])null, (Type[])null), (HarmonyMethod)null, (HarmonyMethod)null, new HarmonyMethod(typeof(Patches_Research), "UniversalTranspiler", (Type[])null), (HarmonyMethod)null);
 			harmony.Patch((MethodBase)AccessTools.Method(typeof(MainTabWindow_Research), "DrawRightRect", (Type[])null, (Type[])null), (HarmonyMethod)null, (HarmonyMethod)null, new HarmonyMethod(typeof(Patches_Research), "UniversalTranspiler", (Type[])null), (HarmonyMethod)null);
 		}
-	}
+	}*/
 }

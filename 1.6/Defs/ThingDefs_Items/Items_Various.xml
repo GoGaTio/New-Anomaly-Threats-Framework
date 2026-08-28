@@ -57,7 +57,7 @@
   <ThingDef ParentName="NAT_AnomalousResourceBase">
     <defName>NAT_DarkMetal</defName>
     <label>dark metal</label>
-    <description>A piece of clotted pain.</description>
+    <description>A dark tough metal.</description>
     <drawerType>MapMeshOnly</drawerType>
     <burnableByRecipe>false</burnableByRecipe>
     <graphicData>
@@ -75,7 +75,7 @@
   <ThingDef ParentName="NAT_AnomalousResourceBase">
     <defName>NAT_VoidOil</defName>
     <label>void oil</label>
-    <description>A piece of clotted pain.</description>
+    <description>A black substance which usually covers dark metal structures. In the free state, it rapidly turns into a jelly-like mass.</description>
     <drawerType>MapMeshOnly</drawerType>
     <graphicData>
       <texPath>Things/Item/NAT_VoidOil</texPath>
@@ -92,7 +92,7 @@
   <ThingDef>
     <defName>NAT_HoraxChunk</defName>
     <label>dark metal chunk</label>
-    <description>A chunk of steel slag. While it's useless in its current form, it can be smelted to recover steel.</description>
+    <description>A chunk of dark archotech structure.</description>
     <graphicData>
       <texPath>Things/Item/NAT_HoraxChunk</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -125,7 +125,7 @@
     <comps>
       <li Class="NAT.CompProperties_ConverterSubject">
         <allowByDefault>true</allowByDefault>
-        <ticksToConvert>20000</ticksToConvert>
+        <ticksToConvert>30000</ticksToConvert>
         <products>
           <li>
             <def>Shard</def>

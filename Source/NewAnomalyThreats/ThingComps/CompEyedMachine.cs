@@ -227,6 +227,7 @@ namespace NAT
 					else
 					{
 						mote.exactPosition = targetingPos;
+						mote.Position = targetingPos.ToIntVec3();
 					}
 					mote?.Maintain();
 					if (eyeWarmUpTicks <= 0)

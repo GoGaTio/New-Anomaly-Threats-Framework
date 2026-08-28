@@ -42,6 +42,8 @@ namespace NAT
 			}
 		}
 
+		public bool Incoming => ticksIncomingLeft > -10;
+
 		public virtual void ResetPoints() { lastPoints = -1; }
 
 		public virtual void Init()
@@ -66,6 +68,15 @@ namespace NAT
 
 		public virtual AcceptanceReport CanCall(IntVec3 cell, Map map)
 		{
+			int cooldown = Find.TickManager.TicksGame - lastCalledTick;
+			if (cooldown < def.ticksCooldown)
+			{
+				return "CooldownTime".Translate() + ": " + (def.ticksCooldown - cooldown).ToStringTicksToPeriod();
+			}
+			if (Incoming)
+			{
+				return false;
+			}
 			return true;
 		}
 
