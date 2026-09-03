@@ -77,16 +77,16 @@ namespace NAT
 
 		public bool TryResurrect(Pawn pawn)
 		{
+			CompBossStages comp = CompBoss;
+			if(comp == null || !comp.CanAdvanceStage)
+			{
+				return false;
+			}
 			if (pawn.Discarded)
 			{
 				Log.Warning("New Anomaly Threats - " + pawn.LabelCap + " was discarded during resurrection, fixing");
 				pawn.ForceSetStateToUnspawned();
 				pawn.DecrementMapIndex();
-			}
-			CompBossStages comp = CompBoss;
-			if(comp == null || !comp.CanAdvanceStage)
-			{
-				return false;
 			}
 			ResurrectionParams parms = new ResurrectionParams();
 			parms.restoreMissingParts = true;

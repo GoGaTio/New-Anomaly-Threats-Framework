@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -14,6 +15,67 @@ using Verse.Grammar;
 
 namespace NAT
 {
+	public class ThingDefParmsClass : IExposable
+	{
+		public ThingDef thingDef;
+
+		public float value;
+
+		public float reserveValue;
+
+		public int count = 1;
+
+		public IntRange intRange;
+
+		public FloatRange floatRange;
+
+		public ThingDef stuff;
+
+		public QualityCategory quality = QualityCategory.Normal;
+
+		public ThingDefParmsClass()
+		{
+		}
+
+		public ThingDefParmsClass(ThingDef thingDef, int count)
+		{
+			if (count < 0)
+			{
+				Log.Warning("Tried to set ThingDefCountClass count to " + count + ". thingDef=" + thingDef);
+				count = 0;
+			}
+			this.thingDef = thingDef;
+			this.count = count;
+		}
+
+		public void ExposeData()
+		{
+			Scribe_Defs.Look(ref thingDef, "thingDef");
+			Scribe_Values.Look(ref value, "value");
+			Scribe_Values.Look(ref reserveValue, "reserveValue");
+			Scribe_Values.Look(ref count, "count", 1);
+			Scribe_Values.Look(ref intRange, "intRange");
+			Scribe_Values.Look(ref floatRange, "floatRange");
+			Scribe_Defs.Look(ref stuff, "stuff");
+			Scribe_Values.Look(ref quality, "quality", QualityCategory.Normal);
+		}
+
+		public void LoadDataFromXmlCustom(XmlNode xmlRoot)
+		{
+			XmlHelper.ParseElements(this, xmlRoot, "thingDef", "value");
+		}
+
+		public override string ToString()
+		{
+			return string.Format("({0}x {1})", value, (thingDef != null) ? thingDef.defName : "null");
+		}
+
+		public override int GetHashCode()
+		{
+			return thingDef.shortHash + count << 16;
+		}
+	}
+
 	public class CapacityImpactorBoss : PawnCapacityUtility.CapacityImpactor
 	{
 		public override string Readable(Pawn pawn)

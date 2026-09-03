@@ -22,7 +22,6 @@
     <requiresSingleRectRoom>true</requiresSingleRectRoom>
     <canBeInMixedRoom>true</canBeInMixedRoom>
     <roomContentsWorkerType>NAT.RoomContents_ContainmentRoom</roomContentsWorkerType>
-    <thingSetMakerDef>MapGen_OrbitalItemStash</thingSetMakerDef>
     <prefabs>
       <NAT_AncientHoldingPlatforms4_Shard>
         <minMaxRange>0~2</minMaxRange>

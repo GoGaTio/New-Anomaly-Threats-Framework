@@ -112,11 +112,13 @@
     <Compile Include="ThingComps\CompConverter.cs" />
     <Compile Include="ThingComps\CompCauseGameCondition_UnnaturalDarkness.cs" />
     <Compile Include="ThingComps\CompEyedMachine.cs" />
+    <Compile Include="ThingComps\CompVoidFireOverlay.cs" />
     <Compile Include="Things\Building_Converter.cs" />
     <Compile Include="Things\Building_HoraxStabilizer.cs" />
     <Compile Include="Things\Building_HoraxMachine.cs" />
     <Compile Include="Things\Building_VaultDoor.cs" />
     <Compile Include="Interfaces.cs" />
+    <Compile Include="Things\VoidFire.cs" />
     <Compile Include="UI\ITabs.cs" />
     <Compile Include="Verbs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

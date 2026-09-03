@@ -1,6 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <ThingDef>
+    <defName>NAT_VoidFire</defName>
+    <label>void fire</label>
+    <thingClass>NAT.VoidFire</thingClass>
+    <tickerType>Normal</tickerType>
+    <pathfinderDangerous>true</pathfinderDangerous>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <canInteractThroughCorners>true</canInteractThroughCorners>
+    <graphicData>
+      <texPath>Things/Mote/NAT_VoidFire</texPath>
+      <graphicClass>Graphic_Flicker</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData>
+    <altitudeLayer>PawnState</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(100,100,100,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
   <ThingDef ParentName="SignalActionBase">
     <defName>NAT_SignalAction_Sightstealers</defName>
     <thingClass>NAT.SignalAction_Sightstealers</thingClass>

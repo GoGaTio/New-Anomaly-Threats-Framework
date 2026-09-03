@@ -60,6 +60,18 @@ namespace NAT
 			entityTrackers.Add(entityTracker);
 		}
 
+		public T TryGetEntityTracker<T>() where T : EntityTracker
+		{
+			for (int i = 0; i < entityTrackers.Count; i++)
+			{
+				if (entityTrackers[i] is T result)
+				{
+					return result;
+				}
+			}
+			return null;
+		}
+
 		public T TryGetData<T>() where T : DataStorer
 		{
 			for (int i = 0; i < dataStorage.Count; i++)

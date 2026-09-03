@@ -3,6 +3,7 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace NAT
 
 		public int destroyDelayTicks = -1;
 
+		public float extraFloatingRotation;
+
 		public CompProperties_CallAnomalyBoss()
 		{
 			compClass = typeof(CompCallAnomalyBoss);
@@ -36,6 +39,24 @@ namespace NAT
 		public new CompProperties_CallAnomalyBoss Props => (CompProperties_CallAnomalyBoss)props;
 
 		public int ticksTillDestroy = -1;
+
+		private Graphic floatingGraphicInt;
+
+		public virtual Graphic FloatingGraphic
+		{
+			get
+			{
+				if (floatingGraphicInt == null)
+				{
+					if (Props.floatingGraphic == null)
+					{
+						return BaseContent.BadGraphic;
+					}
+					floatingGraphicInt = Props.floatingGraphic.GraphicColoredFor(parent);
+				}
+				return floatingGraphicInt;
+			}
+		}
 
 		public override void OrderForceTarget(LocalTargetInfo target)
 		{
@@ -132,7 +153,7 @@ namespace NAT
 				float num = 0.5f * (1f + Mathf.Sin(Mathf.PI * 2f * (float)GenTicks.TicksGame / 300f)) * 0.35f;
 				drawLoc.z += num;
 				drawLoc += Altitudes.AltIncVect;
-				Props.floatingGraphic.Graphic.Draw(drawLoc, parent.Rotation, parent);
+				FloatingGraphic.Draw(drawLoc, parent.Rotation, parent, Props.extraFloatingRotation);
 			}
 		}
 

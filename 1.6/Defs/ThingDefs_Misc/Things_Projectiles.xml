@@ -33,6 +33,12 @@
       <damageAmountBase>30</damageAmountBase>
       <speed>110</speed>
     </projectile>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
+      </li>
+    </comps>
   </ThingDef>
 
 </Defs>

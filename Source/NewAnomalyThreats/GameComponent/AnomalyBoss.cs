@@ -16,7 +16,7 @@ namespace NAT
 	{
 		public AnomalyBossDef def;
 
-		public int lastCalledTick = 0;
+		public int lastCalledTick = -999999;
 
 		public int timesCalled = 0;
 
