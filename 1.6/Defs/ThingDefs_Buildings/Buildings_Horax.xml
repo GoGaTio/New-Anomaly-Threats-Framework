@@ -90,7 +90,7 @@
     </placeWorkers>
     <comps>
       <li Class="CompProperties_AmbientSound">
-        <sound>MechanoidRelay_Ambient</sound>
+        <sound>NAT_HoraxMachine_Ambient</sound>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>6</glowRadius>
@@ -247,4 +247,82 @@
     </comps>
   </ThingDef>
 
+  <ThingDef Name="NAT_BaseHoraxTurret" ParentName="BuildingBase" Abstract="True">
+    <defName>NAT_HoraxStabilizer</defName>
+    <label>horax machine stabilizer</label>
+    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
+    <thingClass>NAT.Building_HoraxTurret</thingClass>
+    <altitudeLayer>Blueprint</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>1</ArmorRating_Sharp>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+    </statBases>
+    <rotatable>false</rotatable>
+    <killedLeavingsRanges>
+      <Bioferrite>20~40</Bioferrite>
+      <NAT_HoraxChunk>1</NAT_HoraxChunk>
+    </killedLeavingsRanges>
+    <drawerType>RealtimeOnly</drawerType>
+    <size>(1, 1)</size>
+    <fillPercent>0.35</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <passability>PassThroughOnly</passability>
+    <tickerType>Normal</tickerType>
+    <terrainAffordanceNeeded ISNull="True"/>
+    <pathCost>10</pathCost>
+    <building>
+      <deconstructible>false</deconstructible>
+      <repairable>false</repairable>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <displayAttackToDestroyOnInspectPane>true</displayAttackToDestroyOnInspectPane>
+      <playTargetAcquiredSound>false</playTargetAcquiredSound>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <draftAttackNonDeconstructable>false</draftAttackNonDeconstructable>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+    </building>
+    <drawHighlight>true</drawHighlight>
+    <comps>
+      <li Class="NAT.CompProperties_Armor"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_InvalidOverSubstructure</li>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="NAT_BaseHoraxTurret">
+    <defName>NAT_HoraxTurret_Spiker</defName>
+    <label>horax spiker</label>
+    <description>A rusted bioferrite piece shaped like a small automatic turret.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_RustedTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shadowData>
+        <volume>(0.27,0.25,0.27)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>Things/Building/NAT_RustedMiniTurret_Icon</uiIconPath>
+    <uiIconScale>0.90</uiIconScale>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <building>
+      <combatPower>120</combatPower>
+      <turretGunDef>NAT_Gun_RustedMiniTurret</turretGunDef>
+      <turretBurstCooldownTime>4.8</turretBurstCooldownTime>
+      <turretTopOffset>(0, 0)</turretTopOffset>
+    </building>
+  </ThingDef>
+  
 </Defs>

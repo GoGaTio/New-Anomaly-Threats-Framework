@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <SoundDef>
+    <defName>NAT_HoraxMachine_Ambient</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>NAT_HoraxMachineIdle</clipPath>
+          </li>
+        </grains>
+        <volumeRange>35</volumeRange>
+        <distRange>5~30</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

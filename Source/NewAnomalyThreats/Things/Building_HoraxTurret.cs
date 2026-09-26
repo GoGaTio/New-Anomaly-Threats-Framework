@@ -13,7 +13,7 @@ using static HarmonyLib.Code;
 
 namespace NAT
 {
-	public class Building_HoraxStabilizer : Building, IAttackTarget
+	public class Building_HoraxTurret : Building_TurretGun
 	{
 		[Unsaved(false)]
 		private Material cachedShadowMaterial;
@@ -30,15 +30,7 @@ namespace NAT
 			}
 		}
 
-		public Building_HoraxMachine parent;
-
 		private float extraSinParam;
-
-		public float TargetPriorityFactor => 0.6f;
-
-		public LocalTargetInfo TargetCurrentlyAimingAt => LocalTargetInfo.Invalid;
-
-		Thing IAttackTarget.Thing => this;
 
 		public override void PostPostMake()
 		{
@@ -46,9 +38,69 @@ namespace NAT
 			extraSinParam = Rand.ValueAsync(thingIDNumber) * 2 * Mathf.PI;
 		}
 
+		public override LocalTargetInfo TryFindNewTarget()
+		{
+			IAttackTargetSearcher attackTargetSearcher = TargSearcher();
+			Faction faction = attackTargetSearcher.Thing.Faction;
+			float range = AttackVerb.verbProps.range;
+			TargetScanFlags targetScanFlags = TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable;
+			if (!AttackVerb.ProjectileFliesOverhead())
+			{
+				targetScanFlags |= TargetScanFlags.NeedLOSToAll;
+			}
+			if (AttackVerb.IsIncendiary_Ranged())
+			{
+				targetScanFlags |= TargetScanFlags.NeedNonBurning;
+			}
+			return (Thing)AttackTargetFinder.BestShootTargetFromCurrentPosition(attackTargetSearcher, targetScanFlags, IsValidTarget);
+		}
+
+		protected override void BeginBurst()
+		{
+			AttackVerb.TryStartCastOn(CurrentTarget, preventFriendlyFire: true);
+			OnAttackedTarget(CurrentTarget);
+		}
+
+		private IAttackTargetSearcher TargSearcher()
+		{
+			if (mannableComp != null && mannableComp.MannedNow)
+			{
+				return mannableComp.ManningPawn;
+			}
+			return this;
+		}
+
+		private bool IsValidTarget(Thing t)
+		{
+			if (t is Pawn pawn)
+			{
+				if (base.Faction == Faction.OfPlayer && pawn.IsPrisoner)
+				{
+					return false;
+				}
+				if (AttackVerb.ProjectileFliesOverhead())
+				{
+					RoofDef roofDef = base.Map.roofGrid.RoofAt(t.Position);
+					if (roofDef != null && roofDef.isThickRoof)
+					{
+						return false;
+					}
+				}
+				if (mannableComp == null)
+				{
+					return !GenAI.MachinesLike(base.Faction, pawn);
+				}
+				if (pawn.RaceProps.Animal && pawn.Faction == Faction.OfPlayer)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
 		public override void PreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
 		{
-			if (dinfo.Instigator != null && !dinfo.Instigator.HostileTo(this))
+			if(dinfo.Instigator != null && !dinfo.Instigator.HostileTo(this))
 			{
 				absorbed = true;
 				return;
@@ -66,15 +118,6 @@ namespace NAT
 			base.PreApplyDamage(ref dinfo, out absorbed);
 		}
 
-		public override void PostApplyDamage(DamageInfo dinfo, float totalDamageDealt)
-		{
-			base.PostApplyDamage(dinfo, totalDamageDealt);
-			if(parent != null)
-			{
-				parent.lastStabilizatorDamagedTick = Find.TickManager.TicksGame;
-			}
-		}
-
 		protected override void DrawAt(Vector3 drawLoc, bool flip = false)
 		{
 			if (base.Spawned)
@@ -85,6 +128,7 @@ namespace NAT
 				Graphic.Draw(drawLoc, Rot4.North, this);
 				SilhouetteUtility.DrawGraphicSilhouette(this, drawLoc);
 				Comps_DrawAt(drawLoc, flip);
+				Top.DrawTurret(drawLoc, Vector3.zero, 0f);
 			}
 			else
 			{
@@ -92,52 +136,10 @@ namespace NAT
 			}
 		}
 
-		public bool ThreatDisabled(IAttackTargetSearcher disabledFor)
-		{
-			if (!base.Spawned)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
-		{
-			base.Destroy(mode);
-			if(parent != null)
-			{
-				parent.stabilizers.Remove(this);
-				parent.Notify_StabilizerRemoved(this);
-			}
-		}
-
-		public override void DrawExtraSelectionOverlays()
-		{
-			base.DrawExtraSelectionOverlays();
-			if(parent != null)
-			{
-				GenDraw.DrawLineBetween(parent.DrawPos, DrawPos, AltitudeLayer.MoteLow.AltitudeFor());
-			}
-		}
-
-		public override void SpawnSetup(Map map, bool respawningAfterLoad)
-		{
-			base.SpawnSetup(map, respawningAfterLoad);
-			if(parent == null || (parent.MapHeld != null && map != parent.MapHeld))
-			{
-				Kill();
-			}
-		}
-
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_References.Look(ref parent, "parent");
 			Scribe_Values.Look(ref extraSinParam, "extraSinParam");
-			if (Scribe.mode == LoadSaveMode.PostLoadInit && parent != null)
-			{
-				parent.stabilizers.Add(this);
-			}
 		}
 
 		public override void Notify_DebugSpawned()

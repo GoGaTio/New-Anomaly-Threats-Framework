@@ -101,6 +101,10 @@ namespace NAT
 
 		private int lastDamageCheckTick = -99999;
 
+		public static Action<DamageInfo, ThingWithComps, float> DeflectAction;
+
+		protected bool deflectActionActive;
+
 		public override void PostPreApplyDamage(ref DamageInfo dinfo, out bool absorbed)
 		{
 			absorbed = false;
@@ -131,9 +135,25 @@ namespace NAT
 				bool diminished = false;
 				if (Props.combatExtendedArmor)
 				{
+					float damageAmount = dinfo.Amount;
 					if (armorPenetration < armorRating)
 					{
 						absorbed = true;
+					}
+					else
+					{
+						dinfo.SetAmount(damageAmount * ((armorPenetration - armorRating) / armorPenetration));
+					}
+					if (armorRating > 0 && dinfo.Def.armorCategory == DamageArmorCategoryDefOf.Sharp)
+					{
+						deflectActionActive = true;
+						DeflectAction?.Invoke(dinfo, parent, damageAmount - dinfo.Amount);
+						if (parent.Destroyed)
+						{
+							absorbed = true;
+							return;
+						}
+						deflectActionActive = false;
 					}
 				}
 				else
@@ -216,7 +236,6 @@ namespace NAT
 					}
 				}
 			}
-            
 		}
 	}
 }

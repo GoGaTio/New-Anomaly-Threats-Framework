@@ -52,6 +52,7 @@ using Verse.Profile;
 using Verse.Sound;
 using Verse.Steam;
 using static RimWorld.ResearchManager;
+using static System.Net.Mime.MediaTypeNames;
 using static Verse.PawnCapacityUtility;
 
 namespace NAT
@@ -66,6 +67,56 @@ namespace NAT
 			NewAnomalyThreatsUtility.gameComp = null;
 		}
 	}
+
+	[HarmonyPatch(typeof(PsychicRitualGizmo), nameof(PsychicRitualGizmo.GetGizmos))]
+	public static class Patch_PsychicRitualGizmo_GetGizmos
+	{
+		public static Thing savedTarget;
+		public static void Prefix(Thing target)
+		{
+			savedTarget = target;
+		}
+		public static void Postfix()
+		{
+			savedTarget = null;
+		}
+	}
+
+	[HarmonyPatch(typeof(PsychicRitualGizmo), "VisibleRituals")]
+	public static class Patch_PsychicRitualGizmo_VisibleRituals
+	{
+		public static IEnumerable<PsychicRitualDef_InvocationCircle> Postfix(IEnumerable<PsychicRitualDef_InvocationCircle> __result)
+		{
+			ThingDef target = Patch_PsychicRitualGizmo_GetGizmos.savedTarget?.def;
+			bool flag1 = target == null;
+			bool flag2 = target?.HasModExtension<RitualExtension>() == true;
+			foreach (PsychicRitualDef_InvocationCircle item in __result)
+			{
+				if (flag1)
+				{
+					yield return item;
+					continue;
+				}
+				RitualExtension ext = item.GetModExtension<RitualExtension>();
+				if (ext == null)
+				{
+					if (flag2)
+					{
+						continue;
+					}
+					else
+					{
+						yield return item;
+					}
+				}
+				else if (ext.targetsWhitelist.Contains(target))
+				{
+					yield return item;
+				}
+			}
+		}
+	}
+
 	/*[HarmonyPatch(typeof(PsychicRitualToil_GatherForInvocation), "InvokerGatherPhaseToils")]
 	public static class Patch_InvokerGatherPhaseToils
 	{

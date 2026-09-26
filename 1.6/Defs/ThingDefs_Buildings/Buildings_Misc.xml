@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <DesignatorDropdownGroupDef>
+    <defName>NAT_BossCallers</defName>
+    <label>boss callers</label>
+  </DesignatorDropdownGroupDef>
+
   <ThingDef Abstract="True" ParentName="BuildingBase" Name="NAT_BossCallerBase">
     <graphicData>
       <texPath>Things/Building/NAT_AnomalyBossCaller</texPath>
@@ -23,6 +28,7 @@
       </buildingTags>
     </building>
     <designationCategory>Anomaly</designationCategory>
+    <designatorDropdown>NAT_BossCallers</designatorDropdown>
     <uiOrder>2460</uiOrder>
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>

@@ -79,18 +79,9 @@ namespace NAT
 
 		public static HediffDef NAT_Subdued;
 
-		[MayRequire("GoGaTio.NewAnomalyThreats.SeaMonsters")]
-		public static HediffDef NAT_BilePowerSerum;
-
 		public static HediffDef NAT_SlowedByBile;
 
 		public static HediffDef NAT_EmotionSuppression;
-
-		[MayRequire("GoGaTio.NewAnomalyThreats.SeaMonsters")]
-		public static PawnGroupKindDef NAT_Serpents;
-
-		[MayRequire("GoGaTio.NewAnomalyThreats.SeaMonsters")]
-		public static DutyDef NAT_SerpentAssault;
 
 		public static DutyDef NAT_BringAdditionalOfferingsForPsychicRitual;
 

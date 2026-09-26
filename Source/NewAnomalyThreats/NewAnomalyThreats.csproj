@@ -114,6 +114,7 @@
     <Compile Include="ThingComps\CompEyedMachine.cs" />
     <Compile Include="ThingComps\CompVoidFireOverlay.cs" />
     <Compile Include="Things\Building_Converter.cs" />
+    <Compile Include="Things\Building_HoraxTurret.cs" />
     <Compile Include="Things\Building_HoraxStabilizer.cs" />
     <Compile Include="Things\Building_HoraxMachine.cs" />
     <Compile Include="Things\Building_VaultDoor.cs" />

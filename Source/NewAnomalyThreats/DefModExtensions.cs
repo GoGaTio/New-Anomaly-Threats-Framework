@@ -39,4 +39,9 @@ namespace NAT
 
 		public float armorPenetration;
 	}
+
+	public class RitualExtension : DefModExtension
+	{
+		public List<ThingDef> targetsWhitelist = new List<ThingDef>();
+	}
 }
