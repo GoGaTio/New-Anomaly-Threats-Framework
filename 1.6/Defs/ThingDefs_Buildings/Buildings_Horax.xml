@@ -248,9 +248,6 @@
   </ThingDef>
 
   <ThingDef Name="NAT_BaseHoraxTurret" ParentName="BuildingBase" Abstract="True">
-    <defName>NAT_HoraxStabilizer</defName>
-    <label>horax machine stabilizer</label>
-    <description>A node that coordinates signals across a planet-wide mechanoid communication network. The command signals originate at the mechhive - the center of mechanoid intelligence.</description>
     <thingClass>NAT.Building_HoraxTurret</thingClass>
     <altitudeLayer>Blueprint</altitudeLayer>
     <statBases>
@@ -303,9 +300,9 @@
     <label>horax spiker</label>
     <description>A rusted bioferrite piece shaped like a small automatic turret.</description>
     <graphicData>
-      <texPath>Things/Building/NAT_RustedTurret</texPath>
+      <texPath>Things/Building/NAT_HoraxTurret</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
+      <drawSize>(2,2)</drawSize>
       <shadowData>
         <volume>(0.27,0.25,0.27)</volume>
         <offset>(0,0,0)</offset>
@@ -314,15 +311,60 @@
     <uiIconPath>Things/Building/NAT_RustedMiniTurret_Icon</uiIconPath>
     <uiIconScale>0.90</uiIconScale>
     <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
-      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+      <MaxHitPoints>200</MaxHitPoints>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
     </statBases>
     <building>
-      <combatPower>120</combatPower>
-      <turretGunDef>NAT_Gun_RustedMiniTurret</turretGunDef>
-      <turretBurstCooldownTime>4.8</turretBurstCooldownTime>
-      <turretTopOffset>(0, 0)</turretTopOffset>
+      <combatPower>200</combatPower>
+      <turretGunDef>NAT_Gun_HoraxTurret_Spiker</turretGunDef>
+      <turretBurstCooldownTime>3</turretBurstCooldownTime>
+      <turretTopDrawSize>1.5</turretTopDrawSize>
+      <turretTopOffset>(0, 0.23)</turretTopOffset>
     </building>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeapon">
+    <defName>NAT_Gun_HoraxTurret_Spiker</defName>
+    <label>horax spiker</label>
+    <description>A self-loading large-bore cannon designed to attach to a turret.</description>
+    <graphicData>
+      <texPath>Things/Building/NAT_HoraxTurret_Spiker</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <destroyOnDrop>True</destroyOnDrop>
+    <drawerType>RealtimeOnly</drawerType>
+    <canGenerateDefaultDesignator>false</canGenerateDefaultDesignator>
+    <tradeability>None</tradeability>
+    <useHitPoints>false</useHitPoints>
+    <allowedArchonexusCount>0</allowedArchonexusCount>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <statBases>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>0.72</AccuracyShort>
+      <AccuracyMedium>0.66</AccuracyMedium>
+      <AccuracyLong>0.5</AccuracyLong>
+      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>40</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_Heatspike</defaultProjectile>
+        <warmupTime>1</warmupTime>
+        <range>34.9</range>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <burstShotCount>5</burstShotCount>
+        <soundCast>Heatspikes_Shot</soundCast>
+        <soundCastTail>Heatspikes_Tail</soundCastTail>
+        <muzzleFlashScale>12</muzzleFlashScale>
+        <defaultCooldownTime>2</defaultCooldownTime>
+        <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+      </li>
+    </verbs>
   </ThingDef>
   
 </Defs>

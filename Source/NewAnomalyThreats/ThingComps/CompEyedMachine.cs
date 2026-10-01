@@ -273,7 +273,7 @@ namespace NAT
 		protected virtual void Cast()
 		{
 			MoteMaker.MakeInteractionOverlay(Props.lineMote, new TargetInfo(parent.Position, parent.Map), new TargetInfo(TargetingCell, parent.Map), eyeOffset, Vector3.zero).Maintain();
-			GenExplosion.DoExplosion(TargetingCell, parent.Map, Props.explosionRadius, VanillaDefOf.NociosphereVaporize, parent, 200, 9f, ignoredThings: new List<Thing>() { parent });
+			GenExplosion.DoExplosion(TargetingCell, parent.Map, Props.explosionRadius, VanillaDefOf.NociosphereVaporize, parent, 200, 9f, ignoredThings: new List<Thing>() { parent }, overrideCells: CellRect.FromCell(TargetingCell).ExpandedBy(2).Cells.ToList());
 		}
 
 		protected virtual LocalTargetInfo GetTarget()
