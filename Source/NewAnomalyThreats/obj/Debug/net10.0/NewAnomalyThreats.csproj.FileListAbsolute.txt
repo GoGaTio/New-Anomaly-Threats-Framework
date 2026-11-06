@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\1.6\Assemblies\net10.0\NewAnomalyThreats.deps.json
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\1.6\Assemblies\net10.0\NewAnomalyThreats.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\Source\NewAnomalyThreats\obj\Debug\net10.0\NewAnomalyThreats.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\Source\NewAnomalyThreats\obj\Debug\net10.0\NewAnomalyThreats.GeneratedMSBuildEditorConfig.editorconfig
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\Source\NewAnomalyThreats\obj\Debug\net10.0\NewAnomalyThreats.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\NewAnomalyThreatsFramework\Source\NewAnomalyThreats\obj\Debug\net10.0\NewAnomalyThreats.dll

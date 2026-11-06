@@ -43,6 +43,23 @@ namespace NAT
 			}
 		}*/
 
+		public static int StackCount(this List<Thing> list, ThingDef def)
+		{
+			if (list.NullOrEmpty())
+			{
+				return 0;
+			}
+			int count = 0;
+			foreach (Thing thing in list)
+			{
+				if(thing.def == def)
+				{
+					count += thing.stackCount;
+				}
+			}
+			return count;
+		}
+
 		public static bool AnyAdjacentCellsWalkable(this IntVec3 cell, Map map)
 		{
 			

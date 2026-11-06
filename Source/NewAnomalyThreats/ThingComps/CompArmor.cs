@@ -6,7 +6,6 @@ using Ionic.Zlib;
 using JetBrains.Annotations;
 using KTrie;
 using LudeonTK;
-
 using RimWorld;
 using RimWorld.BaseGen;
 using RimWorld.IO;
@@ -14,7 +13,6 @@ using RimWorld.Planet;
 using RimWorld.QuestGen;
 using RimWorld.SketchGen;
 using RimWorld.Utility;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,7 +58,9 @@ namespace NAT
 	{
 		public bool combatExtendedArmor = false;
 
-		public FloatRange effectorOffsetRange = new FloatRange(-0.4f, 0.4f);
+		public bool overridesHideStats = false;
+
+        public FloatRange effectorOffsetRange = new FloatRange(-0.4f, 0.4f);
 
 		public CompProperties_Armor()
 		{
@@ -89,7 +89,7 @@ namespace NAT
 				float num = flag ? req.Thing.GetStatValue(stat) : req.BuildableDef.GetStatValueAbstract(stat);
 				if (num > 0)
 				{
-					yield return new StatDrawEntry(stat.category, stat.LabelCap, stat.Worker.ValueToString(num, true), stat.description, stat.displayPriorityInCategory);
+					yield return new StatDrawEntry(stat.category, stat.LabelCap, stat.Worker.ValueToString(num, true), stat.description, stat.displayPriorityInCategory, overridesHideStats: overridesHideStats);
 				}
 			}
 		}

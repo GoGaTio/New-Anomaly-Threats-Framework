@@ -203,7 +203,7 @@ namespace NAT
 			PsychicRitualToil_BringAdditionalOfferings toil = lordToil_PsychicRitual.RitualData.CurPsychicRitualToil as PsychicRitualToil_BringAdditionalOfferings;
 			if (toil == null || toil.brought)
 			{
-				Log.Message(lordToil_PsychicRitual.RitualData.CurPsychicRitualToil);
+				//Log.Message(lordToil_PsychicRitual.RitualData.CurPsychicRitualToil);
 				return null;
 			}
 			if (ritualDef.additionalOfferings.NullOrEmpty())
@@ -229,7 +229,7 @@ namespace NAT
 				{
 					thingList.Add(t);
 				}
-				if(p.CurJob?.targetA.Thing != null)
+				if(p.CurJob?.targetA.Thing != null && p.CurJobDef == NATDefOf.NAT_BringAdditionalOfferings)
 				{
 					thingList.Add(p.CurJob.targetA.Thing);
 				}
@@ -238,7 +238,7 @@ namespace NAT
 			{
 				return null;
 			}
-			List<ThingDefCountClass> list = ritualDef.OfferingsLeft(thingList);
+            List<ThingDefCountClass> list = ritualDef.OfferingsReadonly;
 			ThingDefCountClass num = null;
 			LocalTargetInfo value = (LocalTargetInfo)psychicRitual.assignments.Target;
 			Thing thing = GenClosest.ClosestThingReachable(pawn.PositionHeld, pawn.MapHeld, ThingRequest.ForGroup(ThingRequestGroup.HaulableAlways), PathEndMode.Touch, TraverseParms.For(pawn), 9999f, delegate (Thing thing2)
@@ -256,7 +256,7 @@ namespace NAT
 				{
 					return false;
 				}
-				return pawn.CanReserve(thing2, 10, Mathf.Min(num.count, thing2.stackCount)) ? true : false;
+				return pawn.CanReserve(thing2, 10, Mathf.Min(num.count - thingList.StackCount(thing2.def), thing2.stackCount)) ? true : false;
 			});
 			if (thing == null)
 			{
@@ -268,7 +268,7 @@ namespace NAT
 			job.count = thing.stackCount;
 			if (num != null)
 			{
-				job.count = Mathf.Min(job.count, num.count);
+				job.count = Mathf.Min(job.count, num.count - thingList.StackCount(thing.def));
 			}
 			return job;
 		}
